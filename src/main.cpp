@@ -1,12 +1,11 @@
+#include "libtcod.hpp"
 
 int main(int argc, char *argv[]) {
 
-	/*
-		Init stuff goes here.
-	*/
+	TCODConsole::initRoot(80, 50, "days-gone-by");
 
 	//Main game loop.
-	while (true) { //TODO If we're using LibTCOD, terminate the loop when the window is closed.
+	while (!TCODConsole::isWindowClosed()) { //Note, this doesn't actually do anything yet as the window does not handle inputs--including clicking the x button.
 
 		/*
 			Maybe break this this up into two functions or so.
