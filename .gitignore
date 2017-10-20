@@ -37,3 +37,4 @@
 *.filters
 *.sln
 *.vcxproj
+*.opendb
