@@ -8,11 +8,13 @@
 #include "Tile.hpp"
 
 class Map {
-public:
+protected:
 	
 	int w, h;
 	Tile** tileMap; //Map of tiles.
 	//std:::vector<Entity> entities; //Uncomment when implimented.
+
+public:
 
 	Map(int w, int h);
 	~Map();
