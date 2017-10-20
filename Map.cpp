@@ -17,7 +17,16 @@ Map::~Map() {
 }
 
 void Map::render() {
-	//TODO impliment this.
+	for (int x = 0; x < w; x++) {
+
+		for (int y = 0; y < h; y++) {
+			Tile t = getTile(x, y);
+			TCODConsole::root->setChar(x, y, t.c);
+			TCODConsole::root->setCharBackground(x, y, t.background);
+			TCODConsole::root->setCharForeground(x, y, t.foreground);
+		}
+
+	}
 }
 
 void Map::generateFill(Tile t) {
