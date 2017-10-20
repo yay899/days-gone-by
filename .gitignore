@@ -41,3 +41,4 @@
 *.opendb
 \Debug
 \x64
+\Release
