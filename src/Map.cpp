@@ -47,6 +47,46 @@ void Map::setTile(int x, int y, Tile t) {
 	*(tileMap[w * x + y]) = t;
 }
 
+void Map::setRectangle(int x, int y, int width, int height, Tile outline) {
+	
+	//Draw horizontal portion of outline.
+	for (int i = 0; i < width; i++) {
+		setTile(i + x, y, outline);
+		setTile(i + x, y + height - 1, outline);
+	}
+
+	//Draw vertical portion of outline.
+	for (int i = 1; i < height - 1; i++) { //Start and end one early because the horizontal already covered the corners.
+		setTile(x, y + i, outline);
+		setTile(x + width - 1, y + i, outline);
+	}
+}
+
+void Map::setRectangle(int x, int y, int width, int height, Tile outline, Tile fill) {
+
+	//No need to draw outline individually if the tiles are identical.
+	if (outline == fill) {
+
+		//Set all tiles in entire rectangle.
+		for (int i = 0; i < width; i++) {
+			for (int k = 0; k < height; k++) {
+				setTile(x + i, y + k, outline);
+			}
+		}
+	} else {
+		
+		//Set outline.
+		setRectangle(x, y, width, height, outline);
+
+		//Set inside.
+		for (int i = 1; i < width - 1; i++) {
+			for (int k = 1; k < height - 1; k++) {
+				setTile(x + i, y + k, fill);
+			}
+		}
+	}
+}
+
 bool Map::isSolid(int x, int y) {
 	return tileMap[w * x + y]->isSolid;
 }

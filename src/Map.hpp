@@ -59,6 +59,29 @@ public:
 	void setTile(int x, int y, Tile t);
 
 	/*
+		Helper function; sets tiles on rectangle to provided tile.
+
+		@parem x
+		@parem y
+		@parem width
+		@parem height
+		@parem outline tile
+	*/
+	void setRectangle(int x, int y, int width, int height, Tile outline);
+
+	/*
+		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
+
+		@parem x
+		@parem y
+		@parem width
+		@parem height
+		@parem outline tile
+		@parem fill tile
+	*/
+	void setRectangle(int x, int y, int width, int height, Tile outline, Tile fill);
+
+	/*
 		Helper function; checks if tile on map is solid.
 
 		@parem x
