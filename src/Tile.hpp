@@ -16,6 +16,12 @@ public:
 	Tile(char c = ' ', TCODColor foreground = TCODConsole::root->getDefaultForeground(), TCODColor background = TCODConsole::root->getDefaultBackground(), bool isSolid = false);
 
 	/*
+		Overload == and != so they function. Hopefully this works. Stole most of it off the internet.
+	*/
+	const bool operator==(const Tile &other);
+	const bool operator!=(const Tile &other);
+
+	/*
 		Called when tile is walked on, to enable complex tile functionality
 
 		@param entity that entered tile
