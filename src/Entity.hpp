@@ -50,7 +50,7 @@ public:
 	void moveForce(int targetX, int targetY, Map* map);
 };
 
-class EntityPlayer : Entity {
+class EntityPlayer : public Entity {
 public:
 
 	EntityPlayer(int x, int y, char c, TCODColor = TCODConsole::root->getDefaultForeground());
