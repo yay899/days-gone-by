@@ -30,4 +30,12 @@ public:
 	virtual void walkedOn(Entity* e); //TODO Make this take an entity as an argument when those are implimented.
 };
 
+/*
+	Tile constants.
+	Basically presets. That's why they're global.
+*/
+const Tile TILE_FLOOR = Tile(' ', TCOD_white, TCOD_black, false);
+const Tile TILE_WALL = Tile(' ', TCOD_white, TCOD_blue, true);
+const Tile TILE_FANCYFLOOR = Tile('+', TCOD_white, TCOD_azure, false);
+const Tile TILE_FANCYWALL = Tile('#', TCOD_white, TCOD_blue, true);
 #endif
