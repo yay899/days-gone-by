@@ -24,9 +24,9 @@ void Map::update(float t, TCOD_keycode_t key) {
 }
 
 void Map::render() {
-	for (int x = 0; x < w; x++) {
+	for (int x = 0; x < h; x++) { //I legitimately don't understand why x needs to be compared to h, and y to w, but the program overflows the tileMap array if you don't.
 
-		for (int y = 0; y < h; y++) {
+		for (int y = 0; y < w; y++) {
 			Tile t = getTile(x, y);
 			TCODConsole::root->setChar(x, y, t.c);
 			TCODConsole::root->setCharBackground(x, y, t.background);
