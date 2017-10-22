@@ -34,6 +34,10 @@ void Map::render() {
 		}
 
 	}
+
+	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
+		(*i)->render();
+	}
 }
 
 void Map::generateFill(Tile t) {
