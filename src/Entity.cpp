@@ -17,22 +17,22 @@ void Entity::render() {
 
 void Entity::move(int targetX, int targetY, Map* map) {
 	//Check to see if target is in bounds, and if target is not solid.
-	if (map->getWidth() * x + y < map->getWidth() * map->getHeight() && !map->isSolid(x, y)) {
+	if (map->getWidth() * targetX + targetY < map->getWidth() * map->getHeight() && !map->isSolid(targetX, targetY)) {
 		x = targetX;
 		y = targetY;
 	}
 
-	map->getTilePointer(x, y)->walkedOn(this);
+	map->getTilePointer(targetX, targetY)->walkedOn(this);
 }
 
 void Entity::moveForce(int targetX, int targetY, Map* map) {
 	//Check to see if target is in bounds.
-	if (map->getWidth() * x + y < map->getWidth() * map->getHeight()) {
+	if (map->getWidth() * targetX + targetY < map->getWidth() * map->getHeight()) {
 		x = targetX;
 		y = targetY;
 	}
 
-	map->getTilePointer(x, y)->walkedOn(this);
+	map->getTilePointer(targetX, targetY)->walkedOn(this);
 }
 
 /*
