@@ -16,6 +16,13 @@ Map::~Map() {
 	delete tileMap;
 }
 
+void Map::update(float t, TCOD_key_t key) {
+	//Iterate over every entity in map, calling updater.
+	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
+		(*i)->update(t, key, this);
+	}
+}
+
 void Map::render() {
 	for (int x = 0; x < w; x++) {
 
@@ -31,7 +38,7 @@ void Map::render() {
 
 void Map::generateFill(Tile t) {
 	for (int i = 0; i < w*h; i++) {
-		*(tileMap[i]) = t;
+		*tileMap[i] = t;
 	}
 }
 
@@ -40,11 +47,11 @@ Tile* Map::getTilePointer(int x, int y) {
 }
 
 Tile Map::getTile(int x, int y) {
-	return *(tileMap[w * x + y]);
+	return *tileMap[w * x + y];
 }
 
 void Map::setTile(int x, int y, Tile t) {
-	*(tileMap[w * x + y]) = t;
+	*tileMap[w * x + y] = t;
 }
 
 void Map::setRectangle(int x, int y, int width, int height, Tile outline) {

@@ -6,18 +6,27 @@
 
 #include "libtcod.hpp"
 #include "Tile.hpp"
+#include "Entity.hpp"
 
 class Map {
 protected:
 	
 	int w, h;
 	Tile** tileMap; //Map of tiles.
-	//std:::vector<Entity> entities; //Uncomment when implimented.
+	std::vector<Entity*> entities; //All entities in map.
 
 public:
 
 	Map(int w, int h);
 	~Map();
+
+	/*
+		Updates all entities in map.
+
+		@parem time
+		@parem key
+	*/
+	void update(float t, TCOD_key_t key);
 
 	/*
 		Displays the contents of the map on TCODConsole->root.
