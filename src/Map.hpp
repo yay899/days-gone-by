@@ -89,6 +89,16 @@ public:
 		@return solidity of tile at (x,y)
 	*/
 	bool isSolid(int x, int y);
+
+	/*
+		@return width of map
+	*/
+	int getWidth();
+
+	/*
+		@return height of map
+	*/
+	int getHeight();
 };
 
 #endif

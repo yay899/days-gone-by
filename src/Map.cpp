@@ -90,3 +90,7 @@ void Map::setRectangle(int x, int y, int width, int height, Tile outline, Tile f
 bool Map::isSolid(int x, int y) {
 	return tileMap[w * x + y]->isSolid;
 }
+
+int Map::getWidth() { return w; }
+
+int Map::getHeight() { return h; }
