@@ -18,7 +18,7 @@ const bool Tile::operator!=(const Tile &other) {
 	return !(*this == other);
 }
 
-void Tile::walkedOn() {
+void Tile::walkedOn(Entity* e) {
 
 	//Put stuff here when extending this class.
 

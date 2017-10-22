@@ -3,6 +3,7 @@
 #define TILE_HPP
 
 #include "libtcod.hpp"
+#include "Entity.hpp"
 
 //Basic tile for use in Map.
 class Tile {
@@ -26,7 +27,7 @@ public:
 
 		@param entity that entered tile
 	*/
-	virtual void walkedOn(); //TODO Make this take an entity as an argument when those are implimented.
+	virtual void walkedOn(Entity* e); //TODO Make this take an entity as an argument when those are implimented.
 };
 
 #endif
