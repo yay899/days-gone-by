@@ -45,16 +45,16 @@ EntityPlayer::EntityPlayer(int x, int y, char c, TCODColor col) : Entity(x, y, c
 void EntityPlayer::update(float t, TCOD_keycode_t key, Map* map) {
 
 	switch (key) {
-	TCODK_UP:
+	case TCODK_UP:
 		move(x, y - 1, map);
 		break;
-	TCODK_DOWN:
+	case TCODK_DOWN:
 		move(x, y + 1, map);
 		break;
-	TCODK_LEFT:
+	case TCODK_LEFT:
 		move(x - 1, y, map);
 		break;
-	TCODK_RIGHT:
+	case TCODK_RIGHT:
 		move(x + 1, y, map);
 		break;
 	default:
