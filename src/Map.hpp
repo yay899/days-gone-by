@@ -24,9 +24,9 @@ public:
 		Updates all entities in map.
 
 		@parem time
-		@parem key
+		@parem keycode
 	*/
-	void update(float t, TCOD_key_t key);
+	void update(float t, TCOD_keycode_t key);
 
 	/*
 		Displays the contents of the map on TCODConsole->root.

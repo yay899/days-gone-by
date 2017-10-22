@@ -16,7 +16,7 @@ Map::~Map() {
 	delete tileMap;
 }
 
-void Map::update(float t, TCOD_key_t key) {
+void Map::update(float t, TCOD_keycode_t key) {
 	//Iterate over every entity in map, calling updater.
 	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
 		(*i)->update(t, key, this);

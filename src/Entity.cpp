@@ -7,7 +7,7 @@ Entity::Entity(int x, int y, char c, TCODColor col) : x(x), y(y), c(c), col(col)
 
 }
 
-void Entity::update(float t, TCOD_key_t key, Map* map) {
+void Entity::update(float t, TCOD_keycode_t key, Map* map) {
 	//Define this when extending.
 }
 
@@ -42,9 +42,9 @@ EntityPlayer::EntityPlayer(int x, int y, char c, TCODColor col) : Entity(x, y, c
 
 }
 
-void EntityPlayer::update(float t, TCOD_key_t key, Map* map) {
+void EntityPlayer::update(float t, TCOD_keycode_t key, Map* map) {
 
-	switch (key.vk) {
+	switch (key) {
 	TCODK_UP:
 		move(x, y - 1, map);
 		break;

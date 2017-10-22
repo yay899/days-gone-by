@@ -18,10 +18,10 @@ public:
 		Takes time since last frame, and pressed key and then does something to the object.
 
 		@parem time
-		@parem key
+		@parem keycode
 		@parem map entity is on
 	*/
-	virtual void update(float t, TCOD_key_t key, Map* map);
+	virtual void update(float t, TCOD_keycode_t key, Map* map);
 
 	/*
 		Renders itself.
@@ -56,10 +56,10 @@ public:
 		Extends Entity::update() with player functionality.
 
 		@parem time
-		@parem key
+		@parem keycode
 		@parem map entity is on
 	*/
-	void update(float t, TCOD_key_t key, Map* map);
+	void update(float t, TCOD_keycode_t key, Map* map);
 
 	/*
 		Extends Entity::render() with player functionality.
