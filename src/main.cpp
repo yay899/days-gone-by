@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 	Map map(80, 50);
 
 	//Main game loop.
-	while (!TCODConsole::isWindowClosed()) { //Note, this doesn't actually do anything yet as the window does not handle inputs--including clicking the x button.
+	while (!TCODConsole::isWindowClosed()) {
 
 		update(&map);
 		render(&map);
