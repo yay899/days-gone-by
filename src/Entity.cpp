@@ -7,10 +7,62 @@ Entity::Entity(int x, int y, char c, TCODColor col) : x(x), y(y), c(c), col(col)
 
 }
 
-void Entity::update(float t, TCOD_key_t) {
+void Entity::update(float t, TCOD_key_t key, Map* map) {
 	//Define this when extending.
 }
 
 void Entity::render() {
 	//Define this when extending.
+}
+
+void Entity::move(int targetX, int targetY, Map* map) {
+	//Check to see if target is in bounds, and if target is not solid.
+	if (map->getWidth() * x + y < map->getWidth() * map->getHeight() && !map->isSolid(x, y)) {
+		x = targetX;
+		y = targetY;
+	}
+
+	map->getTilePointer(x, y)->walkedOn(this);
+}
+
+void Entity::moveForce(int targetX, int targetY, Map* map) {
+	//Check to see if target is in bounds.
+	if (map->getWidth() * x + y < map->getWidth() * map->getHeight()) {
+		x = targetX;
+		y = targetY;
+	}
+
+	map->getTilePointer(x, y)->walkedOn(this);
+}
+
+/*
+	Class EntityPlayer.
+*/
+EntityPlayer::EntityPlayer(int x, int y, char c, TCODColor col) : Entity(x, y, c, col) {
+
+}
+
+void EntityPlayer::update(float t, TCOD_key_t key, Map* map) {
+
+	switch (key.vk) {
+	TCODK_UP:
+		move(x, y - 1, map);
+		break;
+	TCODK_DOWN:
+		move(x, y + 1, map);
+		break;
+	TCODK_LEFT:
+		move(x - 1, y, map);
+		break;
+	TCODK_RIGHT:
+		move(x + 1, y, map);
+		break;
+	default:
+		break;
+	}
+}
+
+void EntityPlayer::render() {
+	TCODConsole::root->setCharForeground(x, y, col);
+	TCODConsole::root->setChar(x, y, c);
 }
