@@ -1,5 +1,8 @@
 #include "Tile.hpp"
 
+/*
+	Class Tile.
+*/
 Tile::Tile(char c, TCODColor foreground, TCODColor background, bool isSolid) : c(c), foreground(foreground), background(background), isSolid(isSolid) {
 
 }
