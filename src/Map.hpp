@@ -17,9 +17,9 @@ protected:
 	
 	int w, h;
 	Tile** tileMap; //Map of tiles.
-	std::vector<Entity*> entities; //All entities in map.
 
 public:
+	std::vector<Entity*> entities; //All entities in map.
 
 	Map(int w, int h);
 	~Map();
