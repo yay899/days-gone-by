@@ -5,6 +5,9 @@
 #include "libtcod.hpp"
 #include "Entity.hpp"
 
+//Need to declare this here due to cyclical #includes.
+class Entity;
+
 //Basic tile for use in Map.
 class Tile {
 public:

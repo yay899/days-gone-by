@@ -8,6 +8,10 @@
 #include "Tile.hpp"
 #include "Entity.hpp"
 
+//Need to declare this here due to cyclical #includes.
+class Entity;
+class Tile;
+
 class Map {
 protected:
 	

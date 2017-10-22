@@ -5,6 +5,9 @@
 #include "libtcod.hpp"
 #include "Map.hpp"
 
+//Need to declare this here due to cyclical #includes.
+class Map;
+
 //Basic entity. Pretty useless unless extended.
 class Entity {
 public:
