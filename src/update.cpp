@@ -10,9 +10,9 @@ void update(Map* map) {
 
 	//Only pass keycode if it's when the key is pressed, to prevent it from passing key up events.
 	if (ev == TCOD_EVENT_KEY_PRESS) {
-		map->update(TCODSystem::getLastFrameLength(), key.vk);
+		map->update(TCODSystem::getLastFrameLength(), key);
 	}
 	else {
-		map->update(TCODSystem::getLastFrameLength(), TCODK_F12); //Can't pass NULL. So I don't know, just don't use this key ever?
+		map->update(TCODSystem::getLastFrameLength(), TCOD_key_t()); //Hopefully this is null and not about to explode.
 	}
 }

@@ -11,7 +11,7 @@ Entity::Entity(int x, int y, char c, TCODColor col) : x(x), y(y), c(c), col(col)
 
 }
 
-void Entity::update(float t, TCOD_keycode_t key, Map* map) {
+void Entity::update(float t, TCOD_key_t key, Map* map) {
 	//Define this when extending.
 }
 
@@ -49,9 +49,19 @@ EntityPlayer::EntityPlayer(int x, int y, char c, TCODColor col) : Entity(x, y, c
 
 }
 
-void EntityPlayer::update(float t, TCOD_keycode_t key, Map* map) {
+void EntityPlayer::update(float t, TCOD_key_t key, Map* map) {
 
-	switch (key) {
+	switch (key.vk) {
+	//Characters.
+	case TCODK_CHAR:
+		switch (key.c) {
+		case '.':
+			_gameState = STATE_AI_TURN;
+		default:
+			break;
+		}
+		break;
+	//Special keys.
 	case TCODK_UP:
 		move(x, y - 1, map);
 		_gameState = STATE_AI_TURN;
@@ -86,7 +96,7 @@ EntityTestEnemy::EntityTestEnemy(int x, int y, char c, TCODColor col) : Entity(x
 
 }
 
-void EntityTestEnemy::update(float t, TCOD_keycode_t key, Map* map) {
+void EntityTestEnemy::update(float t, TCOD_key_t key, Map* map) {
 	int targetX(x), targetY(y);
 
 	//Target one tile in the direction of the player.

@@ -20,7 +20,7 @@ Map::~Map() {
 	delete tileMap;
 }
 
-void Map::update(float t, TCOD_keycode_t key) {
+void Map::update(float t, TCOD_key_t key) {
 	switch (_gameState) {
 	case STATE_PLAYER_TURN:
 		//Iterate over every player entity in map, calling updater.
