@@ -24,7 +24,7 @@ void Entity::move(int targetX, int targetY, Map* map) {
 			y = targetY;
 		}
 
-		map->getTilePointer(targetX, targetY)->walkedOn(this);
+		map->getTilePointer(targetX, targetY)->walkedOn(this, map);
 	}
 }
 
@@ -34,7 +34,7 @@ void Entity::moveForce(int targetX, int targetY, Map* map) {
 		x = targetX;
 		y = targetY;
 
-		map->getTilePointer(targetX, targetY)->walkedOn(this);
+		map->getTilePointer(targetX, targetY)->walkedOn(this, map);
 	}
 }
 

@@ -18,8 +18,20 @@ const bool Tile::operator!=(const Tile &other) {
 	return !(*this == other);
 }
 
-void Tile::walkedOn(Entity* e) {
+void Tile::walkedOn(Entity* e, Map* map) {
 
 	//Put stuff here when extending this class.
 
+}
+
+/*
+	Class TileTeleport
+*/
+
+TileTeleport::TileTeleport(char c, TCODColor foreground, TCODColor background, bool isSolid, int x, int y) : Tile(c, foreground, background, isSolid), x(x), y(y) {
+
+}
+
+void TileTeleport::walkedOn(Entity* e, Map* map) {
+	e->moveForce(x, y, map);
 }

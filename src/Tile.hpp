@@ -4,9 +4,11 @@
 
 #include "libtcod.hpp"
 #include "Entity.hpp"
+#include "Map.hpp"
 
 //Need to declare this here due to cyclical #includes.
 class Entity;
+class Map;
 
 //Basic tile for use in Map.
 class Tile {
@@ -30,7 +32,22 @@ public:
 
 		@param entity that entered tile
 	*/
-	virtual void walkedOn(Entity* e); //TODO Make this take an entity as an argument when those are implimented.
+	virtual void walkedOn(Entity* e, Map* map); //TODO Make this take an entity as an argument when those are implimented.
+};
+
+class TileTeleport : public Tile {
+public:
+
+	int x, y; //Target tile to teleport to.
+
+	TileTeleport(char c = ' ', TCODColor foreground = TCODConsole::root->getDefaultForeground(), TCODColor background = TCODConsole::root->getDefaultBackground(), bool isSolid = false, int x = 0, int y = 0);
+
+	/*
+		Teleports entity that enters tile to target.
+
+		@parem entity that entered tile
+	*/
+	void walkedOn(Entity* e, Map* map);
 };
 
 /*

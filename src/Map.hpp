@@ -67,9 +67,9 @@ public:
 
 		@parem x
 		@parem y
-		@parem desired tile
+		@parem pointer to new tile
 	*/
-	void setTile(int x, int y, Tile t);
+	void setTile(int x, int y, Tile* t);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile.
