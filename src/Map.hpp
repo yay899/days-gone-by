@@ -20,6 +20,8 @@ protected:
 
 public:
 	std::vector<Entity*> entities; //All entities in map.
+	std::vector<Entity*> teamPlayer; //ONLY player entities.
+	std::vector<Entity*> teamAI; //Everything else.
 
 	Map(int w, int h);
 	~Map();
@@ -39,6 +41,26 @@ public:
 
 	/*
 		Fills the map with the specified tiles.
+	*/
+
+	/*
+		Helper function; add entity to teamPlayer and entities.
+
+		@param pointer to new entity
+	*/
+	void addTeamPlayer(Entity* e);
+
+	/*
+		Helper function; add entity to teamAI and entities
+
+		@param pointer to new entity
+	*/
+	void addTeamAI(Entity* e);
+
+	/*
+		Fills map with a single tile
+
+		@param desired tile
 	*/
 	void generateFill(Tile t);
 

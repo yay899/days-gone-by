@@ -1,4 +1,8 @@
 #include "Map.hpp"
+#include "update.hpp"
+
+//Declare this so it'll actually recognize that it exists.
+extern State _gameState;
 
 Map::Map(int w, int h) : w(w), h(h) {
 	tileMap = new Tile*[w*h];
@@ -17,10 +21,24 @@ Map::~Map() {
 }
 
 void Map::update(float t, TCOD_keycode_t key) {
-	//Iterate over every entity in map, calling updater.
-	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
-		(*i)->update(t, key, this);
+	switch (_gameState) {
+	case STATE_PLAYER_TURN:
+		//Iterate over every player entity in map, calling updater.
+		for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
+			(*i)->update(t, key, this);
+		}
+		break;
+	case STATE_AI_TURN:
+		//Iterate over every AI entity in map, calling updater.
+		for (std::vector<Entity*>::iterator i = teamAI.begin(); i < teamAI.end(); i++) {
+			(*i)->update(t, key, this);
+		}
+		_gameState = STATE_PLAYER_TURN;
+		break;
+	default:
+		break;
 	}
+	
 }
 
 void Map::render() {
@@ -38,6 +56,16 @@ void Map::render() {
 	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
 		(*i)->render();
 	}
+}
+
+void Map::addTeamPlayer(Entity* e) {
+	teamPlayer.emplace_back(e);
+	entities.emplace_back(e);
+}
+
+void Map::addTeamAI(Entity* e) {
+	teamAI.emplace_back(e);
+	entities.emplace_back(e);
 }
 
 void Map::generateFill(Tile t) {

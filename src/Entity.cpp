@@ -1,4 +1,8 @@
 #include "Entity.hpp"
+#include "update.hpp"
+
+//Declare this so it'll actually recognize that it exists.
+extern State _gameState;
 
 /*
 	Class Entity.
@@ -50,15 +54,19 @@ void EntityPlayer::update(float t, TCOD_keycode_t key, Map* map) {
 	switch (key) {
 	case TCODK_UP:
 		move(x, y - 1, map);
+		_gameState = STATE_AI_TURN;
 		break;
 	case TCODK_DOWN:
 		move(x, y + 1, map);
+		_gameState = STATE_AI_TURN;
 		break;
 	case TCODK_LEFT:
 		move(x - 1, y, map);
+		_gameState = STATE_AI_TURN;
 		break;
 	case TCODK_RIGHT:
 		move(x + 1, y, map);
+		_gameState = STATE_AI_TURN;
 		break;
 	default:
 		break;
