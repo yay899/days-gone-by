@@ -31,7 +31,7 @@ public:
 		Called when tile is walked on, to enable complex tile functionality
 
 		@param entity that entered tile
-		@parem map tile is on
+		@param map tile is on
 	*/
 	virtual void walkedOn(Entity* e, Map* map); //TODO Make this take an entity as an argument when those are implimented.
 };
@@ -47,8 +47,8 @@ public:
 	/*
 		Teleports entity that enters tile to target.
 
-		@parem entity that entered tile
-		@parem map tile is on
+		@param entity that entered tile
+		@param map tile is on
 	*/
 	void walkedOn(Entity* e, Map* map);
 };
@@ -73,8 +73,8 @@ public:
 	/*
 		Opens door when entity attempts to enter it.
 
-		@parem entity that entered tile
-		@parem map tile is on
+		@param entity that entered tile
+		@param map tile is on
 	*/
 	void walkedOn(Entity* e, Map* map);
 };

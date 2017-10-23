@@ -20,9 +20,9 @@ public:
 	/*
 		Takes time since last frame, and pressed key and then does something to the object.
 
-		@parem time
-		@parem keycode
-		@parem map entity is on
+		@param time
+		@param keycode
+		@param map entity is on
 	*/
 	virtual void update(float t, TCOD_keycode_t key, Map* map);
 
@@ -34,18 +34,18 @@ public:
 	/*
 		Checks to see if target is solid and then moves object there if it isn't. Runs walkedOn() regardless of whether or not the entity is actually moved.
 
-		@parem target x
-		@parem target y
-		@parem map entity is on
+		@param target x
+		@param target y
+		@param map entity is on
 	*/
 	void move(int targetX, int targetY, Map* map);
 
 	/*
 		Same as move(), but it ignores checks for solidity.
 
-		@parem target x
-		@parem target y
-		@parem map entity is on
+		@param target x
+		@param target y
+		@param map entity is on
 	*/
 	void moveForce(int targetX, int targetY, Map* map);
 };
@@ -58,9 +58,9 @@ public:
 	/*
 		Extends Entity::update() with player functionality.
 
-		@parem time
-		@parem keycode
-		@parem map entity is on
+		@param time
+		@param keycode
+		@param map entity is on
 	*/
 	void update(float t, TCOD_keycode_t key, Map* map);
 
