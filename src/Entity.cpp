@@ -78,6 +78,41 @@ void EntityPlayer::update(float t, TCOD_key_t key, Map* map) {
 		move(x + 1, y, map);
 		_gameState = STATE_AI_TURN;
 		break;
+	case TCODK_KP1:
+		move(x - 1, y + 1, map);
+		_gameState = STATE_AI_TURN;
+		break;
+	case TCODK_KP2:
+		move(x, y + 1, map);
+		_gameState = STATE_AI_TURN;
+		break;
+	case TCODK_KP3:
+		move(x + 1, y + 1, map);
+		_gameState = STATE_AI_TURN;
+		break;
+	case TCODK_KP4:
+		move(x - 1, y, map);
+		_gameState = STATE_AI_TURN;
+		break;
+	case TCODK_KP5:
+		_gameState = STATE_AI_TURN;
+		break;
+	case TCODK_KP6:
+		move(x + 1, y, map);
+		_gameState = STATE_AI_TURN;
+		break;
+	case TCODK_KP7:
+		move(x - 1, y - 1, map);
+		_gameState = STATE_AI_TURN;
+		break;
+	case TCODK_KP8:
+		move(x, y - 1, map);
+		_gameState = STATE_AI_TURN;
+		break;
+	case TCODK_KP9:
+		move(x + 1, y - 1, map);
+		_gameState = STATE_AI_TURN;
+		break;
 	default:
 		break;
 	}
