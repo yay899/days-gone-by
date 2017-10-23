@@ -100,6 +100,14 @@ void Map::setRectangle(int x, int y, int width, int height, Tile outline, Tile f
 }
 
 bool Map::isSolid(int x, int y) {
+	//Return solid if there is an entity there.
+	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
+		if ((*i)->x == x && (*i)->y == y) {
+			return true;
+		}
+	}
+
+	//Otherwise just return the solidity of the tile.
 	return tileMap[w * x + y]->isSolid;
 }
 
