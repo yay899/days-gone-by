@@ -35,3 +35,28 @@ TileTeleport::TileTeleport(char c, TCODColor foreground, TCODColor background, b
 void TileTeleport::walkedOn(Entity* e, Map* map) {
 	e->moveForce(x, y, map);
 }
+
+/*
+	Class TileDoor
+*/
+TileDoor::TileDoor(Tile openTile, Tile closedTile) : Tile(closedTile.c, closedTile.foreground, closedTile.background, closedTile.isSolid), openTile(openTile), closedTile(closedTile) {
+
+}
+
+void TileDoor::open() {
+	c = openTile.c;
+	foreground = openTile.foreground;
+	background = openTile.background;
+	isSolid = openTile.isSolid;
+}
+
+void TileDoor::closed() {
+	c = closedTile.c;
+	foreground = closedTile.foreground;
+	background = closedTile.background;
+	isSolid = closedTile.isSolid;
+}
+
+void TileDoor::walkedOn(Entity* e, Map* map) {
+	open();
+}

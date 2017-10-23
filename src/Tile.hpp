@@ -31,10 +31,12 @@ public:
 		Called when tile is walked on, to enable complex tile functionality
 
 		@param entity that entered tile
+		@parem map tile is on
 	*/
 	virtual void walkedOn(Entity* e, Map* map); //TODO Make this take an entity as an argument when those are implimented.
 };
 
+//Tile that teleports anything that walks on it.
 class TileTeleport : public Tile {
 public:
 
@@ -46,6 +48,33 @@ public:
 		Teleports entity that enters tile to target.
 
 		@parem entity that entered tile
+		@parem map tile is on
+	*/
+	void walkedOn(Entity* e, Map* map);
+};
+
+class TileDoor : public Tile {
+public:
+	Tile openTile, closedTile; //Both states of doors.
+
+	//Initializes closed.
+	TileDoor(Tile openTile, Tile closedTile);
+
+	/*
+		Opens door.
+	*/
+	void open();
+
+	/*
+		Closes door.
+	*/
+	void closed();
+
+	/*
+		Opens door when entity attempts to enter it.
+
+		@parem entity that entered tile
+		@parem map tile is on
 	*/
 	void walkedOn(Entity* e, Map* map);
 };
@@ -58,4 +87,6 @@ const Tile TILE_FLOOR = Tile(' ', TCOD_white, TCOD_black, false);
 const Tile TILE_WALL = Tile(' ', TCOD_white, TCOD_blue, true);
 const Tile TILE_FANCYFLOOR = Tile('+', TCOD_white, TCOD_azure, false);
 const Tile TILE_FANCYWALL = Tile('#', TCOD_white, TCOD_blue, true);
+
+const TileDoor TILEDOOR_DOOR = TileDoor(Tile('+', TCOD_amber, TCOD_black, false), Tile('#', TCOD_white, TCOD_amber, true));
 #endif
