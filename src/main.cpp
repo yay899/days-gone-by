@@ -3,11 +3,13 @@
 #include "update.hpp"
 #include "render.hpp"
 
+State _gameState = STATE_PLAYER_TURN;
+
 int main(int argc, char *argv[]) {
 
 	TCODConsole::initRoot(80, 50, "days-gone-by");
 
-	Map map(80, 50);
+	Map map(50, 80);
 
 	//Main game loop.
 	while (!TCODConsole::isWindowClosed()) {
