@@ -7,7 +7,8 @@
 
 enum State {
 	STATE_PLAYER_TURN,
-	STATE_AI_TURN
+	STATE_AI_TURN,
+	STATE_IN_MENU
 };
 
 void update(Map* map);
