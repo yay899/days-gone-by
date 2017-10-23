@@ -77,3 +77,40 @@ void EntityPlayer::render() {
 	TCODConsole::root->setCharForeground(x, y, col);
 	TCODConsole::root->setChar(x, y, c);
 }
+
+/*
+	Class EntityTestEnemy
+*/
+
+EntityTestEnemy::EntityTestEnemy(int x, int y, char c, TCODColor col) : Entity(x, y, c, col) {
+
+}
+
+void EntityTestEnemy::update(float t, TCOD_keycode_t key, Map* map) {
+	int targetX(x), targetY(y);
+
+	//Target one tile in the direction of the player.
+	if (map->teamPlayer.at(0)->x > x) {
+		targetX++;
+	}
+	else if (map->teamPlayer.at(0)->x < x) {
+		targetX--;
+	}
+
+	if (map->teamPlayer.at(0)->y > y) {
+		targetY++;
+	}
+	else if (map->teamPlayer.at(0)->y < y) {
+		targetY--;
+	}
+
+	//Move if the target is actually somewhere other than current position.
+	if (targetX != x || targetY != y) {
+		move(targetX, targetY, map);
+	}
+}
+
+void EntityTestEnemy::render() {
+	TCODConsole::root->setCharForeground(x, y, col);
+	TCODConsole::root->setChar(x, y, c);
+}

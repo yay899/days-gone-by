@@ -70,4 +70,26 @@ public:
 	void render();
 };
 
+/*
+	Test enemy. Please ignore. (67k upvotes)
+*/
+class EntityTestEnemy : public Entity {
+public:
+
+	EntityTestEnemy(int x, int y, char c, TCODColor = TCODConsole::root->getDefaultForeground());
+
+	/*
+		Extends Entity::update() with test enemy functionality.
+
+		@param time
+		@param keycode
+		@param map entity is on
+	*/
+	void update(float t, TCOD_keycode_t key, Map* map);
+
+	/*
+		Extends Entity::render() with test enemy functionality.
+	*/
+	void render();
+};
 #endif
