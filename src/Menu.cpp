@@ -23,7 +23,7 @@ void Menu::render(int x, int y) {
 	TCOD_alignment_t oldAlignment = TCODConsole::root->getAlignment();
 	TCODConsole::root->setDefaultBackground(MENU_BACKGROUND);
 	TCODConsole::root->setDefaultForeground(MENU_FOREGROUND);
-	TCODConsole::root->setBackgroundFlag(TCOD_BKGND_NONE);
+	TCODConsole::root->setBackgroundFlag(TCOD_BKGND_SET);
 	TCODConsole::root->setAlignment(TCOD_LEFT);
 
 	//Wrote this before I found out printFrame was a function. :c
@@ -42,7 +42,7 @@ void Menu::render(int x, int y) {
 	TCODConsole::root->setChar(x + width, y + height, '+');
 	*/
 
-	TCODConsole::root->printFrame(x, y, width, height, true, TCOD_BKGND_NONE, name.c_str());
+	TCODConsole::root->printFrame(x, y, width, height, true, TCOD_BKGND_DEFAULT, name.c_str());
 
 	//Draw options.
 	std::string s = ""; //For some reason this as to be declared out here or else it'll drop out of scope when TCODConsole tries to print it????
@@ -52,18 +52,14 @@ void Menu::render(int x, int y) {
 		s += '-';
 		s += std::get<0>(options.at(i));
 		
-		if (i == index) { //This doesn't work for some reason???
-			TCODConsole::root->setDefaultBackground(MENU_SELECT_BACKGROUND);
-			TCODConsole::root->setDefaultForeground(MENU_SELECT_FOREGROUND);
-
-			TCODConsole::root->print(x + 2, y + 2 + i, s.c_str());
-
-			TCODConsole::root->setDefaultBackground(MENU_BACKGROUND);
-			TCODConsole::root->setDefaultForeground(MENU_FOREGROUND);
-		} else {
-			TCODConsole::root->print(x + 2, y + 2 + i, s.c_str());
-		}
+		if (index == i) TCODConsole::root->setDefaultForeground(MENU_SELECT_FOREGROUND); //Highlight selection.
+		TCODConsole::root->print(x + 2, y + 2 + i, s.c_str());
+		if (index == i) TCODConsole::root->setDefaultForeground(MENU_FOREGROUND);
 	}
+	
+	//Highlight selection.
+	TCODConsole::root->setDefaultBackground(MENU_SELECT_BACKGROUND);
+	TCODConsole::root->rect(x + 1, y + index + 2, width - 2, 1, false);
 
 	//Restore default colors.
 	TCODConsole::root->setDefaultBackground(oldBackground);
