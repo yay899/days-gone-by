@@ -43,7 +43,7 @@ public:
 		@param map to be added
 		@returns index
 	*/
-	unsigned int addMap(Map map);
+	unsigned int addMap(Map* map);
 
 	/*
 		Adds a map and sets it to the current map.
@@ -51,7 +51,7 @@ public:
 		@param map to be added
 		@returns index
 	*/
-	unsigned int addCurrentMap(Map map);
+	unsigned int addCurrentMap(Map* map);
 
 	/*
 		Gets map at index.

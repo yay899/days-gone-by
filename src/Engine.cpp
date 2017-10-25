@@ -14,14 +14,14 @@ Engine::~Engine() {
 	}
 }
 
-unsigned int Engine::addMap(Map map) {
-	maps.push_back(new Map(map));
+unsigned int Engine::addMap(Map* map) {
+	maps.push_back(map);
 	return maps.size() - 1;
 }
 
-unsigned int Engine::addCurrentMap(Map map) {
-	currentMap = new Map(map);
-	maps.push_back(currentMap);
+unsigned int Engine::addCurrentMap(Map* map) {
+	currentMap = map;
+	maps.push_back(map);
 	return maps.size() - 1;
 }
 

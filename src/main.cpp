@@ -4,22 +4,32 @@
 #include "Engine.hpp"
 
 Engine _eng = Engine();
-State _gameState = STATE_PLAYER_TURN;
-Menu _menu = Menu("BLAH"); //TODO figure out how to not use a global here.
 
 int main(int argc, char *argv[]) {
-
+	//Initialization
 	TCODConsole::initRoot(80, 50, "days-gone-by");
 
-	Map* map = new Map(50, 80);
-	_eng.maps.push_back(map);
-	_eng.currentMap = map;
+	//Move these eventually.
+	{
+		Map* temp = new Map(50, 80);
+		temp->generateFill(Tile(' '));
+
+		_eng.addCurrentMap(temp);
+	}
+
+	{
+		Menu temp = Menu("ESC");
+		temp.options.push_back(std::tuple<std::string, void(*)(Map*)>("Create player", &Menu::testOption));
+		temp.options.push_back(std::tuple<std::string, void(*)(Map*)>("Create test enemy", &Menu::testOption2));
+
+		_eng.addMenu(temp);
+	}
 
 	//Main game loop.
 	while (!TCODConsole::isWindowClosed()) {
 
-		_eng.update(_eng.currentMap);
-		_eng.render(_eng.currentMap);
+		_eng.update();
+		_eng.render();
 
 	}
 

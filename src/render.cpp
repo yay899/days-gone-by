@@ -1,11 +1,19 @@
 #include "Engine.hpp"
 
-extern State _gameState;
-extern Menu _menu;
+extern Engine _eng;
 
-void Engine::render(Map* map) {
-	TCODConsole::root->clear();
-	map->render();
-	if (_gameState == STATE_IN_MENU) _menu.render(4, 4);
-	TCODConsole::root->flush();
+void Engine::render() {
+	TCODConsole::root->clear(); //Clear screen.
+	
+	//Render current map.
+	currentMap->render();
+	
+	//Render menus so that index 0 is rendered last.
+	if (_eng.gameState == STATE_IN_MENU) {
+		for (std::vector<Menu*>::reverse_iterator i = openMenus.rbegin(); i < openMenus.rend(); i++) {
+			(*i)->render(4, 4);
+		}
+	}
+
+	TCODConsole::root->flush(); //Display buffer on screen.
 }
