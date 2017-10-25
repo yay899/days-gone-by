@@ -34,7 +34,7 @@ public: //                                    v Totally super clear exactly what
 
 		@param index of target
 	*/
-	void execute(int i, Map* map);
+	void execute(unsigned int i, Map* map);
 
 	/*
 		Moves selection up.
@@ -51,7 +51,7 @@ public: //                                    v Totally super clear exactly what
 
 		@param index of target.
 	*/
-	void select(int i);
+	void select(unsigned int i);
 
 	/*--------------------------------------------------
 						EFFECTS

@@ -45,6 +45,16 @@ void update(Map* map) {
 				_menu.execute(map);
 				_gameState = STATE_PLAYER_TURN;
 				break;
+			case TCODK_UP:
+				_menu.selectUp();
+				break;
+			case TCODK_DOWN:
+				_menu.selectDown();
+				break;
+			case TCODK_CHAR:
+				_menu.execute(key.c - 97, map);
+				_gameState = STATE_PLAYER_TURN;
+				break;
 			default:
 				break;
 			}

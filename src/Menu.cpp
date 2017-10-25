@@ -76,20 +76,20 @@ void Menu::execute(Map* map) {
 	std::get<1>(options.at(index))(map);
 }
 
-void Menu::execute(int i, Map* map) {
-	std::get<1>(options.at(i))(map);
+void Menu::execute(unsigned int i, Map* map) {
+	if (i <= options.size()) std::get<1>(options.at(i))(map);
 }
 
 void Menu::selectUp() {
-
+	if (index < options.size()) index++;
 }
 
 void Menu::selectDown() {
-
+	if (index > 0) index--;
 }
 
-void Menu::select(int i) {
-
+void Menu::select(unsigned int i) {
+	if (i <= options.size()) index = i;
 }
 
 	/*--------------------------------------------------
