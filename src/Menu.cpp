@@ -77,11 +77,11 @@ void Menu::execute(unsigned int i, Map* map) {
 }
 
 void Menu::selectUp() {
-	if (index < options.size()) index++;
+	if (index > 0) index--;
 }
 
 void Menu::selectDown() {
-	if (index > 0) index--;
+	if (index < options.size() - 1) index++;
 }
 
 void Menu::select(unsigned int i) {
