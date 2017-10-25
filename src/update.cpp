@@ -17,7 +17,7 @@ void update(Map* map) {
 	if (ev == TCOD_EVENT_KEY_PRESS && key.vk == TCODK_ESCAPE) {
 		_menu = Menu("BLAH");
 		_menu.options.push_back(std::tuple<std::string, void(*)(Map*)>("TEST OPTION", &Menu::testOption));
-		_menu.options.push_back(std::tuple<std::string, void(*)(Map*)>("TEST OPTION 2", &Menu::testOption));
+		_menu.options.push_back(std::tuple<std::string, void(*)(Map*)>("TEST OPTION 2", &Menu::testOption2));
 		_menu.options.push_back(std::tuple<std::string, void(*)(Map*)>("AAAAAAAAAAAAAAAAAAAAAAAAa", &Menu::testOption));
 		_gameState = STATE_IN_MENU;
 	}

@@ -63,6 +63,13 @@ public: //                                    v Totally super clear exactly what
 		@param current map
 	*/
 	static void testOption(Map* map);
+
+	/*
+		For testing purposes; spawns a test enemy entitiy at (40, 40)
+
+		@param current map
+	*/
+	static void testOption2(Map* map);
 };
 
 //Constants

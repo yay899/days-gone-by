@@ -95,3 +95,7 @@ void Menu::select(unsigned int i) {
 void Menu::testOption(Map* map) {
 	map->addTeamPlayer(new EntityPlayer(0, 0, '@'));
 }
+
+void Menu::testOption2(Map* map) {
+	map->addTeamAI(new EntityTestEnemy(40, 40, 'e'));
+}
