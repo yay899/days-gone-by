@@ -5,7 +5,7 @@
 #include "Menu.hpp"
 
 State _gameState = STATE_PLAYER_TURN;
-Menu _menu = Menu(); //TODO figure out how to not use a global here.
+Menu _menu = Menu("BLAH"); //TODO figure out how to not use a global here.
 
 int main(int argc, char *argv[]) {
 

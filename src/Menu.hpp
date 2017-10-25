@@ -11,9 +11,10 @@
 class Menu {
 public: //                                    v Totally super clear exactly what this means. /s (It's a pointer to a void function that takes a pointer to a Map as an argument.)
 	std::vector<std::tuple<std::string, void (*)(Map*)>> options; //Duple contains text of option, and what function it calls.
-	int index; //Contains which menu option is currently selected.
+	unsigned int index; //Contains which menu option is currently selected.
+	std::string name;
 
-	Menu();
+	Menu(std::string name);
 
 	/*
 		Renders menu at (x,y)
@@ -64,4 +65,9 @@ public: //                                    v Totally super clear exactly what
 	static void testOption(Map* map);
 };
 
+//Constants
+const TCODColor MENU_BACKGROUND = TCOD_black;
+const TCODColor MENU_FOREGROUND = TCOD_white;
+const TCODColor MENU_SELECT_BACKGROUND = TCOD_blue;
+const TCODColor MENU_SELECT_FOREGROUND = TCOD_white;
 #endif
