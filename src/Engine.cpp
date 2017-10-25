@@ -13,3 +13,58 @@ Engine::~Engine() {
 		delete *i;
 	}
 }
+
+unsigned int Engine::addMap(Map map) {
+	maps.push_back(new Map(map));
+}
+
+unsigned int Engine::addCurrentMap(Map map) {
+	currentMap = new Map(map);
+	maps.push_back(currentMap);
+}
+
+Map* Engine::getMap(unsigned int i) {
+	return maps.at(i);
+}
+
+int Engine::findMap(Map* map) {
+	for (unsigned int i = 0; i < maps.size() - 1; i++) {
+		if (maps.at(i) == map) return i;
+	}
+
+	return -1;
+}
+
+void Engine::removeMap(unsigned int i) {
+	delete maps.at(i);
+	maps.erase(maps.begin() + i);
+}
+
+unsigned int Engine::addMenu(Menu menu) {
+	menus.push_back(new Menu(menu));
+}
+
+Menu* Engine::getMenu(unsigned int i) {
+	return menus.at(i);
+}
+
+int Engine::findMenu(Menu* menu) {
+	for (unsigned int i = 0; i < menus.size() - 1; i++) {
+		if (menus.at(i) == menu) return i;
+	}
+
+	return -1;
+}
+
+void Engine::removeMenu(unsigned int i) {
+	delete menus.at(i);
+	menus.erase(menus.begin() + i);
+}
+
+void Engine::openMenu(unsigned int i) {
+	openMenus.insert(openMenus.begin(), menus.at(i));
+}
+
+void Engine::closeMenu() {
+	openMenus.erase(openMenus.begin());
+}
