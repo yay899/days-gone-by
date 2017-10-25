@@ -15,6 +15,7 @@ void Menu::render(int x, int y) {
 	//Expand box for padding, plus markers on left side of options.
 	height += 4;
 	width += 6;
+	width = MAX(width, name.length() + 4);
 
 	//Store old default colors and set new ones.
 	TCODColor oldBackground = TCODConsole::root->getDefaultBackground();
