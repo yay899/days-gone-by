@@ -30,8 +30,11 @@
 *.exe
 *.out
 *.app
+*.png
+game1
 
 #VS 2015 project files
+lib/
 \.vs
 *.db
 *.filters
@@ -39,6 +42,8 @@
 *.vcxproj
 *.vcxproj.user
 *.opendb
+include/
+include/*
 \Debug
 \x64
 \Release
