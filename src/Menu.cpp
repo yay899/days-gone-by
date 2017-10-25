@@ -8,8 +8,8 @@ void Menu::render(int x, int y) {
 
 }
 
-void Menu::execute() {
-
+void Menu::execute(Map* map) {
+	std::get<1>(options.at(index))(map);
 }
 
 void Menu::execute(int i, Map* map) {
@@ -33,5 +33,5 @@ void Menu::select(int i) {
 	--------------------------------------------------*/
 
 void Menu::testOption(Map* map) {
-
+	map->addTeamPlayer(new EntityPlayer(0, 0, '@'));
 }

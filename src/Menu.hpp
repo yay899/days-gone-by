@@ -26,7 +26,7 @@ public: //                                    v Totally super clear exactly what
 	/*
 		Executes effect of current selection.
 	*/
-	void execute();
+	void execute(Map* map);
 
 	/*
 		Executes effect of target option.

@@ -4,6 +4,7 @@
 
 #include "libtcod.hpp"
 #include "Map.hpp"
+#include "Menu.hpp"
 
 enum State {
 	STATE_PLAYER_TURN,
