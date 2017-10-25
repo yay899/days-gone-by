@@ -30,12 +30,12 @@ public:
 	/*
 		Updates the game state
 	*/
-	void update(Map* map);
+	void update();
 
 	/*
 		Renders the game to screen.
 	*/
-	void render(Map* map);
+	void render();
 
 	/*
 		Adds map to maps.
