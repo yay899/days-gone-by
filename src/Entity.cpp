@@ -1,8 +1,7 @@
 #include "Entity.hpp"
-#include "update.hpp"
+#include "Engine.hpp"
 
-//Declare this so it'll actually recognize that it exists.
-extern State _gameState;
+extern Engine _eng;
 
 /*
 	Class Entity.
@@ -56,7 +55,7 @@ void EntityPlayer::update(float t, TCOD_key_t key, Map* map) {
 	case TCODK_CHAR:
 		switch (key.c) {
 		case '.':
-			_gameState = STATE_AI_TURN;
+			_eng.gameState = STATE_AI_TURN;
 		default:
 			break;
 		}
@@ -64,54 +63,54 @@ void EntityPlayer::update(float t, TCOD_key_t key, Map* map) {
 	//Special keys.
 	case TCODK_UP:
 		move(x, y - 1, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_DOWN:
 		move(x, y + 1, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_LEFT:
 		move(x - 1, y, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_RIGHT:
 		move(x + 1, y, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP1:
 		move(x - 1, y + 1, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP2:
 		move(x, y + 1, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP3:
 		move(x + 1, y + 1, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP4:
 		move(x - 1, y, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP5:
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP6:
 		move(x + 1, y, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP7:
 		move(x - 1, y - 1, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP8:
 		move(x, y - 1, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP9:
 		move(x + 1, y - 1, map);
-		_gameState = STATE_AI_TURN;
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	default:
 		break;

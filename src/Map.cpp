@@ -1,8 +1,7 @@
 #include "Map.hpp"
-#include "update.hpp"
+#include "Engine.hpp"
 
-//Declare this so it'll actually recognize that it exists.
-extern State _gameState;
+extern Engine _eng;
 
 Map::Map(int w, int h) : w(w), h(h) {
 	tileMap = new Tile*[w*h];
@@ -21,7 +20,7 @@ Map::~Map() {
 }
 
 void Map::update(float t, TCOD_key_t key) {
-	switch (_gameState) {
+	switch (_eng.gameState) {
 	case STATE_PLAYER_TURN:
 		//Iterate over every player entity in map, calling updater.
 		for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
@@ -33,7 +32,7 @@ void Map::update(float t, TCOD_key_t key) {
 		for (std::vector<Entity*>::iterator i = teamAI.begin(); i < teamAI.end(); i++) {
 			(*i)->update(t, key, this);
 		}
-		_gameState = STATE_PLAYER_TURN;
+		_eng.gameState = STATE_PLAYER_TURN;
 		break;
 	default:
 		break;

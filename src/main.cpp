@@ -1,9 +1,9 @@
 #include "libtcod.hpp"
 #include "Map.hpp"
-#include "update.hpp"
-#include "render.hpp"
 #include "Menu.hpp"
+#include "Engine.hpp"
 
+Engine _eng = Engine();
 State _gameState = STATE_PLAYER_TURN;
 Menu _menu = Menu("BLAH"); //TODO figure out how to not use a global here.
 
@@ -11,13 +11,15 @@ int main(int argc, char *argv[]) {
 
 	TCODConsole::initRoot(80, 50, "days-gone-by");
 
-	Map map(50, 80);
+	Map* map = new Map(50, 80);
+	_eng.maps.push_back(map);
+	_eng.currentMap = map;
 
 	//Main game loop.
 	while (!TCODConsole::isWindowClosed()) {
 
-		update(&map);
-		render(&map);
+		_eng.update(_eng.currentMap);
+		_eng.render(_eng.currentMap);
 
 	}
 

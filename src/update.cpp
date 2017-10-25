@@ -1,9 +1,9 @@
-#include "update.hpp"
+#include "Engine.hpp"
 
 extern State _gameState;
 extern Menu _menu;
 
-void update(Map* map) {
+void Engine::update(Map* map) {
 	//Code stolen from another one of my projects.
 	//Check all events to prevent window from locking up.
 	TCOD_key_t key;
