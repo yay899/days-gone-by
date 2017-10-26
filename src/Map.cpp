@@ -41,9 +41,9 @@ void Map::update(float t, TCOD_key_t key) {
 }
 
 void Map::render() {
-	for (int x = 0; x < h; x++) { //I legitimately don't understand why x needs to be compared to h, and y to w, but the program overflows the tileMap array if you don't.
+	for (int x = 0; x < w; x++) {
 
-		for (int y = 0; y < w; y++) {
+		for (int y = 0; y < h; y++) {
 			Tile t = getTile(x, y);
 			TCODConsole::root->setChar(x, y, t.c);
 			TCODConsole::root->setCharBackground(x, y, t.background);
@@ -74,16 +74,16 @@ void Map::generateFill(Tile t) {
 }
 
 Tile* Map::getTilePointer(int x, int y) {
-	return tileMap[w * x + y];
+	return tileMap[h * x + y];
 }
 
 Tile Map::getTile(int x, int y) {
-	return *tileMap[w * x + y];
+	return *tileMap[h * x + y];
 }
 
 void Map::setTile(int x, int y, Tile* t) {
-	delete tileMap[w * x + y];
-	tileMap[w * x + y] = t;
+	delete tileMap[h * x + y];
+	tileMap[h * x + y] = t;
 }
 
 void Map::setRectangle(int x, int y, int width, int height, Tile outline) {
@@ -135,7 +135,7 @@ bool Map::isSolid(int x, int y) {
 	}
 
 	//Otherwise just return the solidity of the tile.
-	return tileMap[w * x + y]->isSolid;
+	return tileMap[h * x + y]->isSolid;
 }
 
 int Map::getWidth() { return w; }
