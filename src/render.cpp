@@ -13,5 +13,7 @@ void Engine::render() {
 		}
 	}
 
+	gameHud.render();
+
 	TCODConsole::root->flush(); //Display buffer on screen.
 }

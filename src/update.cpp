@@ -64,4 +64,6 @@ void Engine::update() {
 	case STATE_IN_MENU:
 		break;
 	}
+
+	gameHud.update();
 }
