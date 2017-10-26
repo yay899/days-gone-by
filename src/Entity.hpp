@@ -35,6 +35,15 @@ public:
 	virtual void render();
 
 	/*
+		Attacks entity at target
+
+		@param x coordinate
+		@param y coordinate
+		@param map entity is on
+	*/
+	virtual void attack(unsigned int targetX, unsigned int targetY, Map* map);
+
+	/*
 		Checks to see if target is solid and then moves object there if it isn't. Runs walkedOn() regardless of whether or not the entity is actually moved.
 
 		@param target x
@@ -92,6 +101,15 @@ public:
 		Extends Entity::render() with player functionality.
 	*/
 	void render();
+
+	/*
+		Does flat damage to entity player attempts to move into. Maybe scale off a stat or weapon later.
+
+		@param x
+		@param y
+		@param map entity is on
+	*/
+	void attack(unsigned int x, unsigned int y, Map* map);
 };
 
 /*
@@ -115,5 +133,23 @@ public:
 		Extends Entity::render() with test enemy functionality.
 	*/
 	void render();
+
+	/*
+	Does flat damage to entity enemy attempts to move into. Maybe scale off a stat or weapon later.
+
+	@param x
+	@param y
+	@param map entity is on
+	*/
+	void attack(unsigned int x, unsigned int y, Map* map);
 };
+
+/*
+	Constants
+*/
+
+const int DEFAULT_PLAYER_MAXHP = 10;
+const int DEFAULT_PLAYER_MAXWATTS = 10;
+const int DEFAULT_TESTENEMY_MAXHP = 10;
+const int DEFAULT_TESTENEMY_MAXWATTS = 10;
 #endif

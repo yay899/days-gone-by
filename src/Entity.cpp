@@ -18,6 +18,10 @@ void Entity::render() {
 	//Define this when extending.
 }
 
+void Entity::attack(unsigned int targetX, unsigned int targetY, Map* map) {
+	//Define this when extending.
+}
+
 void Entity::move(unsigned int targetX, unsigned int targetY, Map* map) {
 	//Check to see if target is in bounds.
 	if (targetX >= 0 && targetY >= 0 && targetX < map->getWidth() && targetY < map->getHeight()) {
@@ -25,6 +29,8 @@ void Entity::move(unsigned int targetX, unsigned int targetY, Map* map) {
 		if (!map->isSolid(targetX, targetY)) {
 			x = targetX;
 			y = targetY;
+		} else {
+			attack(targetX, targetY, map);
 		}
 
 		map->getTilePointer(targetX, targetY)->walkedOn(this, map);
@@ -145,6 +151,11 @@ void EntityPlayer::render() {
 	TCODConsole::root->setChar(x, y, c);
 }
 
+void EntityPlayer::attack(unsigned int x, unsigned int y, Map* map) {
+	Entity* target = map->getEntity(x, y);
+	if (target != nullptr) target->hurt(4);
+}
+
 /*
 	Class EntityTestEnemy
 */
@@ -180,4 +191,9 @@ void EntityTestEnemy::update(float t, TCOD_key_t key, Map* map) {
 void EntityTestEnemy::render() {
 	TCODConsole::root->setCharForeground(x, y, col);
 	TCODConsole::root->setChar(x, y, c);
+}
+
+void EntityTestEnemy::attack(unsigned int x, unsigned int y, Map* map) {
+	Entity* target = map->getEntity(x, y);
+	if (target != nullptr) target->hurt(1);
 }

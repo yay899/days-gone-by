@@ -126,6 +126,15 @@ public:
 	bool isSolid(unsigned int x, unsigned int y);
 
 	/*
+		Finds entity at (x,y)
+
+		@param x
+		@param y
+		@returns pointer to entity
+	*/
+	Entity* getEntity(unsigned int x, unsigned int y);
+
+	/*
 		@return width of map
 	*/
 	unsigned int getWidth();

@@ -138,6 +138,16 @@ bool Map::isSolid(unsigned int x, unsigned int y) {
 	return tileMap[h * x + y]->isSolid;
 }
 
+Entity* Map::getEntity(unsigned int x, unsigned int y) {
+	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
+		if ((*i)->x == x && (*i)->y == y) {
+			return *i;
+		}
+	}
+
+	return nullptr;
+}
+
 unsigned int Map::getWidth() { return w; }
 
 unsigned int Map::getHeight() { return h; }
