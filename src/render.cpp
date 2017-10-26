@@ -1,7 +1,5 @@
 #include "Engine.hpp"
 
-extern Engine _eng;
-
 void Engine::render() {
 	TCODConsole::root->clear(); //Clear screen.
 	
@@ -9,7 +7,7 @@ void Engine::render() {
 	currentMap->render();
 	
 	//Render menus so that index 0 is rendered last.
-	if (_eng.gameState == STATE_IN_MENU) {
+	if (gameState == STATE_IN_MENU) {
 		for (std::vector<Menu*>::reverse_iterator i = openMenus.rbegin(); i < openMenus.rend(); i++) {
 			(*i)->render(4, 4);
 		}
