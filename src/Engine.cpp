@@ -16,13 +16,13 @@ Engine::~Engine() {
 
 unsigned int Engine::addMap(Map* map) {
 	maps.push_back(map);
-	return maps.size() - 1;
+	return (unsigned int)maps.size() - 1;
 }
 
 unsigned int Engine::addCurrentMap(Map* map) {
 	currentMap = map;
 	maps.push_back(map);
-	return maps.size() - 1;
+	return (unsigned int)maps.size() - 1;
 }
 
 Map* Engine::getMap(unsigned int i) {
@@ -44,7 +44,7 @@ void Engine::removeMap(unsigned int i) {
 
 unsigned int Engine::addMenu(Menu menu) {
 	menus.push_back(new Menu(menu));
-	return maps.size() - 1;
+	return (unsigned int)maps.size() - 1;
 }
 
 Menu* Engine::getMenu(unsigned int i) {
