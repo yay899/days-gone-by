@@ -6,6 +6,7 @@
 
 #include "Map.hpp"
 #include "Menu.hpp"
+#include "Hud.hpp"
 
 enum State {
 	STATE_PLAYER_TURN,
@@ -20,6 +21,7 @@ private:
 	std::vector<Menu*> menus; //List of menus.
 
 public:
+	Hud gameHud;
 	State gameState;
 	Map* currentMap; //Current map.
 	std::vector<Menu*> openMenus; //List of menues that are open, with index zero being the top-most menu.

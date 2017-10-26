@@ -1,6 +1,6 @@
 #include "Engine.hpp"
 
-Engine::Engine() : gameState(STATE_PLAYER_TURN), maps(std::vector<Map*>()), currentMap(nullptr), menus(std::vector<Menu*>()), openMenus(std::vector<Menu*>()) {
+Engine::Engine() : gameState(STATE_PLAYER_TURN), maps(std::vector<Map*>()), currentMap(nullptr), menus(std::vector<Menu*>()), openMenus(std::vector<Menu*>()), gameHud(Hud(8)) {
 
 }
 
