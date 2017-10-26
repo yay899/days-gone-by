@@ -5,9 +5,15 @@
 
 Engine _eng = Engine();
 
+/*
+	Constants
+*/
+const unsigned int SCREEN_WIDTH = 80;
+const unsigned int SCREEN_HEIGHT = 50;
+
 int main(int argc, char *argv[]) {
 	//Initialization
-	TCODConsole::initRoot(80, 50, "days-gone-by");
+	TCODConsole::initRoot(SCREEN_WIDTH, SCREEN_HEIGHT, "days-gone-by");
 
 	//Move these eventually.
 	{
