@@ -15,7 +15,7 @@ class Tile;
 class Map {
 protected:
 	
-	int w, h;
+	unsigned int w, h;
 	Tile** tileMap; //Map of tiles.
 
 public:
@@ -23,7 +23,7 @@ public:
 	std::vector<Entity*> teamPlayer; //ONLY player entities.
 	std::vector<Entity*> teamAI; //Everything else.
 
-	Map(int w, int h);
+	Map(unsigned int w, unsigned int h);
 	~Map();
 
 	/*
@@ -73,7 +73,7 @@ public:
 		@param y
 		@return pointer to tile
 	*/
-	Tile* getTilePointer(int x, int y);
+	Tile* getTilePointer(unsigned int x, unsigned int y);
 
 	/*
 		Helper function; gets tile info at (x,y).
@@ -82,7 +82,7 @@ public:
 		@param y
 		@return tile info
 	*/
-	Tile getTile(int x, int y);
+	Tile getTile(unsigned int x, unsigned int y);
 
 	/*
 		Helper function; sets tile at (x,y) to provided tile.
@@ -91,7 +91,7 @@ public:
 		@param y
 		@param pointer to new tile
 	*/
-	void setTile(int x, int y, Tile* t);
+	void setTile(unsigned int x, unsigned int y, Tile* t);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile.
@@ -102,7 +102,7 @@ public:
 		@param height
 		@param outline tile
 	*/
-	void setRectangle(int x, int y, int width, int height, Tile outline);
+	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, Tile outline);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
@@ -114,7 +114,7 @@ public:
 		@param outline tile
 		@param fill tile
 	*/
-	void setRectangle(int x, int y, int width, int height, Tile outline, Tile fill);
+	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, Tile outline, Tile fill);
 
 	/*
 		Helper function; checks if tile on map is solid.
@@ -123,17 +123,17 @@ public:
 		@param y
 		@return solidity of tile at (x,y)
 	*/
-	bool isSolid(int x, int y);
+	bool isSolid(unsigned int x, unsigned int y);
 
 	/*
 		@return width of map
 	*/
-	int getWidth();
+	unsigned int getWidth();
 
 	/*
 		@return height of map
 	*/
-	int getHeight();
+	unsigned int getHeight();
 };
 
 #endif

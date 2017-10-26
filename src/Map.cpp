@@ -3,16 +3,16 @@
 
 extern Engine _eng;
 
-Map::Map(int w, int h) : w(w), h(h) {
+Map::Map(unsigned int w, unsigned int h) : w(w), h(h) {
 	tileMap = new Tile*[w*h];
 
-	for (int i = 0; i < w*h; i++) {
+	for (unsigned int i = 0; i < w*h; i++) {
 		tileMap[i] = new Tile();
 	}
 }
 
 Map::~Map() {
-	for (int i = 0; i < w*h; i++) {
+	for (unsigned int i = 0; i < w*h; i++) {
 		delete tileMap[i];
 	}
 	
@@ -41,9 +41,9 @@ void Map::update(float t, TCOD_key_t key) {
 }
 
 void Map::render() {
-	for (int x = 0; x < w; x++) {
+	for (unsigned int x = 0; x < w; x++) {
 
-		for (int y = 0; y < h; y++) {
+		for (unsigned int y = 0; y < h; y++) {
 			Tile t = getTile(x, y);
 			TCODConsole::root->setChar(x, y, t.c);
 			TCODConsole::root->setCharBackground(x, y, t.background);
@@ -68,47 +68,47 @@ void Map::addTeamAI(Entity* e) {
 }
 
 void Map::generateFill(Tile t) {
-	for (int i = 0; i < w*h; i++) {
+	for (unsigned int i = 0; i < w*h; i++) {
 		*tileMap[i] = t;
 	}
 }
 
-Tile* Map::getTilePointer(int x, int y) {
+Tile* Map::getTilePointer(unsigned int x, unsigned int y) {
 	return tileMap[h * x + y];
 }
 
-Tile Map::getTile(int x, int y) {
+Tile Map::getTile(unsigned int x, unsigned int y) {
 	return *tileMap[h * x + y];
 }
 
-void Map::setTile(int x, int y, Tile* t) {
+void Map::setTile(unsigned int x, unsigned int y, Tile* t) {
 	delete tileMap[h * x + y];
 	tileMap[h * x + y] = t;
 }
 
-void Map::setRectangle(int x, int y, int width, int height, Tile outline) {
+void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, Tile outline) {
 	
 	//Draw horizontal portion of outline.
-	for (int i = 0; i < width; i++) {
+	for (unsigned int i = 0; i < width; i++) {
 		setTile(i + x, y, new Tile(outline));
 		setTile(i + x, y + height - 1, new Tile(outline));
 	}
 
 	//Draw vertical portion of outline.
-	for (int i = 1; i < height - 1; i++) { //Start and end one early because the horizontal already covered the corners.
+	for (unsigned int i = 1; i < height - 1; i++) { //Start and end one early because the horizontal already covered the corners.
 		setTile(x, y + i, new Tile(outline));
 		setTile(x + width - 1, y + i, new Tile(outline));
 	}
 }
 
-void Map::setRectangle(int x, int y, int width, int height, Tile outline, Tile fill) {
+void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, Tile outline, Tile fill) {
 
 	//No need to draw outline individually if the tiles are identical.
 	if (outline == fill) {
 
 		//Set all tiles in entire rectangle.
-		for (int i = 0; i < width; i++) {
-			for (int k = 0; k < height; k++) {
+		for (unsigned int i = 0; i < width; i++) {
+			for (unsigned int k = 0; k < height; k++) {
 				setTile(x + i, y + k, new Tile(outline));
 			}
 		}
@@ -118,15 +118,15 @@ void Map::setRectangle(int x, int y, int width, int height, Tile outline, Tile f
 		setRectangle(x, y, width, height, outline);
 
 		//Set inside.
-		for (int i = 1; i < width - 1; i++) {
-			for (int k = 1; k < height - 1; k++) {
+		for (unsigned int i = 1; i < width - 1; i++) {
+			for (unsigned int k = 1; k < height - 1; k++) {
 				setTile(x + i, y + k, new Tile(fill));
 			}
 		}
 	}
 }
 
-bool Map::isSolid(int x, int y) {
+bool Map::isSolid(unsigned int x, unsigned int y) {
 	//Return solid if there is an entity there.
 	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
 		if ((*i)->x == x && (*i)->y == y) {
@@ -138,6 +138,6 @@ bool Map::isSolid(int x, int y) {
 	return tileMap[h * x + y]->isSolid;
 }
 
-int Map::getWidth() { return w; }
+unsigned int Map::getWidth() { return w; }
 
-int Map::getHeight() { return h; }
+unsigned int Map::getHeight() { return h; }
