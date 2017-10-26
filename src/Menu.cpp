@@ -1,5 +1,8 @@
 #include "Menu.hpp"
 
+#include "Engine.hpp" //Got to put this here or else cyclical includes blows everything up.
+extern Engine _eng;
+
 Menu::Menu(std::string name) : options(std::vector<std::tuple<std::string, void (*)(Map*)>>()), index(0), name(name) {
 
 }
@@ -94,13 +97,15 @@ void Menu::select(unsigned int i) {
 	--------------------------------------------------*/
 
 void Menu::debugAddPlayer(Map* map) {
-	EntityPlayer temp = EntityPlayer(0, 0, '@');
-	temp.maxHp = DEFAULT_PLAYER_MAXHP;
-	temp.hp = DEFAULT_PLAYER_MAXHP;
-	temp.maxWatts = DEFAULT_PLAYER_MAXWATTS;
-	temp.watts = DEFAULT_PLAYER_MAXWATTS;
+	EntityPlayer* temp = new EntityPlayer(0, 0, '@');
+	temp->maxHp = DEFAULT_PLAYER_MAXHP;
+	temp->hp = DEFAULT_PLAYER_MAXHP;
+	temp->maxWatts = DEFAULT_PLAYER_MAXWATTS;
+	temp->watts = DEFAULT_PLAYER_MAXWATTS;
 
-	map->addTeamPlayer(new EntityPlayer(temp));
+	map->addTeamPlayer(temp);
+	_eng.gameHud.addElement(new HudElementHp(temp));
+	_eng.gameHud.addElement(new HudElementWatts(temp));
 }
 
 void Menu::debugAddTestEnemy(Map* map) {
