@@ -18,7 +18,7 @@ void Entity::render() {
 	//Define this when extending.
 }
 
-void Entity::move(int targetX, int targetY, Map* map) {
+void Entity::move(unsigned int targetX, unsigned int targetY, Map* map) {
 	//Check to see if target is in bounds.
 	if (targetX >= 0 && targetY >= 0 && targetX < map->getWidth() && targetY < map->getHeight()) {
 		//Check to see if target is solid.
@@ -31,7 +31,7 @@ void Entity::move(int targetX, int targetY, Map* map) {
 	}
 }
 
-void Entity::moveForce(int targetX, int targetY, Map* map) {
+void Entity::moveForce(unsigned int targetX, unsigned int targetY, Map* map) {
 	//Check to see if target is in bounds.
 	if (targetX >= 0 && targetY >= 0 && targetX < map->getWidth() && targetY < map->getHeight()) {
 		x = targetX;

@@ -38,7 +38,7 @@ public:
 		@param target y
 		@param map entity is on
 	*/
-	void move(int targetX, int targetY, Map* map);
+	void move(unsigned int targetX, unsigned int targetY, Map* map);
 
 	/*
 		Same as move(), but it ignores checks for solidity.
@@ -47,7 +47,7 @@ public:
 		@param target y
 		@param map entity is on
 	*/
-	void moveForce(int targetX, int targetY, Map* map);
+	void moveForce(unsigned int targetX, unsigned int targetY, Map* map);
 };
 
 class EntityPlayer : public Entity {
