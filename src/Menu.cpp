@@ -98,7 +98,7 @@ void Menu::debugAddPlayer(Map* map) {
 }
 
 void Menu::debugAddTestEnemy(Map* map) {
-	map->addTeamAI(new EntityTestEnemy(map->getWidth(), map->getHeight(), 'e'));
+	map->addTeamAI(new EntityTestEnemy(map->getWidth() - 1, map->getHeight() - 1, 'e'));
 }
 
 void Menu::debugHighlightSolid(Map* map) {
