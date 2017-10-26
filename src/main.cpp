@@ -19,8 +19,9 @@ int main(int argc, char *argv[]) {
 
 	{
 		Menu temp = Menu("ESC");
-		temp.options.push_back(std::tuple<std::string, void(*)(Map*)>("Create player", &Menu::testOption));
-		temp.options.push_back(std::tuple<std::string, void(*)(Map*)>("Create test enemy", &Menu::testOption2));
+		temp.options.push_back(std::tuple<std::string, void(*)(Map*)>("Create player", &Menu::debugAddPlayer));
+		temp.options.push_back(std::tuple<std::string, void(*)(Map*)>("Create test enemy", &Menu::debugAddTestEnemy));
+		temp.options.push_back(std::tuple<std::string, void(*)(Map*)>("Highlight solid tiles", &Menu::debugHighlightSolid));
 
 		_eng.addMenu(temp);
 	}

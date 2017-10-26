@@ -62,14 +62,21 @@ public: //                                    v Totally super clear exactly what
 
 		@param current map
 	*/
-	static void testOption(Map* map);
+	static void debugAddPlayer(Map* map);
 
 	/*
-		For testing purposes; spawns a test enemy entitiy at (40, 40)
+		For testing purposes; spawns a test enemy entitiy at the lower right corner of the map.
 
 		@param current map
 	*/
-	static void testOption2(Map* map);
+	static void debugAddTestEnemy(Map* map);
+
+	/*
+		For testing purposes; highlights all solid tiles.
+
+		@param current map
+	*/
+	static void debugHighlightSolid(Map* map);
 };
 
 //Constants

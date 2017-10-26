@@ -93,10 +93,18 @@ void Menu::select(unsigned int i) {
 					EFFECTS
 	--------------------------------------------------*/
 
-void Menu::testOption(Map* map) {
+void Menu::debugAddPlayer(Map* map) {
 	map->addTeamPlayer(new EntityPlayer(0, 0, '@'));
 }
 
-void Menu::testOption2(Map* map) {
-	map->addTeamAI(new EntityTestEnemy(40, 40, 'e'));
+void Menu::debugAddTestEnemy(Map* map) {
+	map->addTeamAI(new EntityTestEnemy(map->getWidth(), map->getHeight(), 'e'));
+}
+
+void Menu::debugHighlightSolid(Map* map) {
+	for (unsigned int x = 0; x < map->getWidth(); x++) {
+		for (unsigned int y = 0; y < map->getHeight(); y++) {
+			if (map->isSolid(x, y)) map->getTilePointer(x, y)->background = TCOD_pink;
+		}
+	}
 }
