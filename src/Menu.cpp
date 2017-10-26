@@ -94,11 +94,23 @@ void Menu::select(unsigned int i) {
 	--------------------------------------------------*/
 
 void Menu::debugAddPlayer(Map* map) {
-	map->addTeamPlayer(new EntityPlayer(0, 0, '@'));
+	EntityPlayer temp = EntityPlayer(0, 0, '@');
+	temp.maxHp = DEFAULT_PLAYER_MAXHP;
+	temp.hp = DEFAULT_PLAYER_MAXHP;
+	temp.maxWatts = DEFAULT_PLAYER_MAXWATTS;
+	temp.watts = DEFAULT_PLAYER_MAXWATTS;
+
+	map->addTeamPlayer(new EntityPlayer(temp));
 }
 
 void Menu::debugAddTestEnemy(Map* map) {
-	map->addTeamAI(new EntityTestEnemy(map->getWidth() - 1, map->getHeight() - 1, 'e'));
+	EntityTestEnemy temp = EntityTestEnemy(map->getWidth() - 1, map->getHeight() - 1, 'e');
+	temp.maxHp = DEFAULT_TESTENEMY_MAXHP;
+	temp.hp = DEFAULT_TESTENEMY_MAXHP;
+	temp.maxWatts = DEFAULT_TESTENEMY_MAXWATTS;
+	temp.watts = DEFAULT_TESTENEMY_MAXWATTS;
+
+	map->addTeamAI(new EntityTestEnemy(temp));
 }
 
 void Menu::debugHighlightSolid(Map* map) {
