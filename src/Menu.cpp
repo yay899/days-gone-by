@@ -6,16 +6,16 @@ Menu::Menu(std::string name) : options(std::vector<std::tuple<std::string, void 
 
 void Menu::render(int x, int y) {
 	//Calculate size box needs to be.
-	unsigned int height = options.size();
+	unsigned int height = (unsigned int)options.size();
 	unsigned int width = 0;
 	for (std::vector<std::tuple<std::string, void(*)(Map*)>>::iterator i = options.begin(); i < options.end(); i++) {
-		if (std::get<0>(*i).length() > width) width = std::get<0>(*i).length();
+		if (std::get<0>(*i).length() > width) width = (unsigned int)std::get<0>(*i).length();
 	}
 
 	//Expand box for padding, plus markers on left side of options.
 	height += 4;
 	width += 6;
-	width = MAX(width, name.length() + 4);
+	width = MAX(width, (unsigned int)name.length() + 4);
 
 	//Store old default colors and set new ones.
 	TCODColor oldBackground = TCODConsole::root->getDefaultBackground();
