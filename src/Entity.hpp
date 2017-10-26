@@ -15,6 +15,9 @@ public:
 	char c; //Character to render as.
 	TCODColor col; //Color of character.
 
+	int hp, maxHp;
+	int watts, maxWatts;
+
 	Entity(int x, int y, char c, TCODColor = TCODConsole::root->getDefaultForeground());
 
 	/*
@@ -48,6 +51,27 @@ public:
 		@param map entity is on
 	*/
 	void moveForce(unsigned int targetX, unsigned int targetY, Map* map);
+
+	/*
+		Reduces the entities HP. Negative numbers heal.
+
+		@param damage done
+		@returns true if entity survived
+	*/
+	bool hurt(int x);
+
+	/*
+		Reduces the entities Watts. Negative numbers restore Watts.
+
+		@param watts drained
+		@returns true if entity has enough Watts
+	*/
+	bool drain(int x);
+
+	/*
+		Destroys the entity. When inventory is implimented, drops items, etc.
+	*/
+	void kill();
 };
 
 class EntityPlayer : public Entity {

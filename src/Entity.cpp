@@ -6,7 +6,7 @@ extern Engine _eng;
 /*
 	Class Entity.
 */
-Entity::Entity(int x, int y, char c, TCODColor col) : x(x), y(y), c(c), col(col) {
+Entity::Entity(int x, int y, char c, TCODColor col) : x(x), y(y), c(c), col(col), hp(0), maxHp(0), watts(0), maxWatts(0) {
 
 }
 
@@ -39,6 +39,29 @@ void Entity::moveForce(unsigned int targetX, unsigned int targetY, Map* map) {
 
 		map->getTilePointer(targetX, targetY)->walkedOn(this, map);
 	}
+}
+
+bool Entity::hurt(int x) {
+	hp -= x;
+	if (maxHp > 0 && hp <= 0) {
+		kill(); //This could be an issue. Not sure if it'll still return false if we deconstruct the entity in this function.
+		return false;
+	}
+
+	return true;
+}
+
+bool Entity::drain(int x) {
+	if (watts >= x) {
+		watts -= x;
+		return true;
+	}
+
+	return false;
+}
+
+void Entity::kill() {
+	col = TCOD_red; //Test code. Just makes the entity red.
 }
 
 /*
