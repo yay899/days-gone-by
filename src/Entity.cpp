@@ -20,7 +20,7 @@ void Entity::render() {
 
 void Entity::move(int targetX, int targetY, Map* map) {
 	//Check to see if target is in bounds.
-	if (targetX >= 0 && targetY >= 0 && map->getWidth() * targetX + targetY < map->getWidth() * map->getHeight()) {
+	if (targetX >= 0 && targetY >= 0 && targetX < map->getWidth() && targetY < map->getHeight()) {
 		//Check to see if target is solid.
 		if (!map->isSolid(targetX, targetY)) {
 			x = targetX;
@@ -33,7 +33,7 @@ void Entity::move(int targetX, int targetY, Map* map) {
 
 void Entity::moveForce(int targetX, int targetY, Map* map) {
 	//Check to see if target is in bounds.
-	if (targetX >= 0 && targetY >= 0 && map->getWidth() * targetX + targetY < map->getWidth() * map->getHeight()) {
+	if (targetX >= 0 && targetY >= 0 && targetX < map->getWidth() && targetY < map->getHeight()) {
 		x = targetX;
 		y = targetY;
 
