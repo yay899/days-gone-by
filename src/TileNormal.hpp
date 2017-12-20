@@ -7,8 +7,10 @@
 class TileNormal : public Tile {
 protected:
 
+	TCODColor backgroundColor;
 	char character;
 	bool clear;
+	TCODColor foregroundColor;
 	bool occupied;
 	bool walkable;
 
@@ -16,11 +18,13 @@ public:
 
 	/*
 		@param character
+		@param foregroundColor
+		@param backgroundColor
 		@param clear
 		@param occupied
 		@param walkable
 	*/
-	TileNormal(char, bool, bool, bool);
+	TileNormal(char, TCODColor, TCODColor, bool, bool, bool);
 
 	/*
 		Does nothing.

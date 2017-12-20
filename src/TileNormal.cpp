@@ -1,6 +1,6 @@
 #include "TileNormal.hpp"
 
-TileNormal::TileNormal(char ch, bool cl, bool oc, bool wa) : character(ch), clear(cl), occupied(oc), walkable(wa) {
+TileNormal::TileNormal(char ch, TCODColor fo, TCODColor ba, bool cl, bool oc, bool wa) : backgroundColor(ba), character(ch), clear(cl), foregroundColor(fo), occupied(oc), walkable(wa) {
 
 }
 
@@ -30,6 +30,8 @@ bool TileNormal::isWalkable() {
 
 void TileNormal::render(int r, int c) {
 	TCODConsole::root->setChar(c, r, character);
+	TCODConsole::root->setCharForeground(c, r, foregroundColor);
+	TCODConsole::root->setCharBackground(c, r, backgroundColor);
 }
 
 void TileNormal::walkedOn(Entity& e) {

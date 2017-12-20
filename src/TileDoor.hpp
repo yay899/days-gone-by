@@ -8,9 +8,13 @@ class TileDoor : public Tile {
 protected:
 
 	bool clear;
+	TCODColor closedBackgroundColor;
 	char closedCharacter;
+	TCODColor closedForegroundColor;
 	bool occupied;
+	TCODColor openBackgroundColor;
 	bool open;
+	TCODColor openForegroundColor;
 	char openCharacter;
 	bool walkable;
 
@@ -18,13 +22,17 @@ public:
 
 	/*
 		@param open character
+		@param open foreground color
+		@param open background color
 		@param closed character
+		@param closed foreground color
+		@param closed background color
 		@param clear
 		@param occupied
 		@param walkable
 		@param open
 	*/
-	TileDoor(char, char, bool, bool, bool, bool);
+	TileDoor(char, TCODColor, TCODColor, char, TCODColor, TCODColor, bool, bool, bool, bool);
 
 	/*
 		Opens door.
