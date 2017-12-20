@@ -13,7 +13,7 @@ void TileDoor::interact(Entity& e) {
 }
 
 bool TileDoor::isClear() {
-	return clear;
+	return clear && open;
 }
 
 bool TileDoor::isOccupied() {
