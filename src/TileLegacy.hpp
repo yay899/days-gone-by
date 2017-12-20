@@ -1,6 +1,6 @@
 #pragma once
-#ifndef TILE_HPP
-#define TILE_HPP
+#ifndef TILE_LEGACY_HPP
+#define TILE_LEGACY_HPP
 
 #include "libtcod.hpp"
 #include "Entity.hpp"
@@ -11,7 +11,7 @@ class Entity;
 class Map;
 
 //Basic tile for use in Map.
-class Tile {
+class TileLegacy {
 public:
 
 	char c; //The character this tile on the map renders as.
@@ -19,13 +19,13 @@ public:
 	TCODColor background; //The color of the tile.
 	bool isSolid; //Whether or not the tile is solid.
 
-	Tile(char c = ' ', TCODColor foreground = TCODConsole::root->getDefaultForeground(), TCODColor background = TCODConsole::root->getDefaultBackground(), bool isSolid = false);
+	TileLegacy(char c = ' ', TCODColor foreground = TCODConsole::root->getDefaultForeground(), TCODColor background = TCODConsole::root->getDefaultBackground(), bool isSolid = false);
 
 	/*
 		Overload == and != so they function. Hopefully this works. Stole most of it off the internet.
 	*/
-	const bool operator==(const Tile &other);
-	const bool operator!=(const Tile &other);
+	const bool operator==(const TileLegacy &other);
+	const bool operator!=(const TileLegacy &other);
 
 	/*
 		Called when tile is walked on, to enable complex tile functionality
@@ -37,7 +37,7 @@ public:
 };
 
 //Tile that teleports anything that walks on it.
-class TileTeleport : public Tile {
+class TileTeleport : public TileLegacy {
 public:
 
 	int x, y; //Target tile to teleport to.
@@ -53,12 +53,12 @@ public:
 	void walkedOn(Entity* e, Map* map);
 };
 
-class TileDoor : public Tile {
+class TileDoor : public TileLegacy {
 public:
-	Tile openTile, closedTile; //Both states of doors.
+	TileLegacy openTile, closedTile; //Both states of doors.
 
 	//Initializes closed.
-	TileDoor(Tile openTile, Tile closedTile);
+	TileDoor(TileLegacy openTile, TileLegacy closedTile);
 
 	/*
 		Opens door.
@@ -83,10 +83,10 @@ public:
 	Tile constants.
 	Basically presets. That's why they're global.
 */
-const Tile TILE_FLOOR = Tile(' ', TCOD_white, TCOD_black, false);
-const Tile TILE_WALL = Tile(' ', TCOD_white, TCOD_blue, true);
-const Tile TILE_FANCYFLOOR = Tile('+', TCOD_white, TCOD_azure, false);
-const Tile TILE_FANCYWALL = Tile('#', TCOD_white, TCOD_blue, true);
+const TileLegacy TILE_FLOOR = TileLegacy(' ', TCOD_white, TCOD_black, false);
+const TileLegacy TILE_WALL = TileLegacy(' ', TCOD_white, TCOD_blue, true);
+const TileLegacy TILE_FANCYFLOOR = TileLegacy('+', TCOD_white, TCOD_azure, false);
+const TileLegacy TILE_FANCYWALL = TileLegacy('#', TCOD_white, TCOD_blue, true);
 
-const TileDoor TILEDOOR_DOOR = TileDoor(Tile('+', TCOD_amber, TCOD_black, false), Tile('#', TCOD_white, TCOD_amber, true));
+const TileDoor TILEDOOR_DOOR = TileDoor(TileLegacy('+', TCOD_amber, TCOD_black, false), TileLegacy('#', TCOD_white, TCOD_amber, true));
 #endif
