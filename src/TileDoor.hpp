@@ -7,15 +7,24 @@
 class TileDoor : public Tile {
 protected:
 
-	char character;
 	bool clear;
+	char closedCharacter;
 	bool occupied;
 	bool open;
+	char openCharacter;
 	bool walkable;
 
 public:
 
-	TileDoor(char, bool, bool, bool, bool);
+	/*
+		@param open character
+		@param closed character
+		@param clear
+		@param occupied
+		@param walkable
+		@param open
+	*/
+	TileDoor(char, char, bool, bool, bool, bool);
 
 	/*
 		Toggles door.

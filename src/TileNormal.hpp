@@ -14,6 +14,12 @@ protected:
 
 public:
 
+	/*
+		@param character
+		@param clear
+		@param occupied
+		@param walkable
+	*/
 	TileNormal(char, bool, bool, bool);
 
 	/*
