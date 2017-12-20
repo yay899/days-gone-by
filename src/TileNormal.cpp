@@ -4,7 +4,13 @@ TileNormal::TileNormal(char ch, bool cl, bool oc, bool wa) : character(ch), clea
 
 }
 
-void TileNormal::interact() {
+void TileNormal::bumped(Entity e) {
+	/*
+	
+	*/
+}
+
+void TileNormal::interact(Entity e) {
 	/*
 		Can you hear it?
 	*/
@@ -24,4 +30,10 @@ bool TileNormal::isWalkable() {
 
 void TileNormal::render(int r, int c) {
 	TCODConsole::root->setChar(c, r, character);
+}
+
+void TileNormal::walkedOn(Entity e) {
+	/*
+		No. Of course you can't.
+	*/
 }

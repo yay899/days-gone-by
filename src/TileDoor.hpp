@@ -27,9 +27,14 @@ public:
 	TileDoor(char, char, bool, bool, bool, bool);
 
 	/*
+		Opens door.
+	*/
+	void bumped(Entity);
+
+	/*
 		Toggles door.
 	*/
-	void interact();
+	void interact(Entity);
 
 	/*
 		@return clear
@@ -53,6 +58,11 @@ public:
 		@param column
 	*/
 	void render(int, int);
+
+	/*
+		Does nothing.
+	*/
+	void walkedOn(Entity);
 
 };
 

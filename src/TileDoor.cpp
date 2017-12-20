@@ -4,7 +4,11 @@ TileDoor::TileDoor(char opCh, char clCh, bool cl, bool oc, bool wa, bool op) : c
 
 }
 
-void TileDoor::interact() {
+void TileDoor::bumped(Entity e) {
+	open = true;
+}
+
+void TileDoor::interact(Entity e) {
 	open = !open;
 }
 
@@ -22,4 +26,8 @@ bool TileDoor::isWalkable() {
 
 void TileDoor::render(int r, int c) {
 	TCODConsole::root->setChar(c, r, open ? openCharacter : closedCharacter);
+}
+
+void TileDoor::walkedOn(Entity e) {
+	//e.hp = 0;
 }

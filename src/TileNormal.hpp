@@ -25,7 +25,12 @@ public:
 	/*
 		Does nothing.
 	*/
-	void interact();
+	void bumped(Entity);
+
+	/*
+		Does nothing.
+	*/
+	void interact(Entity);
 
 	/*
 		@return clear
@@ -49,6 +54,11 @@ public:
 		@param column
 	*/
 	void render(int, int);
+
+	/*
+		Does nothing.
+	*/
+	void walkedOn(Entity);
 
 };
 
