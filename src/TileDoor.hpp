@@ -29,12 +29,12 @@ public:
 	/*
 		Opens door.
 	*/
-	void bumped(Entity);
+	void bumped(Entity&);
 
 	/*
 		Toggles door.
 	*/
-	void interact(Entity);
+	void interact(Entity&);
 
 	/*
 		@return clear
@@ -62,7 +62,7 @@ public:
 	/*
 		Does nothing.
 	*/
-	void walkedOn(Entity);
+	void walkedOn(Entity&);
 
 };
 

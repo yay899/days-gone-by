@@ -25,12 +25,12 @@ public:
 	/*
 		Does nothing.
 	*/
-	void bumped(Entity);
+	void bumped(Entity&);
 
 	/*
 		Does nothing.
 	*/
-	void interact(Entity);
+	void interact(Entity&);
 
 	/*
 		@return clear
@@ -58,7 +58,7 @@ public:
 	/*
 		Does nothing.
 	*/
-	void walkedOn(Entity);
+	void walkedOn(Entity&);
 
 };
 
