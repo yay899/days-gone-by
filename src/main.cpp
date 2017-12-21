@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	//Move these eventually.
 	{
 		Map* temp = new Map(80, 50);
-		temp->generateFill(Tile(' '));
+		temp->generateFill(TileLegacy(' '));
 
 		_eng.addCurrentMap(temp);
 	}

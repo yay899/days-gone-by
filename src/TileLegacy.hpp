@@ -37,12 +37,12 @@ public:
 };
 
 //Tile that teleports anything that walks on it.
-class TileTeleport : public TileLegacy {
+class TileTeleportLegacy : public TileLegacy {
 public:
 
 	int x, y; //Target tile to teleport to.
 
-	TileTeleport(char c = ' ', TCODColor foreground = TCODConsole::root->getDefaultForeground(), TCODColor background = TCODConsole::root->getDefaultBackground(), bool isSolid = false, int x = 0, int y = 0);
+	TileTeleportLegacy(char c = ' ', TCODColor foreground = TCODConsole::root->getDefaultForeground(), TCODColor background = TCODConsole::root->getDefaultBackground(), bool isSolid = false, int x = 0, int y = 0);
 
 	/*
 		Teleports entity that enters tile to target.
@@ -53,12 +53,12 @@ public:
 	void walkedOn(Entity* e, Map* map);
 };
 
-class TileDoor : public TileLegacy {
+class TileDoorLegacy : public TileLegacy {
 public:
 	TileLegacy openTile, closedTile; //Both states of doors.
 
 	//Initializes closed.
-	TileDoor(TileLegacy openTile, TileLegacy closedTile);
+	TileDoorLegacy(TileLegacy openTile, TileLegacy closedTile);
 
 	/*
 		Opens door.
@@ -88,5 +88,5 @@ const TileLegacy TILE_WALL = TileLegacy(' ', TCOD_white, TCOD_blue, true);
 const TileLegacy TILE_FANCYFLOOR = TileLegacy('+', TCOD_white, TCOD_azure, false);
 const TileLegacy TILE_FANCYWALL = TileLegacy('#', TCOD_white, TCOD_blue, true);
 
-const TileDoor TILEDOOR_DOOR = TileDoor(TileLegacy('+', TCOD_amber, TCOD_black, false), TileLegacy('#', TCOD_white, TCOD_amber, true));
+const TileDoorLegacy TILEDOOR_DOOR = TileDoorLegacy(TileLegacy('+', TCOD_amber, TCOD_black, false), TileLegacy('#', TCOD_white, TCOD_amber, true));
 #endif
