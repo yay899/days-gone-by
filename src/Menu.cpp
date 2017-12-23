@@ -119,9 +119,11 @@ void Menu::debugAddTestEnemy(Map* map) {
 }
 
 void Menu::debugHighlightSolid(Map* map) {
+	/*
 	for (unsigned int x = 0; x < map->getWidth(); x++) {
 		for (unsigned int y = 0; y < map->getHeight(); y++) {
 			if (map->isSolid(x, y)) map->getTilePointer(x, y)->background = TCOD_pink;
 		}
 	}
+	*/
 }

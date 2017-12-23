@@ -1,30 +1,30 @@
 #include "Map.hpp"
+
 #include "Engine.hpp"
 #include <iostream>
 
 extern Engine _eng;
 
 Map::Map(unsigned int w, unsigned int h) : w(w), h(h) {
-	tileMap = new TileLegacy**[h];
-    for(int i = 0; i <h; ++i) {
-		tileMap[i] = new TileLegacy*[w];
+	tileMap = new Tile**[h];
+    for(unsigned int i = 0; i < h; ++i) {
+		tileMap[i] = new Tile*[w];
 	}
 
 
 	for (unsigned int  r = 0; r < h; r++) {
 		for (unsigned int c = 0; c < w; c++) {
-			tileMap[r][c] = new TileLegacy();
-
+			tileMap[r][c] = new TileNormal();
 		}
 	}
 }
 
 Map::~Map() {
 	for (unsigned int  i= 0; i < h; i++) {
-		delete [] tileMap[i];
+		delete[] tileMap[i];
 	}
 	
-	delete tileMap;
+	delete[] tileMap;
 }
 
 void Map::update(float t, TCOD_key_t key) {
@@ -49,15 +49,10 @@ void Map::update(float t, TCOD_key_t key) {
 }
 
 void Map::render() {
-	for (unsigned int x = 0; x < w; x++) {
-
-		for (unsigned int y = 0; y < h; y++) {
-			TileLegacy t = getTile(x, y);
-			TCODConsole::root->setChar(x, y, t.c);
-			TCODConsole::root->setCharBackground(x, y, t.background);
-			TCODConsole::root->setCharForeground(x, y, t.foreground);
+	for (unsigned int r = 0; r < h; r++) {
+		for (unsigned int c = 0; c < h; c++) {
+			getTile(r, c).render(r, c);
 		}
-
 	}
 
 	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
@@ -75,81 +70,57 @@ void Map::addTeamAI(Entity* e) {
 	entities.emplace_back(e);
 }
 
-void Map::generateFill(TileLegacy* t) {
-	for (unsigned int  r= 0; r < h; r++) {
-		for (unsigned int  c= 0; c < w; c++) {
+template <class TileType>
+void Map::generateFill(TileType& t) {
+	for (unsigned int  r = 0; r < h; r++) {
+		for (unsigned int c = 0; c < w; c++) {
 			delete tileMap[r][c];
-			tileMap[r][c] = t;
+			tileMap[r][c] = new TileType(t);
 		}
 	}
 }
 
-TileLegacy* Map::getTilePointer(unsigned int x, unsigned int y) {
-    std::cout<<x<<y<<std::endl;
-    std::cout.flush();
-	return tileMap[y][x];
+Tile& Map::getTile(unsigned int r, unsigned int c) {
+	return *tileMap[r][c];
 }
 
-TileLegacy Map::getTile(unsigned int x, unsigned int y) {
-	return *tileMap[y][x];
-}
-
-void Map::setTile(unsigned int x, unsigned int y, TileLegacy* t) {
+template <class TileType>
+void Map::setTile(unsigned int x, unsigned int y, TileType& t) {
 	delete tileMap[y][x];
-	tileMap[y][x] = t;
+	tileMap[y][x] = new TileType(t);
 }
 
-void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy* outline) {
+template <class TileType>
+void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline) {
 
 	//Draw horizontal portion of outline.
 	for (unsigned int i = 0; i < width; i++) {
-		setTile(i + x, y, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
-		setTile(i + x, y + height - 1, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
+		setTile(r, c + i, TileType(outline));
+		setTile(r + height - 1, c +i, TileType(outline));
 	}
 
 	//Draw vertical portion of outline.
 	for (unsigned int i = 1; i < height - 1; i++) { //Start and end one early because the horizontal already covered the corners.
-		setTile(x, y + i, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
-		setTile(x + width - 1, y + i, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
+		setTile(r + i, c, TileType(outline));
+		setTile(r + i, c + width - 1, TileType(outline));
 	}
 }
 
-void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy* outline, TileLegacy* fill) {
+template <class TileType>
+void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline, TileType& fill) {
+	//Set outline.
+	setRectangle(r, c, width, height, outline);
 
-	//No need to draw outline individually if the tiles are identical.
-	if (outline == fill) {
-
-		//Set all tiles in entire rectangle.
-		for (unsigned int i = 0; i < width; i++) {
-			for (unsigned int k = 0; k < height; k++) {
-				setTile(x + i, y + k, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
-			}
-		}
-	} else {
-
-		//Set outline.
-		setRectangle(x, y, width, height, outline);
-
-		//Set inside.
-		for (unsigned int i = 1; i < width - 1; i++) {
-			for (unsigned int k = 1; k < height - 1; k++) {
-				setTile(x + i, y + k, new TileLegacy(fill->c, fill->foreground, fill->background, fill->isSolid));
-			}
+	//Set inside.
+	for (unsigned int i = 1; i < width - 1; i++) {
+		for (unsigned int k = 1; k < height - 1; k++) {
+			setTile(r + k, c + i, TileType(fill));
 		}
 	}
 }
 
-bool Map::isSolid(unsigned int x, unsigned int y) {
-	//Return solid if there is an entity there.
-	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
-		if ((*i)->x == x && (*i)->y == y) {
-			return true;
-		}
-	}
-
-	//Otherwise just return the solidity of the tile.
-
-	return tileMap[y][x]->isSolid;
+bool Map::isSolid(unsigned int r, unsigned int c) {
+	return !getTile(r, c).isWalkable();
 }
 
 Entity* Map::getEntity(unsigned int x, unsigned int y) {
@@ -165,3 +136,16 @@ Entity* Map::getEntity(unsigned int x, unsigned int y) {
 unsigned int Map::getWidth() { return w; }
 
 unsigned int Map::getHeight() { return h; }
+
+//Explicit instantiations
+template void Map::generateFill(TileNormal&);
+template void Map::generateFill(TileDoor&);
+
+template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&, TileNormal&);
+template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&, TileDoor&);
+
+template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&);
+template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&);
+
+template void Map::setTile(unsigned int, unsigned int, TileNormal&);
+template void Map::setTile(unsigned int, unsigned int, TileDoor&);

@@ -1,5 +1,9 @@
 #include "TileNormal.hpp"
 
+TileNormal::TileNormal() : backgroundColor(TCOD_black), character(' '), clear(true), foregroundColor(TCOD_white), occupied(false), walkable(true) {
+
+}
+
 TileNormal::TileNormal(char ch, TCODColor fo, TCODColor ba, bool cl, bool oc, bool wa) : backgroundColor(ba), character(ch), clear(cl), foregroundColor(fo), occupied(oc), walkable(wa) {
 
 }

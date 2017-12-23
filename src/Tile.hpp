@@ -4,7 +4,7 @@
 
 #include "libtcod.hpp"
 
-#include "Entity.hpp"
+class Entity;
 
 class Tile {
 public:

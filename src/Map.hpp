@@ -5,18 +5,20 @@
 #include <vector>
 
 #include "libtcod.hpp"
-#include "TileLegacy.hpp"
+
+#include "TileNormal.hpp"
+#include "TileDoor.hpp"
+
 #include "Entity.hpp"
 
 //Need to declare this here due to cyclical #includes.
 class Entity;
-class TileLegacy;
 
 class Map {
 protected:
 	
 	unsigned int w, h;
-	TileLegacy*** tileMap; //Map of tiles.
+	Tile*** tileMap; //Map of tiles.
 
 public:
 	std::vector<Entity*> entities; //All entities in map.
@@ -60,79 +62,77 @@ public:
 	/*
 		Fills map with a single tile
 
+		@template type of tile
 		@param desired tile
 	*/
-	void generateFill(TileLegacy* t);
+	template <class TileType>
+	void generateFill(TileType&);
 
 	//TODO write more generators.
 
 	/*
-		Helper function; gets pointer to tile at (x,y).
+		Helper function; gets tile info at (c,r).
 
-		@param x
-		@param y
-		@return pointer to tile
-	*/
-	TileLegacy* getTilePointer(unsigned int x, unsigned int y);
-
-	/*
-		Helper function; gets tile info at (x,y).
-
-		@param x
-		@param y
+		@param c
+		@param r
 		@return tile info
 	*/
-	TileLegacy getTile(unsigned int x, unsigned int y);
+	Tile& getTile(unsigned int, unsigned int);
 
 	/*
 		Helper function; sets tile at (x,y) to provided tile.
 
-		@param x
-		@param y
+		@template tile type
+		@param r
+		@param c
 		@param pointer to new tile
 	*/
-	void setTile(unsigned int x, unsigned int y, TileLegacy* t);
+	template <class TileType>
+	void setTile(unsigned int, unsigned int, TileType&);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile.
 
-		@param x
-		@param y
+		@template tile type
+		@param r
+		@param c
 		@param width
 		@param height
 		@param outline tile
 	*/
-	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy* outline);
+	template <class TileType>
+	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType&);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
 
-		@param x
-		@param y
+		@param r
+		@param c
 		@param width
 		@param height
 		@param outline tile
 		@param fill tile
 	*/
-	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy* outline, TileLegacy* fill);
+	template <class TileType>
+	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType&, TileType&);
 
 	/*
 		Helper function; checks if tile on map is solid.
 
-		@param x
-		@param y
-		@return solidity of tile at (x,y)
+		@param r
+		@param c
+		@return solidity of tile at (r,c)
 	*/
-	bool isSolid(unsigned int x, unsigned int y);
+	bool isSolid(unsigned int, unsigned int);
 
 	/*
-		Finds entity at (x,y)
+		Finds entity at (r,c)
 
-		@param x
-		@param y
+		@param r
+		@param c
 		@returns pointer to entity
 	*/
-	Entity* getEntity(unsigned int x, unsigned int y);
+	Entity* getEntity(unsigned int, unsigned int);
 
 	/*
 		@return width of map
