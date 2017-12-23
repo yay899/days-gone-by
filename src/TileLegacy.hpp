@@ -40,7 +40,7 @@ public:
 class TileTeleportLegacy : public TileLegacy {
 public:
 
-	int x, y; //Target tile to teleport to.
+	int x, y; //Target tile to teleport to
 
 	TileTeleportLegacy(char c = ' ', TCODColor foreground = TCODConsole::root->getDefaultForeground(), TCODColor background = TCODConsole::root->getDefaultBackground(), bool isSolid = false, int x = 0, int y = 0);
 
@@ -82,6 +82,7 @@ public:
 /*
 	Tile constants.
 	Basically presets. That's why they're global.
+ 	these do not work as they are const and functions need to be const to accept them
 */
 const TileLegacy TILE_FLOOR = TileLegacy(' ', TCOD_white, TCOD_black, false);
 const TileLegacy TILE_WALL = TileLegacy(' ', TCOD_white, TCOD_blue, true);

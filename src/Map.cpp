@@ -1,5 +1,6 @@
 #include "Map.hpp"
 #include "Engine.hpp"
+#include <iostream>
 
 extern Engine _eng;
 
@@ -84,34 +85,36 @@ void Map::generateFill(TileLegacy* t) {
 }
 
 TileLegacy* Map::getTilePointer(unsigned int x, unsigned int y) {
-	return tileMap[h-y-1][x];
+    std::cout<<x<<y<<std::endl;
+    std::cout.flush();
+	return tileMap[y][x];
 }
 
 TileLegacy Map::getTile(unsigned int x, unsigned int y) {
-	return *tileMap[h-y-1][x];
+	return *tileMap[y][x];
 }
 
 void Map::setTile(unsigned int x, unsigned int y, TileLegacy* t) {
-	delete tileMap[h-y-1][x];
-	tileMap[h-y-1][x] = t;
+	delete tileMap[y][x];
+	tileMap[y][x] = t;
 }
 
-void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline) {
-	
+void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy* outline) {
+
 	//Draw horizontal portion of outline.
 	for (unsigned int i = 0; i < width; i++) {
-		setTile(i + x, y, new TileLegacy(outline));
-		setTile(i + x, y + height - 1, new TileLegacy(outline));
+		setTile(i + x, y, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
+		setTile(i + x, y + height - 1, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
 	}
 
 	//Draw vertical portion of outline.
 	for (unsigned int i = 1; i < height - 1; i++) { //Start and end one early because the horizontal already covered the corners.
-		setTile(x, y + i, new TileLegacy(outline));
-		setTile(x + width - 1, y + i, new TileLegacy(outline));
+		setTile(x, y + i, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
+		setTile(x + width - 1, y + i, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
 	}
 }
 
-void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline, TileLegacy fill) {
+void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy* outline, TileLegacy* fill) {
 
 	//No need to draw outline individually if the tiles are identical.
 	if (outline == fill) {
@@ -119,18 +122,18 @@ void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsig
 		//Set all tiles in entire rectangle.
 		for (unsigned int i = 0; i < width; i++) {
 			for (unsigned int k = 0; k < height; k++) {
-				setTile(x + i, y + k, new TileLegacy(outline));
+				setTile(x + i, y + k, new TileLegacy(outline->c, outline->foreground, outline->background, outline->isSolid));
 			}
 		}
 	} else {
-		
+
 		//Set outline.
 		setRectangle(x, y, width, height, outline);
 
 		//Set inside.
 		for (unsigned int i = 1; i < width - 1; i++) {
 			for (unsigned int k = 1; k < height - 1; k++) {
-				setTile(x + i, y + k, new TileLegacy(fill));
+				setTile(x + i, y + k, new TileLegacy(fill->c, fill->foreground, fill->background, fill->isSolid));
 			}
 		}
 	}
@@ -145,7 +148,8 @@ bool Map::isSolid(unsigned int x, unsigned int y) {
 	}
 
 	//Otherwise just return the solidity of the tile.
-	return tileMap[h-y-1][x]->isSolid;
+
+	return tileMap[y][x]->isSolid;
 }
 
 Entity* Map::getEntity(unsigned int x, unsigned int y) {

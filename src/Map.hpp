@@ -102,7 +102,7 @@ public:
 		@param height
 		@param outline tile
 	*/
-	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline);
+	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy* outline);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
@@ -114,7 +114,7 @@ public:
 		@param outline tile
 		@param fill tile
 	*/
-	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline, TileLegacy fill);
+	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy* outline, TileLegacy* fill);
 
 	/*
 		Helper function; checks if tile on map is solid.

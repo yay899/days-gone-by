@@ -1,5 +1,6 @@
 #include "Entity.hpp"
 #include "Engine.hpp"
+#include <iostream>
 
 extern Engine _eng;
 
@@ -33,7 +34,11 @@ void Entity::move(unsigned int targetX, unsigned int targetY, Map* map) {
 			attack(targetX, targetY, map);
 		}
 
-		map->getTilePointer(targetX, targetY)->walkedOn(this, map);
+		//this throws errors as it is somehow calling tile teleportLegacy, which does not have initialized x and y coords
+		//look into this
+
+		//map->getTilePointer(targetX, targetY)->walkedOn(this, map);
+
 	}
 }
 
@@ -43,6 +48,8 @@ void Entity::moveForce(unsigned int targetX, unsigned int targetY, Map* map) {
 		x = targetX;
 		y = targetY;
 
+		//this throws errors as it is somehow calling tile teleportLegacy, which does not have initialized x and y coords
+		//look into this
 		map->getTilePointer(targetX, targetY)->walkedOn(this, map);
 	}
 }

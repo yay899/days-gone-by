@@ -33,6 +33,7 @@ TileTeleportLegacy::TileTeleportLegacy(char c, TCODColor foreground, TCODColor b
 }
 
 void TileTeleportLegacy::walkedOn(Entity* e, Map* map) {
+	//this throws errors as there is no x and y given
 	e->moveForce(x, y, map);
 }
 
