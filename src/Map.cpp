@@ -23,7 +23,7 @@ Map::~Map() {
 	for (unsigned int  i= 0; i < h; i++) {
 		delete [] tileMap[i];
 	}
-	
+
 	delete tileMap;
 }
 
@@ -34,6 +34,7 @@ void Map::update(float t, TCOD_key_t key) {
 		for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
 			(*i)->update(t, key, this);
 		}
+		_eng.gameState = STATE_AI_TURN;
 		break;
 	case STATE_AI_TURN:
 		//Iterate over every AI entity in map, calling updater.
@@ -45,7 +46,7 @@ void Map::update(float t, TCOD_key_t key) {
 	default:
 		break;
 	}
-	
+
 }
 
 void Map::render() {
