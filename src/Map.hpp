@@ -16,7 +16,7 @@ class Map {
 protected:
 	
 	unsigned int w, h;
-	TileLegacy** tileMap; //Map of tiles.
+	TileLegacy*** tileMap; //Map of tiles.
 
 public:
 	std::vector<Entity*> entities; //All entities in map.
@@ -62,7 +62,7 @@ public:
 
 		@param desired tile
 	*/
-	void generateFill(TileLegacy t);
+	void generateFill(TileLegacy* t);
 
 	//TODO write more generators.
 

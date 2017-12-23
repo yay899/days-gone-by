@@ -32,6 +32,20 @@
 *.app
 *.png
 game1
+DGB
+
+cmake-build-debug/CMakeFiles/clion-log.txt
+.settings
+.settings/
+.settings/*
+.project
+.idea
+.idea/
+.idea/*
+.cproject
+cmake-build-debug/*
+cmake-build-debug
+
 
 #VS 2015 project files
 lib/

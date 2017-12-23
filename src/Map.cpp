@@ -4,16 +4,23 @@
 extern Engine _eng;
 
 Map::Map(unsigned int w, unsigned int h) : w(w), h(h) {
-	tileMap = new TileLegacy*[w*h];
+	tileMap = new TileLegacy**[h];
+    for(int i = 0; i <h; ++i) {
+		tileMap[i] = new TileLegacy*[w];
+	}
 
-	for (unsigned int i = 0; i < w*h; i++) {
-		tileMap[i] = new TileLegacy();
+
+	for (unsigned int  r = 0; r < h; r++) {
+		for (unsigned int c = 0; c < w; c++) {
+			tileMap[r][c] = new TileLegacy();
+
+		}
 	}
 }
 
 Map::~Map() {
-	for (unsigned int i = 0; i < w*h; i++) {
-		delete tileMap[i];
+	for (unsigned int  i= 0; i < h; i++) {
+		delete [] tileMap[i];
 	}
 	
 	delete tileMap;
@@ -67,23 +74,26 @@ void Map::addTeamAI(Entity* e) {
 	entities.emplace_back(e);
 }
 
-void Map::generateFill(TileLegacy t) {
-	for (unsigned int i = 0; i < w*h; i++) {
-		*tileMap[i] = t;
+void Map::generateFill(TileLegacy* t) {
+	for (unsigned int  r= 0; r < h; r++) {
+		for (unsigned int  c= 0; c < w; c++) {
+			delete tileMap[r][c];
+			tileMap[r][c] = t;
+		}
 	}
 }
 
 TileLegacy* Map::getTilePointer(unsigned int x, unsigned int y) {
-	return tileMap[h * x + y];
+	return tileMap[h-y-1][x];
 }
 
 TileLegacy Map::getTile(unsigned int x, unsigned int y) {
-	return *tileMap[h * x + y];
+	return *tileMap[h-y-1][x];
 }
 
 void Map::setTile(unsigned int x, unsigned int y, TileLegacy* t) {
-	delete tileMap[h * x + y];
-	tileMap[h * x + y] = t;
+	delete tileMap[h-y-1][x];
+	tileMap[h-y-1][x] = t;
 }
 
 void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline) {
@@ -135,7 +145,7 @@ bool Map::isSolid(unsigned int x, unsigned int y) {
 	}
 
 	//Otherwise just return the solidity of the tile.
-	return tileMap[h * x + y]->isSolid;
+	return tileMap[h-y-1][x]->isSolid;
 }
 
 Entity* Map::getEntity(unsigned int x, unsigned int y) {
