@@ -4,6 +4,9 @@
 
 #include "Tile.hpp"
 
+class Tile;
+class Entity;
+
 class TileNormal : public Tile {
 protected:
 
@@ -15,6 +18,8 @@ protected:
 	bool walkable;
 
 public:
+
+	TileNormal();
 
 	/*
 		@param character

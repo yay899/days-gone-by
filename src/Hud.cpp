@@ -34,7 +34,7 @@ void Hud::render() {
 	}
 
 	//Print elements
-	for (int y = 0; y < elements.size(); y++) {
+	for (unsigned int y = 0; y < elements.size(); y++) {
 		TCODConsole::root->setDefaultForeground(elements.at(y)->col);
 		TCODConsole::root->print(SCREEN_WIDTH - w, y, elements.at(y)->display.c_str());
 	}

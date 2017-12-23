@@ -4,6 +4,9 @@
 
 #include "Tile.hpp"
 
+class Tile;
+class Entity;
+
 class TileDoor : public Tile {
 protected:
 

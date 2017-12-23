@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
 	//Move these eventually.
 	{
 		Map *temp = new Map(80, 50);
-		temp->generateFill(new TileLegacy(' '));
-		temp->setRectangle(30,30,10,10,new TileLegacy(' ', TCOD_black, TCOD_black, true), new TileLegacy('.', TCOD_black, TCOD_black, false));
+		temp->generateFill(TileNormal(' ', TCOD_white, TCOD_black, true, false, true));
+		temp->setRectangle(30, 30, 10, 10, TileNormal(' ', TCOD_white, TCOD_black, true, false, true), TileNormal('#', TCOD_white, TCOD_black, true, false, false));
 		_eng.addCurrentMap(temp);
 	}
 
