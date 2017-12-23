@@ -1,4 +1,4 @@
-#include "Engine.hpp"
+/*#include "Engine.hpp"
 
 void Engine::render() {
 	TCODConsole::root->clear(); //Clear screen.
@@ -16,4 +16,4 @@ void Engine::render() {
 	gameHud.render();
 
 	TCODConsole::root->flush(); //Display buffer on screen.
-}
+}*/

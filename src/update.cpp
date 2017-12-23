@@ -1,4 +1,4 @@
-#include "Engine.hpp"
+/*#include "Engine.hpp"
 
 void Engine::update() {
 	//Code stolen from another one of my projects.
@@ -66,4 +66,4 @@ void Engine::update() {
 	}
 
 	gameHud.update();
-}
+}*/
