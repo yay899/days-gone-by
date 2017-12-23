@@ -5,18 +5,18 @@
 #include <vector>
 
 #include "libtcod.hpp"
-#include "Tile.hpp"
+#include "TileLegacy.hpp"
 #include "Entity.hpp"
 
 //Need to declare this here due to cyclical #includes.
 class Entity;
-class Tile;
+class TileLegacy;
 
 class Map {
 protected:
 	
 	unsigned int w, h;
-	Tile** tileMap; //Map of tiles.
+	TileLegacy** tileMap; //Map of tiles.
 
 public:
 	std::vector<Entity*> entities; //All entities in map.
@@ -62,7 +62,7 @@ public:
 
 		@param desired tile
 	*/
-	void generateFill(Tile t);
+	void generateFill(TileLegacy t);
 
 	//TODO write more generators.
 
@@ -73,7 +73,7 @@ public:
 		@param y
 		@return pointer to tile
 	*/
-	Tile* getTilePointer(unsigned int x, unsigned int y);
+	TileLegacy* getTilePointer(unsigned int x, unsigned int y);
 
 	/*
 		Helper function; gets tile info at (x,y).
@@ -82,7 +82,7 @@ public:
 		@param y
 		@return tile info
 	*/
-	Tile getTile(unsigned int x, unsigned int y);
+	TileLegacy getTile(unsigned int x, unsigned int y);
 
 	/*
 		Helper function; sets tile at (x,y) to provided tile.
@@ -91,7 +91,7 @@ public:
 		@param y
 		@param pointer to new tile
 	*/
-	void setTile(unsigned int x, unsigned int y, Tile* t);
+	void setTile(unsigned int x, unsigned int y, TileLegacy* t);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile.
@@ -102,7 +102,7 @@ public:
 		@param height
 		@param outline tile
 	*/
-	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, Tile outline);
+	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
@@ -114,7 +114,7 @@ public:
 		@param outline tile
 		@param fill tile
 	*/
-	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, Tile outline, Tile fill);
+	void setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline, TileLegacy fill);
 
 	/*
 		Helper function; checks if tile on map is solid.

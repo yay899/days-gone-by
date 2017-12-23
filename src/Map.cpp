@@ -4,10 +4,10 @@
 extern Engine _eng;
 
 Map::Map(unsigned int w, unsigned int h) : w(w), h(h) {
-	tileMap = new Tile*[w*h];
+	tileMap = new TileLegacy*[w*h];
 
 	for (unsigned int i = 0; i < w*h; i++) {
-		tileMap[i] = new Tile();
+		tileMap[i] = new TileLegacy();
 	}
 }
 
@@ -44,7 +44,7 @@ void Map::render() {
 	for (unsigned int x = 0; x < w; x++) {
 
 		for (unsigned int y = 0; y < h; y++) {
-			Tile t = getTile(x, y);
+			TileLegacy t = getTile(x, y);
 			TCODConsole::root->setChar(x, y, t.c);
 			TCODConsole::root->setCharBackground(x, y, t.background);
 			TCODConsole::root->setCharForeground(x, y, t.foreground);
@@ -67,41 +67,41 @@ void Map::addTeamAI(Entity* e) {
 	entities.emplace_back(e);
 }
 
-void Map::generateFill(Tile t) {
+void Map::generateFill(TileLegacy t) {
 	for (unsigned int i = 0; i < w*h; i++) {
 		*tileMap[i] = t;
 	}
 }
 
-Tile* Map::getTilePointer(unsigned int x, unsigned int y) {
+TileLegacy* Map::getTilePointer(unsigned int x, unsigned int y) {
 	return tileMap[h * x + y];
 }
 
-Tile Map::getTile(unsigned int x, unsigned int y) {
+TileLegacy Map::getTile(unsigned int x, unsigned int y) {
 	return *tileMap[h * x + y];
 }
 
-void Map::setTile(unsigned int x, unsigned int y, Tile* t) {
+void Map::setTile(unsigned int x, unsigned int y, TileLegacy* t) {
 	delete tileMap[h * x + y];
 	tileMap[h * x + y] = t;
 }
 
-void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, Tile outline) {
+void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline) {
 	
 	//Draw horizontal portion of outline.
 	for (unsigned int i = 0; i < width; i++) {
-		setTile(i + x, y, new Tile(outline));
-		setTile(i + x, y + height - 1, new Tile(outline));
+		setTile(i + x, y, new TileLegacy(outline));
+		setTile(i + x, y + height - 1, new TileLegacy(outline));
 	}
 
 	//Draw vertical portion of outline.
 	for (unsigned int i = 1; i < height - 1; i++) { //Start and end one early because the horizontal already covered the corners.
-		setTile(x, y + i, new Tile(outline));
-		setTile(x + width - 1, y + i, new Tile(outline));
+		setTile(x, y + i, new TileLegacy(outline));
+		setTile(x + width - 1, y + i, new TileLegacy(outline));
 	}
 }
 
-void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, Tile outline, Tile fill) {
+void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileLegacy outline, TileLegacy fill) {
 
 	//No need to draw outline individually if the tiles are identical.
 	if (outline == fill) {
@@ -109,7 +109,7 @@ void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsig
 		//Set all tiles in entire rectangle.
 		for (unsigned int i = 0; i < width; i++) {
 			for (unsigned int k = 0; k < height; k++) {
-				setTile(x + i, y + k, new Tile(outline));
+				setTile(x + i, y + k, new TileLegacy(outline));
 			}
 		}
 	} else {
@@ -120,7 +120,7 @@ void Map::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsig
 		//Set inside.
 		for (unsigned int i = 1; i < width - 1; i++) {
 			for (unsigned int k = 1; k < height - 1; k++) {
-				setTile(x + i, y + k, new Tile(fill));
+				setTile(x + i, y + k, new TileLegacy(fill));
 			}
 		}
 	}
