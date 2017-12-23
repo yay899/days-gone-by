@@ -1,5 +1,7 @@
 #include "PlayerAI.hpp"
 
+#include <iostream>
+
 PlayerAI::PlayerAI(Entity* ent){
   entity = ent;
 }
@@ -10,6 +12,7 @@ void PlayerAI::takeTurn(Map* map){
   bool invalid = true;
   while(invalid){
     TCOD_key_t key = getInput();
+    std::cout<<"Test";
     invalid=false;
 
     switch (key.vk) {
@@ -66,7 +69,7 @@ void PlayerAI::takeTurn(Map* map){
 	 }
   }
 }
-TCOD_key_t getInput(){
+TCOD_key_t PlayerAI::getInput(){
   TCOD_key_t key;
 	TCOD_mouse_t mouse;
 	TCOD_event_t ev = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &key, &mouse);

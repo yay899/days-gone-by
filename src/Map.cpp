@@ -32,14 +32,14 @@ void Map::update(float t, TCOD_key_t key) {
 	case STATE_PLAYER_TURN:
 		//Iterate over every player entity in map, calling updater.
 		for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
-			(*i)->update(t, key, this);
+			(*i)->update(key, this);
 		}
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case STATE_AI_TURN:
 		//Iterate over every AI entity in map, calling updater.
 		for (std::vector<Entity*>::iterator i = teamAI.begin(); i < teamAI.end(); i++) {
-			(*i)->update(t, key, this);
+			(*i)->update(key, this);
 		}
 		_eng.gameState = STATE_PLAYER_TURN;
 		break;

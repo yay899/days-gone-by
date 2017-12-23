@@ -1,5 +1,8 @@
 #include "Entity.hpp"
 #include "Engine.hpp"
+#include "EntityAI.hpp"
+#include "EnemyAI.hpp"
+#include "PlayerAI.hpp"
 #include <iostream>
 
 extern Engine _eng;
@@ -11,12 +14,12 @@ Entity::Entity(int x, int y, char c, bool player, TCODColor col) : x(x), y(y), c
 	if(player){
 		maxHp = DEFAULT_PLAYER_MAXHP;
 		maxWatts = DEFAULT_PLAYER_MAXWATTS;
-		ai = new PlayerAI();
+		ai = new PlayerAI(this);
 	}
 	else{
 		maxHp = DEFAULT_TESTENEMY_MAXHP;
 		maxWatts = DEFAULT_TESTENEMY_MAXWATTS;
-		ai = new EnemyAI();
+		ai = new EnemyAI(this);
 	}
 	hp = maxHp;
 	watts = maxWatts;

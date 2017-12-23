@@ -55,12 +55,12 @@ void Menu::render(int x, int y) {
 		s += (char)(i + 97); //97 is important. It offsets it to the beginning of letters.
 		s += '-';
 		s += std::get<0>(options.at(i));
-		
+
 		if (index == i) TCODConsole::root->setDefaultForeground(MENU_SELECT_FOREGROUND); //Highlight selection.
 		TCODConsole::root->print(x + 2, y + 2 + i, s.c_str());
 		if (index == i) TCODConsole::root->setDefaultForeground(MENU_FOREGROUND);
 	}
-	
+
 	//Highlight selection.
 	TCODConsole::root->setDefaultBackground(MENU_SELECT_BACKGROUND);
 	TCODConsole::root->rect(x + 1, y + index + 2, width - 2, 1, false);
@@ -97,11 +97,7 @@ void Menu::select(unsigned int i) {
 	--------------------------------------------------*/
 
 void Menu::debugAddPlayer(Map* map) {
-	EntityPlayer* temp = new EntityPlayer(0, 0, '@');
-	temp->maxHp = DEFAULT_PLAYER_MAXHP;
-	temp->hp = DEFAULT_PLAYER_MAXHP;
-	temp->maxWatts = DEFAULT_PLAYER_MAXWATTS;
-	temp->watts = DEFAULT_PLAYER_MAXWATTS;
+	Entity* temp = new Entity(0, 0, '@', true);
 
 	map->addTeamPlayer(temp);
 	_eng.gameHud.addElement(new HudElementHp(temp));
@@ -109,13 +105,9 @@ void Menu::debugAddPlayer(Map* map) {
 }
 
 void Menu::debugAddTestEnemy(Map* map) {
-	EntityTestEnemy temp = EntityTestEnemy(map->getWidth() - 1, map->getHeight() - 1, 'e');
-	temp.maxHp = DEFAULT_TESTENEMY_MAXHP;
-	temp.hp = DEFAULT_TESTENEMY_MAXHP;
-	temp.maxWatts = DEFAULT_TESTENEMY_MAXWATTS;
-	temp.watts = DEFAULT_TESTENEMY_MAXWATTS;
+	Entity* temp = new Entity(map->getWidth() - 1, map->getHeight() - 1, 'e', false);
 
-	map->addTeamAI(new EntityTestEnemy(temp));
+	map->addTeamAI((temp));
 }
 
 void Menu::debugHighlightSolid(Map* map) {

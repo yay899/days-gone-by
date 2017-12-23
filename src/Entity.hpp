@@ -4,6 +4,7 @@
 
 #include "libtcod.hpp"
 #include "Map.hpp"
+#include "EntityAI.hpp"
 
 //Need to declare this here due to cyclical #includes.
 class Map;

@@ -1,13 +1,16 @@
-#ifndef PLAYERAI
-#define PLAYERAI
+#ifndef ENEMYAI
+#define EMENYAI
 
-class EnemyAI{
+#include "Entity.hpp"
+#include "Map.hpp"
 
-private:
-  Entity* entity;
+class EnemyAI:public EntityAI{
+
 public:
   EnemyAI(Entity* ent);
   bool isPlayer();
   void takeTurn(Map* map);
 
 };
+
+#endif

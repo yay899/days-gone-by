@@ -1,10 +1,11 @@
 #ifndef PLAYERAI
 #define PLAYERAI
 
-class PlayerAI{
+#include "Entity.hpp"
+#include "Map.hpp"
 
-private:
-  Entity* entity;
+class PlayerAI:public EntityAI{
+
 public:
   PlayerAI(Entity* ent);
   bool isPlayer();
@@ -12,3 +13,5 @@ public:
   TCOD_key_t getInput();
 
 };
+
+#endif

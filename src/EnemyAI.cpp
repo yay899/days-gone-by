@@ -1,4 +1,4 @@
-#include "EmenyAI.hpp"
+#include "EnemyAI.hpp"
 
 EnemyAI::EnemyAI(Entity* ent){
   entity = ent;
