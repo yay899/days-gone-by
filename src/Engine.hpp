@@ -31,95 +31,94 @@ public:
 	Engine();
 	~Engine();
 
-	/*
+	/**
 		Updates the game state
 	*/
 	void update();
 
-	/*
+	/**
 		Renders the game to screen.
 	*/
 	void render();
 
-	/*
+	/**
 		Adds floor to maps.
 
 		@param floor to be added
-		@returns index
+		@return index
 	*/
-	unsigned int addDungeon(Dungeon* dungeon);
+	unsigned int addDungeon(Dungeon*);
 
-	/*
+	/**
 		Adds a floor and sets it to the current floor.
 
 		@param floor to be added
-		@returns index
+		@return index
 	*/
-	unsigned int addCurrentDungeon(Dungeon* dungeon);
+	unsigned int addCurrentDungeon(Dungeon*);
 
-	/*
+	/**
 		Gets floor at index.
 
 		@param index of floor
-		@returns pointer to floor
+		@return pointer to floor
 	*/
-	Dungeon* getDungeon(unsigned int i);
+	Dungeon* getDungeon(unsigned int);
 
-	/*
+	/**
 		Gives index of floor pointer. (-1 is failure to find.)
 
 		@param pointer of floor
-		@returns index
+		@return index
 	*/
-	int findDungeon(Dungeon* dungeon);
 	unsigned int findDungeon(Dungeon*);
 
-	/*
+	/**
 		Removes floor at index.
 
 		@param index of floor.
 	*/
-	void removeDungeon(unsigned int i);
+	void removeDungeon(unsigned int);
 
-	/*
+	/**
 		Adds menu.
 
 		@param menu to be added
-		@returns index
+		@return index
 	*/
-	unsigned int addMenu(Menu menu);
+	unsigned int addMenu(Menu);
 
-	/*
+	/**
 		Gets menu at index.
 
 		@param index
-		@returns pointer to menu
+		@return pointer to menu
 	*/
-	Menu* getMenu(unsigned int i);
+	Menu* getMenu(unsigned int);
 
-	/*
-		Takes pointer to menu and finds menu with that pointer. -1 is fail to find.
+	/**
+		Takes pointer to menu and finds menu with that pointer. (-1 is fail to find.)
 
 		@param pointer to menu
-		@returns index
+		@return index
 	*/
-	int findMenu(Menu* menu);
+	int findMenu(Menu*);
 
-	/*
+	/**
 		Deletes menu at index.
 
 		@param index
 	*/
-	void removeMenu(unsigned int i);
+	void removeMenu(unsigned int);
 
-	/*
+	/**
 		Opens menu at index.
 
 		@param index
 	*/
-	void openMenu(unsigned int i);
+	void openMenu(unsigned int);
 
-	/*
+	/**
 		Closes the top most menu.
 
 		@param index

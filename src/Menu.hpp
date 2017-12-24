@@ -14,69 +14,75 @@ public: //                                    v Totally super clear exactly what
 	unsigned int index; //Contains which menu option is currently selected.
 	std::string name;
 
-	Menu(std::string name);
+	/**
+		@param IDK, I can't remember
+	*/
+	Menu(std::string);
 
-	/*
+	/**
 		Renders menu at (x,y)
 
 		@param x
 		@param y
 	*/
-	void render(int x, int y);
+	void render(int, int);
 
-	/*
+	/**
 		Executes effect of current selection.
-	*/
-	void execute(Floor* floor);
 
-	/*
+		@param floor of effect
+	*/
+	void execute(Floor*);
+
+	/**
 		Executes effect of target option.
 
 		@param index of target
+		@param floor of effect
 	*/
-	void execute(unsigned int i, Floor* floor);
+	void execute(unsigned int , Floor*);
 
-	/*
+	/**
 		Moves selection up.
 	*/
 	void selectUp();
 
-	/*
+	/**
 		Moves selection down.
 	*/
 	void selectDown();
 
-	/*
+	/**
 		Select target option.
 
-		@param index of target.
+		@param index of target
 	*/
-	void select(unsigned int i);
+	void select(unsigned int);
 
 	/*--------------------------------------------------
 						EFFECTS
 	--------------------------------------------------*/
 
-	/*
+	/**
 		For testing purposes; spawns a player entity at (0,0)
 
 		@param current floor
 	*/
-	static void debugAddPlayer(Floor* floor);
+	static void debugAddPlayer(Floor*);
 
-	/*
+	/**
 		For testing purposes; spawns a test enemy entitiy at the lower right corner of the floor.
 
 		@param current floor
 	*/
-	static void debugAddTestEnemy(Floor* floor);
+	static void debugAddTestEnemy(Floor*);
 
-	/*
+	/**
 		For testing purposes; highlights all solid tiles.
 
 		@param current floor
 	*/
-	static void debugHighlightSolid(Floor* floor);
+	static void debugHighlightSolid(Floor*);
 };
 
 //Constants

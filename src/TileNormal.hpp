@@ -33,11 +33,15 @@ public:
 
 	/*
 		Does nothing.
+
+		@param entity that bumped
 	*/
 	void bumped(Entity&);
 
 	/*
 		Does nothing.
+
+		@param entity that interacted
 	*/
 	void interact(Entity&);
 
@@ -66,6 +70,8 @@ public:
 
 	/*
 		Does nothing.
+
+		@param entity that walked on
 	*/
 	void walkedOn(Entity&);
 

@@ -23,7 +23,7 @@ protected:
 
 public:
 
-	/*
+	/**
 		@param open character
 		@param open foreground color
 		@param open background color
@@ -37,32 +37,36 @@ public:
 	*/
 	TileDoor(char, TCODColor, TCODColor, char, TCODColor, TCODColor, bool, bool, bool, bool);
 
-	/*
+	/**
 		Opens door.
+
+		@param entity that bumped
 	*/
 	void bumped(Entity&);
 
-	/*
+	/**
 		Toggles door.
+
+		@param entity that interacted
 	*/
 	void interact(Entity&);
 
-	/*
+	/**
 		@return clear
 	*/
 	bool isClear();
 
-	/*
+	/**
 		@return occupied
 	*/
 	bool isOccupied();
 
-	/*
+	/**
 		@return walkable && !occupied && open
 	*/
 	bool isWalkable();
 
-	/*
+	/**
 		Sets tile on TCODConsole::root.
 
 		@param row
@@ -70,8 +74,10 @@ public:
 	*/
 	void render(int, int);
 
-	/*
+	/**
 		Does nothing.
+
+		@param entity that walked
 	*/
 	void walkedOn(Entity&);
 

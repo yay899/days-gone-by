@@ -17,25 +17,28 @@ protected:
 
 public:
 
-	Hud(unsigned int w);
+	/**
+		@param width
+	*/
+	Hud(unsigned int);
 	~Hud();
 
-	/*
+	/**
 		Updates all elements in hud.
 	*/
 	void update();
 
-	/*
+	/**
 		Renders hud.
 	*/
 	void render();
 
-	/*
+	/**
 		Adds a element to the hud
 
 		@param element to add
 	*/
-	void addElement(HudElement* e);
+	void addElement(HudElement*);
 };
 
 //Constants

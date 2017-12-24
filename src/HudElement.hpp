@@ -12,9 +12,13 @@ public:
 	std::string display;
 	TCODColor col;
 
-	HudElement(TCODColor col = TCODConsole::root->getDefaultForeground(), std::string d = "");
+	/**
+		@param text color
+		@param display string
+	*/
+	HudElement(TCODColor = TCODConsole::root->getDefaultForeground(), std::string = "");
 
-	/*
+	/**
 		Extend this with complex functionality.
 	*/
 	virtual void update();
@@ -24,9 +28,12 @@ class HudElementHp : public HudElement {
 public:
 	Entity* e;
 
-	HudElementHp(Entity* e);
+	/**
+		@param tracked Entity.
+	*/
+	HudElementHp(Entity*);
 
-	/*
+	/**
 		Fetches HP of entity
 	*/
 	void update();
@@ -36,10 +43,13 @@ class HudElementWatts : public HudElement {
 public:
 	Entity* e;
 
-	HudElementWatts(Entity* e);
+	/**
+		@param tracked Entity.
+	*/
+	HudElementWatts(Entity*);
 
-	/*
-	Fetches HP of entity
+	/**
+		Fetches HP of entity
 	*/
 	void update();
 };

@@ -25,42 +25,39 @@ public:
 	std::vector<Entity*> teamPlayer; //ONLY player entities.
 	std::vector<Entity*> teamAI; //Everything else.
 
-	Floor(unsigned int w, unsigned int h);
+	/**
+		@param width
+		@param height
+	*/
+	Floor(unsigned int, unsigned int);
 	~Floor();
 
-	/*
+	/**
 		Updates all entities in floor.
-
-		@param time
-		@param keycode
 	*/
 	void update();
 
-	/*
+	/**
 		Displays the contents of the floor on TCODConsole->root.
 	*/
 	void render();
 
-	/*
-		Fills the floor with the specified tiles.
-	*/
-
-	/*
+	/**
 		Helper function; add entity to teamPlayer and entities.
 
 		@param pointer to new entity
 	*/
-	void addTeamPlayer(Entity* e);
+	void addTeamPlayer(Entity*);
 
-	/*
-		Helper function; add entity to teamAI and entities
+	/**
+		Helper function; add entity to teamAI and entities.
 
 		@param pointer to new entity
 	*/
-	void addTeamAI(Entity* e);
+	void addTeamAI(Entity*);
 
-	/*
-		Fills floor with a single tile
+	/**
+		Fills floor with a single tile.
 
 		@template type of tile
 		@param desired tile
@@ -70,7 +67,7 @@ public:
 
 	//TODO write more generators.
 
-	/*
+	/**
 		Helper function; gets tile info at (c,r).
 
 		@param c
@@ -79,18 +76,18 @@ public:
 	*/
 	Tile& getTile(unsigned int, unsigned int);
 
-	/*
-		Helper function; sets tile at (x,y) to provided tile.
+	/**
+		Helper function; sets tile at (r,c) to provided tile.
 
 		@template tile type
 		@param r
 		@param c
-		@param pointer to new tile
+		@param new tile
 	*/
 	template <class TileType>
 	void setTile(unsigned int, unsigned int, TileType);
 
-	/*
+	/**
 		Helper function; sets tiles on rectangle to provided tile.
 
 		@template tile type
@@ -103,9 +100,10 @@ public:
 	template <class TileType>
 	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType);
 
-	/*
+	/**
 		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
 
+		@template tile type
 		@param r
 		@param c
 		@param width
@@ -116,7 +114,7 @@ public:
 	template <class TileType>
 	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType, TileType);
 
-	/*
+	/**
 		Helper function; checks if tile on floor is solid.
 
 		@param r
@@ -125,21 +123,21 @@ public:
 	*/
 	bool isSolid(unsigned int, unsigned int);
 
-	/*
+	/**
 		Finds entity at (r,c)
 
 		@param r
 		@param c
-		@returns pointer to entity
+		@return pointer to entity
 	*/
 	Entity* getEntity(unsigned int, unsigned int);
 
-	/*
+	/**
 		@return width of floor
 	*/
 	unsigned int getWidth();
 
-	/*
+	/**
 		@return height of floor
 	*/
 	unsigned int getHeight();
