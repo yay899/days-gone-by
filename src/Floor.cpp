@@ -124,31 +124,37 @@ void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, uns
 template <class TileType>
 void Floor::setLine(unsigned int r1, unsigned int c1, unsigned int r2, unsigned int c2, TileType outline, TileType fill) {
     int x = 0;
-    double slope = ((double) r2-r1)/(c2-c1);
-    //Set inside.
-    unsigned int currVal = c1;
-    unsigned int endVal = c2;
-    if(c2<c1) {
-        currVal = c2;
-        endVal = c1;
-    }
-
-    double tileVal;
-    int lengPerSeg = std::abs((int) std::ceil(line(slope, c1, r1, currVal) - line(slope, c1, r1, currVal+1)));
-    int sign = 1;
-    if (slope < 0)
-        sign = -1;
-
-    for (; currVal <= endVal -1; currVal++) {
-        tileVal = line(slope, c1, r1, currVal);
-        if(currVal>0) {
-            for(int colLine = tileVal-1; colLine<=tileVal+sign*lengPerSeg; colLine = colLine + sign)
-                setTile(currVal, colLine, TileType(fill));
-
-            setTile( currVal, tileVal - 2*sign, TileType(outline));
-            setTile(currVal, tileVal + sign*lengPerSeg + sign, TileType(outline));
+    if(r2-r1 != c2 - c1) {
+        double slope = ((double) r2 - r1) / (c2 - c1);
+        //Set inside.
+        unsigned int currVal = c1;
+        unsigned int endVal = c2;
+        if (c2 < c1) {
+            currVal = c2;
+            endVal = c1;
         }
 
+        double tileVal;
+        int lengPerSeg = std::abs((int) std::ceil(line(slope, c1, r1, currVal) - line(slope, c1, r1, currVal + 1)));
+        int sign = 1;
+        if (slope < 0)
+            sign = -1;
+
+        for (; currVal <= endVal - 1; currVal++) {
+            tileVal = line(slope, c1, r1, currVal);
+
+                if (std::abs(slope) > .5) {
+                    for (int colLine = tileVal - 1; colLine <= tileVal + sign * lengPerSeg; colLine = colLine + sign)
+                        setTile(currVal, colLine, TileType(fill));
+
+                    setTile(currVal, tileVal - 2 * sign, TileType(outline));
+                    setTile(currVal, tileVal + sign * lengPerSeg + sign, TileType(outline));
+                    //inverse
+
+
+            }
+
+        }
     }
 }
 
