@@ -4,7 +4,7 @@
 	class HudElement
 */
 
-HudElement::HudElement(TCODColor col, std::string d) : col(col), display(d) {
+HudElement::HudElement(TCODColor col, std::string d) : display(d), col(col) {
 
 }
 

@@ -1,7 +1,7 @@
 #include "Engine.hpp"
 #include "InputBuffer.hpp"
 
-Engine::Engine() : gameState(STATE_PLAYER_TURN), Dungeons(std::vector<Dungeon*>()), currentDungeon(nullptr), menus(std::vector<Menu*>()), openMenus(std::vector<Menu*>()), gameHud(Hud(8)) {
+Engine::Engine() : Dungeons(std::vector<Dungeon*>()), menus(std::vector<Menu*>()), gameHud(Hud(8)), gameState(STATE_PLAYER_TURN), currentDungeon(nullptr), openMenus(std::vector<Menu*>()) {
 
 }
 

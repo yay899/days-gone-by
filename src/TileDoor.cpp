@@ -1,6 +1,6 @@
 #include "TileDoor.hpp"
 
-TileDoor::TileDoor(char opCh, TCODColor opFo, TCODColor opBa, char clCh, TCODColor clFo, TCODColor clBa, bool cl, bool oc, bool wa, bool op) : clear(cl), closedBackgroundColor(clBa), closedCharacter(clCh), closedForegroundColor(clFo), occupied(oc), open(op), openBackgroundColor(opBa), openCharacter(opCh), openForegroundColor(opFo), walkable(wa) {
+TileDoor::TileDoor(char opCh, TCODColor opFo, TCODColor opBa, char clCh, TCODColor clFo, TCODColor clBa, bool cl, bool oc, bool wa, bool op) : clear(cl), closedBackgroundColor(clBa), closedCharacter(clCh), closedForegroundColor(clFo), occupied(oc), openBackgroundColor(opBa), open(op), openForegroundColor(opFo), openCharacter(opCh), walkable(wa) {
 
 }
 

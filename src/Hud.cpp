@@ -1,6 +1,6 @@
 #include "Hud.hpp"
 
-Hud::Hud(unsigned int w) : w(w), elements(std::vector<HudElement*>()) {
+Hud::Hud(unsigned int w) : elements(std::vector<HudElement*>()), w(w) {
 
 }
 
