@@ -20,9 +20,8 @@ int main(int argc, char *argv[]) {
 	{
 		Floor *temp = new Floor(80, 50);
         Dungeon *tempDun = new Dungeon();
-        tempDun->addCurrentFloor(temp);
-		temp->generateFill(&TileNormal(' ', TCOD_white, TCOD_black, true, false, true));
-		temp->setRectangle(30, 30, 10, 10, &TileNormal(' ', TCOD_white, TCOD_black, true, false, true), TileNormal('#', TCOD_white, TCOD_black, true, false, false));
+        tempDun->addCurrentFloor(temp);		temp->generateFill(TileNormal(' ', TCOD_white, TCOD_black, true, false, true));
+		temp->setRectangle(30, 30, 10, 10, TileNormal(' ', TCOD_white, TCOD_black, true, false, true), TileNormal('#', TCOD_white, TCOD_black, true, false, false));
 		_eng.addCurrentDungeon(tempDun);
 	}
 

@@ -15,7 +15,7 @@ Engine::~Engine() {
 }
 
 unsigned int Engine::addDungeon(Dungeon* dungeon) {
-	dungeons.push_back(dungeon);
+	Dungeons.push_back(dungeon);
 	return (unsigned int)Dungeons.size() - 1;
 }
 
@@ -44,7 +44,7 @@ void Engine::removeDungeon(unsigned int i) {
 
 unsigned int Engine::addMenu(Menu menu) {
 	menus.push_back(new Menu(menu));
-	return (unsigned int)menues.size() - 1;
+	return (unsigned int)menus.size() - 1;
 }
 
 Menu* Engine::getMenu(unsigned int i) {
@@ -76,7 +76,7 @@ void Engine::render() {
 	TCODConsole::root->clear(); //Clear screen.
 
 	//Render current Dungeon.
-	currentDungeon->currFloor->render();
+	currentDungeon->currentFloor->render();
 
 	//Render menus so that index 0 is rendered last.
 	if (gameState == STATE_IN_MENU) {
@@ -104,7 +104,7 @@ void Engine::update() {
 			case STATE_IN_MENU:
 				switch (key.vk) {
 					case TCODK_ENTER:
-						openMenus.at(0)->execute(currentDungeon->currFloor);
+						openMenus.at(0)->execute(currentDungeon->currentFloor);
 						closeMenu();
 						if (openMenus.size() == 0) gameState = STATE_PLAYER_TURN;
 						break;
@@ -115,7 +115,7 @@ void Engine::update() {
 						openMenus.at(0)->selectDown();
 						break;
 					case TCODK_CHAR:
-						openMenus.at(0)->execute(key.c - 97, currentDungeon->currFloor);
+						openMenus.at(0)->execute(key.c - 97, currentDungeon->currentFloor);
 						closeMenu();
 						if (openMenus.size() == 0) gameState = STATE_PLAYER_TURN;
 						break;
@@ -145,9 +145,9 @@ void Engine::update() {
 		case STATE_AI_TURN:
 			//Only pass keycode if it's when the key is pressed, to prevent it from passing key up events.
 			if (ev == TCOD_EVENT_KEY_PRESS) {
-				currentDungeon->currFloor->update(TCODSystem::getLastFrameLength(), key);
+				currentDungeon->currentFloor->update(TCODSystem::getLastFrameLength(), key);
 			} else {
-				currentDungeon->currFloor->update(TCODSystem::getLastFrameLength(), TCOD_key_t()); //Hopefully this is null and not about to explode.
+				currentDungeon->currentFloor->update(TCODSystem::getLastFrameLength(), TCOD_key_t()); //Hopefully this is null and not about to explode.
 			}
 			break;
 

@@ -71,7 +71,7 @@ void Floor::addTeamAI(Entity* e) {
 }
 
 template <class TileType>
-void Floor::generateFill(TileType& t) {
+void Floor::generateFill(TileType t) {
 	for (unsigned int  r = 0; r < h; r++) {
 		for (unsigned int c = 0; c < w; c++) {
 			delete tileMap[r][c];
@@ -85,13 +85,13 @@ Tile& Floor::getTile(unsigned int r, unsigned int c) {
 }
 
 template <class TileType>
-void Floor::setTile(unsigned int x, unsigned int y, TileType& t) {
+void Floor::setTile(unsigned int x, unsigned int y, TileType t) {
 	delete tileMap[y][x];
 	tileMap[y][x] = new TileType(t);
 }
 
 template <class TileType>
-void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline) {
+void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType outline) {
 
 	//Draw horizontal portion of outline.
 	for (unsigned int i = 0; i < width; i++) {
@@ -107,7 +107,7 @@ void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, uns
 }
 
 template <class TileType>
-void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline, TileType& fill) {
+void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType outline, TileType fill) {
 	//Set outline.
 	setRectangle(r, c, width, height, outline);
 
@@ -138,14 +138,14 @@ unsigned int Floor::getWidth() { return w; }
 unsigned int Floor::getHeight() { return h; }
 
 //Explicit instantiations
-template void Floor::generateFill(TileNormal&);
-template void Floor::generateFill(TileDoor&);
+template void Floor::generateFill<TileNormal>(TileNormal);
+template void Floor::generateFill<TileDoor>(TileDoor);
 
-template void Floor::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&, TileNormal&);
-template void Floor::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&, TileDoor&);
+template void Floor::setRectangle<TileNormal>(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal, TileNormal);
+template void Floor::setRectangle<TileDoor>(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor, TileDoor);
 
-template void Floor::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&);
-template void Floor::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&);
+template void Floor::setRectangle<TileNormal>(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal);
+template void Floor::setRectangle<TileDoor>(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor);
 
-template void Floor::setTile(unsigned int, unsigned int, TileNormal&);
-template void Floor::setTile(unsigned int, unsigned int, TileDoor&);
+template void Floor::setTile<TileNormal>(unsigned int, unsigned int, TileNormal);
+template void Floor::setTile<TileDoor>(unsigned int, unsigned int, TileDoor);

@@ -4,13 +4,15 @@
 
 #ifndef DAYS_GONE_BY_DUNGEON_H
 #define DAYS_GONE_BY_DUNGEON_H
+#include "Floor.hpp"
+#include <vector>
 
 class Dungeon{
 private:
 
-    Floor** Floors;
+    std::vector<Floor*> Floors;
 public:
-    Floor* currFloor;
+    Floor* currentFloor;
 
     /**
       sets the current floor to the given floor

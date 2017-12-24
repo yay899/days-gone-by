@@ -63,7 +63,7 @@ public:
 		@param index of floor
 		@returns pointer to floor
 	*/
-	Floor* getDungeon(unsigned int i);
+	Dungeon* getDungeon(unsigned int i);
 
 	/*
 		Gives index of floor pointer. (-1 is failure to find.)
