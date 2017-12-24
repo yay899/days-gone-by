@@ -28,8 +28,8 @@ Entity::~Entity(){
 	delete ai;
 }
 
-void Entity::update(TCOD_key_t key, Map* map) {
-	ai->takeTurn(map);
+bool Entity::update(Map* map) {
+	return ai->takeTurn(map);
 }
 
 void Entity::render() {

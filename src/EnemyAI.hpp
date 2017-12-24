@@ -9,7 +9,7 @@ class EnemyAI:public EntityAI{
 public:
   EnemyAI(Entity* ent);
   bool isPlayer();
-  void takeTurn(Map* map);
+  bool takeTurn(Map* map);
 
 };
 

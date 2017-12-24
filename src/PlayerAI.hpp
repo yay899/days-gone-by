@@ -9,7 +9,7 @@ class PlayerAI:public EntityAI{
 public:
   PlayerAI(Entity* ent);
   bool isPlayer();
-  void takeTurn(Map* map);
+  bool takeTurn(Map* map);
   TCOD_key_t getInput();
 
 };

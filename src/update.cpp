@@ -1,4 +1,5 @@
 #include "Engine.hpp"
+#include "InputBuffer.hpp"
 
 void Engine::update() {
 	//Code stolen from another one of my projects.
@@ -36,6 +37,7 @@ void Engine::update() {
 
 		case STATE_PLAYER_TURN:
 		case STATE_AI_TURN:
+			KBBuffer::getInstance()->addKey(key);
 		default:
 			switch (key.vk) {
 			case TCODK_ESCAPE:
@@ -54,11 +56,9 @@ void Engine::update() {
 	case STATE_PLAYER_TURN:
 	case STATE_AI_TURN:
 		//Only pass keycode if it's when the key is pressed, to prevent it from passing key up events.
-		if (ev == TCOD_EVENT_KEY_PRESS) {
-			currentMap->update(TCODSystem::getLastFrameLength(), key);
-		} else {
-			currentMap->update(TCODSystem::getLastFrameLength(), TCOD_key_t()); //Hopefully this is null and not about to explode.
-		}
+		//nope this is going to be alright for now
+		currentMap->update();
+
 		break;
 
 	case STATE_IN_MENU:

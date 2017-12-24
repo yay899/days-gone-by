@@ -27,19 +27,19 @@ Map::~Map() {
 	delete tileMap;
 }
 
-void Map::update(float t, TCOD_key_t key) {
+void Map::update() {
 	switch (_eng.gameState) {
 	case STATE_PLAYER_TURN:
 		//Iterate over every player entity in map, calling updater.
 		for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
-			(*i)->update(key, this);
+			(*i)->update(this);
 		}
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case STATE_AI_TURN:
 		//Iterate over every AI entity in map, calling updater.
 		for (std::vector<Entity*>::iterator i = teamAI.begin(); i < teamAI.end(); i++) {
-			(*i)->update(key, this);
+			(*i)->update(this);
 		}
 		_eng.gameState = STATE_PLAYER_TURN;
 		break;

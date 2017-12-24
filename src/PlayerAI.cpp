@@ -1,4 +1,5 @@
 #include "PlayerAI.hpp"
+#include "InputBuffer.hpp"
 
 #include <iostream>
 
@@ -8,12 +9,8 @@ PlayerAI::PlayerAI(Entity* ent){
 bool PlayerAI::isPlayer(){
   return true;
 }
-void PlayerAI::takeTurn(Map* map){
-  bool invalid = true;
-  while(invalid){
+bool PlayerAI::takeTurn(Map* map){
     TCOD_key_t key = getInput();
-    std::cout<<"Test";
-    invalid=false;
 
     switch (key.vk) {
 	   //Characters.
@@ -21,7 +18,7 @@ void PlayerAI::takeTurn(Map* map){
 		  switch (key.c) {
 		    case '.':
 		    default:
-			 break;
+			     break;
 		  }
 		  break;
 	   //Special keys.
@@ -64,13 +61,11 @@ void PlayerAI::takeTurn(Map* map){
 		  entity->move(entity->x + 1, entity->y - 1, map);
 		  break;
 	   default:
-      invalid=true;
+      return false;
 		  break;
 	 }
-  }
+   return true;
 }
 TCOD_key_t PlayerAI::getInput(){
-  TCOD_key_t key;
-	TCOD_mouse_t mouse;
-	TCOD_event_t ev = TCODSystem::checkForEvent(TCOD_EVENT_ANY, &key, &mouse);
+  return KBBuffer::getInstance()->nextKey();
 }

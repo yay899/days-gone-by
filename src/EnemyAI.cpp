@@ -6,6 +6,7 @@ EnemyAI::EnemyAI(Entity* ent){
 bool EnemyAI::isPlayer(){
   return false;
 }
-void EnemyAI::takeTurn(Map* map){
+bool EnemyAI::takeTurn(Map* map){
   //this needs to be implemented
+  return true;
 }

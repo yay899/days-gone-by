@@ -29,7 +29,7 @@ public:
 		@param keycode
 		@param map entity is on
 	*/
-	void update(TCOD_key_t key, Map* map);
+	bool update(Map* map);
 
 	/*
 		Renders itself.

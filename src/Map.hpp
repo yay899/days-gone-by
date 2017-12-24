@@ -14,7 +14,7 @@ class TileLegacy;
 
 class Map {
 protected:
-	
+
 	unsigned int w, h;
 	TileLegacy*** tileMap; //Map of tiles.
 
@@ -32,7 +32,7 @@ public:
 		@param time
 		@param keycode
 	*/
-	void update(float t, TCOD_key_t key);
+	void update();
 
 	/*
 		Displays the contents of the map on TCODConsole->root.
