@@ -9,6 +9,8 @@ class Entity;
 class Tile {
 public:
 
+	virtual ~Tile() = default;
+
 	virtual void bumped(Entity&) = 0; //Called when an entity attempts to walk onto a solid tile.
 	virtual void interact(Entity&) = 0; //Called when player interacts with the tile. I guess an AI could too, but honestly I doubt that'll happen for a while.
 	virtual bool isClear() = 0;

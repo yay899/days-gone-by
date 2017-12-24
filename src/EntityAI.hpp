@@ -12,6 +12,7 @@ class EntityAI{
 protected:
   Entity* entity;
 public:
+  virtual ~EntityAI() = default;
   virtual bool isPlayer() = 0;  //to check is is player
   virtual bool takeTurn(Floor* floor) = 0;  //make entity do things
 };

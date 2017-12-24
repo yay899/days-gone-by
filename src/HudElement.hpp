@@ -18,6 +18,8 @@ public:
 	*/
 	HudElement(TCODColor = TCODConsole::root->getDefaultForeground(), std::string = "");
 
+	virtual ~HudElement() = default;
+
 	/**
 		Extend this with complex functionality.
 	*/
