@@ -1,4 +1,5 @@
 #include "Engine.hpp"
+#include "InputBuffer.hpp"
 
 Engine::Engine() : gameState(STATE_PLAYER_TURN), Dungeons(std::vector<Dungeon*>()), currentDungeon(nullptr), menus(std::vector<Menu*>()), openMenus(std::vector<Menu*>()), gameHud(Hud(8)) {
 
@@ -126,6 +127,9 @@ void Engine::update() {
 
 			case STATE_PLAYER_TURN:
 			case STATE_AI_TURN:
+				//HERE
+				KBBuffer::getInstance()->addKey(key);
+				//HERE
 			default:
 				switch (key.vk) {
 					case TCODK_ESCAPE:
@@ -144,11 +148,9 @@ void Engine::update() {
 		case STATE_PLAYER_TURN:
 		case STATE_AI_TURN:
 			//Only pass keycode if it's when the key is pressed, to prevent it from passing key up events.
-			if (ev == TCOD_EVENT_KEY_PRESS) {
-				currentDungeon->currentFloor->update(TCODSystem::getLastFrameLength(), key);
-			} else {
-				currentDungeon->currentFloor->update(TCODSystem::getLastFrameLength(), TCOD_key_t()); //Hopefully this is null and not about to explode.
-			}
+			//HERE-> //nope this is going to be alright for now
+			currentDungeon->currentFloor->update();
+			//HERE->
 			break;
 
 		case STATE_IN_MENU:

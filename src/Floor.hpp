@@ -34,7 +34,7 @@ public:
 		@param time
 		@param keycode
 	*/
-	void update(float t, TCOD_key_t key);
+	void update();
 
 	/*
 		Displays the contents of the floor on TCODConsole->root.

@@ -27,23 +27,24 @@ Floor::~Floor() {
 	delete[] tileMap;
 }
 
-void Floor::update(float t, TCOD_key_t key) {
+void Floor::update() {
 	switch (_eng.gameState) {
-	case STATE_PLAYER_TURN:
-		//Iterate over every player entity in floor, calling updater.
-		for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
-			(*i)->update(t, key, this);
-		}
-		break;
-	case STATE_AI_TURN:
-		//Iterate over every AI entity in floor, calling updater.
-		for (std::vector<Entity*>::iterator i = teamAI.begin(); i < teamAI.end(); i++) {
-			(*i)->update(t, key, this);
-		}
-		_eng.gameState = STATE_PLAYER_TURN;
-		break;
-	default:
-		break;
+		case STATE_PLAYER_TURN:
+			//Iterate over every player entity in floor, calling updater.
+			for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
+				(*i)->update(this);
+			}
+			_eng.gameState = STATE_AI_TURN;
+			break;
+		case STATE_AI_TURN:
+			//Iterate over every AI entity in floor, calling updater.
+			for (std::vector<Entity*>::iterator i = teamAI.begin(); i < teamAI.end(); i++) {
+				(*i)->update(this);
+			}
+			_eng.gameState = STATE_PLAYER_TURN;
+			break;
+		default:
+			break;
 	}
 	
 }

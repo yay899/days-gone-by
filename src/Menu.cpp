@@ -97,11 +97,7 @@ void Menu::select(unsigned int i) {
 	--------------------------------------------------*/
 
 void Menu::debugAddPlayer(Floor* floor) {
-	EntityPlayer* temp = new EntityPlayer(0, 0, '@');
-	temp->maxHp = DEFAULT_PLAYER_MAXHP;
-	temp->hp = DEFAULT_PLAYER_MAXHP;
-	temp->maxWatts = DEFAULT_PLAYER_MAXWATTS;
-	temp->watts = DEFAULT_PLAYER_MAXWATTS;
+	Entity* temp = new Entity(0, 0, '@', true);
 
 	floor->addTeamPlayer(temp);
 	_eng.gameHud.addElement(new HudElementHp(temp));
@@ -109,13 +105,9 @@ void Menu::debugAddPlayer(Floor* floor) {
 }
 
 void Menu::debugAddTestEnemy(Floor* floor) {
-	EntityTestEnemy temp = EntityTestEnemy(floor->getWidth() - 1, floor->getHeight() - 1, 'e');
-	temp.maxHp = DEFAULT_TESTENEMY_MAXHP;
-	temp.hp = DEFAULT_TESTENEMY_MAXHP;
-	temp.maxWatts = DEFAULT_TESTENEMY_MAXWATTS;
-	temp.watts = DEFAULT_TESTENEMY_MAXWATTS;
+	Entity* temp = new Entity(floor->getWidth() - 1, floor->getHeight() - 1, 'e', false);
 
-	floor->addTeamAI(new EntityTestEnemy(temp));
+	floor->addTeamAI((temp));
 }
 
 void Menu::debugHighlightSolid(Floor* floor) {
@@ -124,6 +116,5 @@ void Menu::debugHighlightSolid(Floor* floor) {
 		for (unsigned int y = 0; y < floor->getHeight(); y++) {
 			if (floor->isSolid(x, y)) floor->getTilePointer(x, y)->background = TCOD_pink;
 		}
-	}
-	*/
+	}*/
 }

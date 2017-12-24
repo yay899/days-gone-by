@@ -4,6 +4,7 @@
 
 #include "libtcod.hpp"
 #include "Floor.hpp"
+#include "EntityAI.hpp"
 
 //Need to declare this here due to cyclical #includes.
 class Floor;
@@ -17,22 +18,24 @@ public:
 
 	int hp, maxHp;
 	int watts, maxWatts;
+	EntityAI *ai;
 
-	Entity(int x, int y, char c, TCODColor = TCODConsole::root->getDefaultForeground());
+	Entity(int x, int y, char c, bool player, TCODColor = TCODConsole::root->getDefaultForeground());
+	~Entity();
 
 	/*
-		Takes time since last frame, and pressed key and then does something to the object.
+		pressed key and then does something to the object.
 
-		@param time
 		@param keycode
 		@param floor entity is on
 	*/
-	virtual void update(float t, TCOD_key_t key, Floor* floor);
+    //CHANGE PARAMS IN CORR CLASS
+	bool update(Floor* floor);
 
 	/*
 		Renders itself.
 	*/
-	virtual void render();
+	void render();
 
 	/*
 		Attacks entity at target
@@ -41,7 +44,7 @@ public:
 		@param y coordinate
 		@param floor entity is on
 	*/
-	virtual void attack(unsigned int targetX, unsigned int targetY, Floor* floor);
+	void attack(unsigned int targetX, unsigned int targetY, Floor* floor);
 
 	/*
 		Checks to see if target is solid and then moves object there if it isn't. Runs walkedOn() regardless of whether or not the entity is actually moved.
@@ -81,67 +84,6 @@ public:
 		Destroys the entity. When inventory is implimented, drops items, etc.
 	*/
 	void kill();
-};
-
-class EntityPlayer : public Entity {
-public:
-
-	EntityPlayer(int x, int y, char c, TCODColor = TCODConsole::root->getDefaultForeground());
-
-	/*
-		Extends Entity::update() with player functionality.
-
-		@param time
-		@param keycode
-		@param floor entity is on
-	*/
-	void update(float t, TCOD_key_t key, Floor* floor);
-
-	/*
-		Extends Entity::render() with player functionality.
-	*/
-	void render();
-
-	/*
-		Does flat damage to entity player attempts to move into. Maybe scale off a stat or weapon later.
-
-		@param x
-		@param y
-		@param floor entity is on
-	*/
-	void attack(unsigned int x, unsigned int y, Floor* floor);
-};
-
-/*
-	Test enemy. Please ignore. (67k upvotes)
-*/
-class EntityTestEnemy : public Entity {
-public:
-
-	EntityTestEnemy(int x, int y, char c, TCODColor = TCODConsole::root->getDefaultForeground());
-
-	/*
-		Extends Entity::update() with test enemy functionality.
-
-		@param time
-		@param keycode
-		@param floor entity is on
-	*/
-	void update(float t, TCOD_key_t key, Floor* floor);
-
-	/*
-		Extends Entity::render() with test enemy functionality.
-	*/
-	void render();
-
-	/*
-	Does flat damage to entity enemy attempts to move into. Maybe scale off a stat or weapon later.
-
-	@param x
-	@param y
-	@param floor entity is on
-	*/
-	void attack(unsigned int x, unsigned int y, Floor* floor);
 };
 
 /*
