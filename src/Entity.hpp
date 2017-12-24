@@ -3,10 +3,10 @@
 #define ENTITY_HPP
 
 #include "libtcod.hpp"
-#include "Map.hpp"
+#include "Floor.hpp"
 
 //Need to declare this here due to cyclical #includes.
-class Map;
+class Floor;
 
 //Basic entity. Pretty useless unless extended.
 class Entity {
@@ -25,9 +25,9 @@ public:
 
 		@param time
 		@param keycode
-		@param map entity is on
+		@param floor entity is on
 	*/
-	virtual void update(float t, TCOD_key_t key, Map* map);
+	virtual void update(float t, TCOD_key_t key, Floor* floor);
 
 	/*
 		Renders itself.
@@ -39,27 +39,27 @@ public:
 
 		@param x coordinate
 		@param y coordinate
-		@param map entity is on
+		@param floor entity is on
 	*/
-	virtual void attack(unsigned int targetX, unsigned int targetY, Map* map);
+	virtual void attack(unsigned int targetX, unsigned int targetY, Floor* floor);
 
 	/*
 		Checks to see if target is solid and then moves object there if it isn't. Runs walkedOn() regardless of whether or not the entity is actually moved.
 
 		@param target x
 		@param target y
-		@param map entity is on
+		@param floor entity is on
 	*/
-	void move(unsigned int targetX, unsigned int targetY, Map* map);
+	void move(unsigned int targetX, unsigned int targetY, Floor* floor);
 
 	/*
 		Same as move(), but it ignores checks for solidity.
 
 		@param target x
 		@param target y
-		@param map entity is on
+		@param floor entity is on
 	*/
-	void moveForce(unsigned int targetX, unsigned int targetY, Map* map);
+	void moveForce(unsigned int targetX, unsigned int targetY, Floor* floor);
 
 	/*
 		Reduces the entities HP. Negative numbers heal.
@@ -93,9 +93,9 @@ public:
 
 		@param time
 		@param keycode
-		@param map entity is on
+		@param floor entity is on
 	*/
-	void update(float t, TCOD_key_t key, Map* map);
+	void update(float t, TCOD_key_t key, Floor* floor);
 
 	/*
 		Extends Entity::render() with player functionality.
@@ -107,9 +107,9 @@ public:
 
 		@param x
 		@param y
-		@param map entity is on
+		@param floor entity is on
 	*/
-	void attack(unsigned int x, unsigned int y, Map* map);
+	void attack(unsigned int x, unsigned int y, Floor* floor);
 };
 
 /*
@@ -125,9 +125,9 @@ public:
 
 		@param time
 		@param keycode
-		@param map entity is on
+		@param floor entity is on
 	*/
-	void update(float t, TCOD_key_t key, Map* map);
+	void update(float t, TCOD_key_t key, Floor* floor);
 
 	/*
 		Extends Entity::render() with test enemy functionality.
@@ -139,9 +139,9 @@ public:
 
 	@param x
 	@param y
-	@param map entity is on
+	@param floor entity is on
 	*/
-	void attack(unsigned int x, unsigned int y, Map* map);
+	void attack(unsigned int x, unsigned int y, Floor* floor);
 };
 
 /*

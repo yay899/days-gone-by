@@ -3,7 +3,7 @@
 void Engine::render() {
 	TCODConsole::root->clear(); //Clear screen.
 	
-	//Render current map.
+	//Render current floor.
 	currentMap->render();
 	
 	//Render menus so that index 0 is rendered last.

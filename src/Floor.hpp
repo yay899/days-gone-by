@@ -14,22 +14,22 @@
 //Need to declare this here due to cyclical #includes.
 class Entity;
 
-class Map {
+class Floor {
 protected:
 	
 	unsigned int w, h;
-	Tile*** tileMap; //Map of tiles.
+	Tile*** tileMap; //Floor of tiles.
 
 public:
-	std::vector<Entity*> entities; //All entities in map.
+	std::vector<Entity*> entities; //All entities in floor.
 	std::vector<Entity*> teamPlayer; //ONLY player entities.
 	std::vector<Entity*> teamAI; //Everything else.
 
-	Map(unsigned int w, unsigned int h);
-	~Map();
+	Floor(unsigned int w, unsigned int h);
+	~Floor();
 
 	/*
-		Updates all entities in map.
+		Updates all entities in floor.
 
 		@param time
 		@param keycode
@@ -37,12 +37,12 @@ public:
 	void update(float t, TCOD_key_t key);
 
 	/*
-		Displays the contents of the map on TCODConsole->root.
+		Displays the contents of the floor on TCODConsole->root.
 	*/
 	void render();
 
 	/*
-		Fills the map with the specified tiles.
+		Fills the floor with the specified tiles.
 	*/
 
 	/*
@@ -60,7 +60,7 @@ public:
 	void addTeamAI(Entity* e);
 
 	/*
-		Fills map with a single tile
+		Fills floor with a single tile
 
 		@template type of tile
 		@param desired tile
@@ -117,7 +117,7 @@ public:
 	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType&, TileType&);
 
 	/*
-		Helper function; checks if tile on map is solid.
+		Helper function; checks if tile on floor is solid.
 
 		@param r
 		@param c
@@ -135,12 +135,12 @@ public:
 	Entity* getEntity(unsigned int, unsigned int);
 
 	/*
-		@return width of map
+		@return width of floor
 	*/
 	unsigned int getWidth();
 
 	/*
-		@return height of map
+		@return height of floor
 	*/
 	unsigned int getHeight();
 };

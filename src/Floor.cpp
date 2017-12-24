@@ -1,11 +1,11 @@
-#include "Map.hpp"
+#include "Floor.hpp"
 
 #include "Engine.hpp"
 #include <iostream>
 
 extern Engine _eng;
 
-Map::Map(unsigned int w, unsigned int h) : w(w), h(h) {
+Floor::Floor(unsigned int w, unsigned int h) : w(w), h(h) {
 	tileMap = new Tile**[h];
     for(unsigned int i = 0; i < h; ++i) {
 		tileMap[i] = new Tile*[w];
@@ -19,7 +19,7 @@ Map::Map(unsigned int w, unsigned int h) : w(w), h(h) {
 	}
 }
 
-Map::~Map() {
+Floor::~Floor() {
 	for (unsigned int  i= 0; i < h; i++) {
 		delete[] tileMap[i];
 	}
@@ -27,16 +27,16 @@ Map::~Map() {
 	delete[] tileMap;
 }
 
-void Map::update(float t, TCOD_key_t key) {
+void Floor::update(float t, TCOD_key_t key) {
 	switch (_eng.gameState) {
 	case STATE_PLAYER_TURN:
-		//Iterate over every player entity in map, calling updater.
+		//Iterate over every player entity in floor, calling updater.
 		for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
 			(*i)->update(t, key, this);
 		}
 		break;
 	case STATE_AI_TURN:
-		//Iterate over every AI entity in map, calling updater.
+		//Iterate over every AI entity in floor, calling updater.
 		for (std::vector<Entity*>::iterator i = teamAI.begin(); i < teamAI.end(); i++) {
 			(*i)->update(t, key, this);
 		}
@@ -48,7 +48,7 @@ void Map::update(float t, TCOD_key_t key) {
 	
 }
 
-void Map::render() {
+void Floor::render() {
 	for (unsigned int r = 0; r < h; r++) {
 		for (unsigned int c = 0; c < h; c++) {
 			getTile(r, c).render(r, c);
@@ -60,18 +60,18 @@ void Map::render() {
 	}
 }
 
-void Map::addTeamPlayer(Entity* e) {
+void Floor::addTeamPlayer(Entity* e) {
 	teamPlayer.emplace_back(e);
 	entities.emplace_back(e);
 }
 
-void Map::addTeamAI(Entity* e) {
+void Floor::addTeamAI(Entity* e) {
 	teamAI.emplace_back(e);
 	entities.emplace_back(e);
 }
 
 template <class TileType>
-void Map::generateFill(TileType& t) {
+void Floor::generateFill(TileType& t) {
 	for (unsigned int  r = 0; r < h; r++) {
 		for (unsigned int c = 0; c < w; c++) {
 			delete tileMap[r][c];
@@ -80,18 +80,18 @@ void Map::generateFill(TileType& t) {
 	}
 }
 
-Tile& Map::getTile(unsigned int r, unsigned int c) {
+Tile& Floor::getTile(unsigned int r, unsigned int c) {
 	return *tileMap[r][c];
 }
 
 template <class TileType>
-void Map::setTile(unsigned int x, unsigned int y, TileType& t) {
+void Floor::setTile(unsigned int x, unsigned int y, TileType& t) {
 	delete tileMap[y][x];
 	tileMap[y][x] = new TileType(t);
 }
 
 template <class TileType>
-void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline) {
+void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline) {
 
 	//Draw horizontal portion of outline.
 	for (unsigned int i = 0; i < width; i++) {
@@ -107,7 +107,7 @@ void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsig
 }
 
 template <class TileType>
-void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline, TileType& fill) {
+void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline, TileType& fill) {
 	//Set outline.
 	setRectangle(r, c, width, height, outline);
 
@@ -119,11 +119,11 @@ void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsig
 	}
 }
 
-bool Map::isSolid(unsigned int r, unsigned int c) {
+bool Floor::isSolid(unsigned int r, unsigned int c) {
 	return !getTile(r, c).isWalkable();
 }
 
-Entity* Map::getEntity(unsigned int x, unsigned int y) {
+Entity* Floor::getEntity(unsigned int x, unsigned int y) {
 	for (std::vector<Entity*>::iterator i = entities.begin(); i < entities.end(); i++) {
 		if ((*i)->x == x && (*i)->y == y) {
 			return *i;
@@ -133,19 +133,19 @@ Entity* Map::getEntity(unsigned int x, unsigned int y) {
 	return nullptr;
 }
 
-unsigned int Map::getWidth() { return w; }
+unsigned int Floor::getWidth() { return w; }
 
-unsigned int Map::getHeight() { return h; }
+unsigned int Floor::getHeight() { return h; }
 
 //Explicit instantiations
-template void Map::generateFill(TileNormal&);
-template void Map::generateFill(TileDoor&);
+template void Floor::generateFill(TileNormal&);
+template void Floor::generateFill(TileDoor&);
 
-template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&, TileNormal&);
-template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&, TileDoor&);
+template void Floor::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&, TileNormal&);
+template void Floor::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&, TileDoor&);
 
-template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&);
-template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&);
+template void Floor::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&);
+template void Floor::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&);
 
-template void Map::setTile(unsigned int, unsigned int, TileNormal&);
-template void Map::setTile(unsigned int, unsigned int, TileDoor&);
+template void Floor::setTile(unsigned int, unsigned int, TileNormal&);
+template void Floor::setTile(unsigned int, unsigned int, TileDoor&);

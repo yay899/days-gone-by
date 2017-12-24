@@ -18,7 +18,7 @@ const bool TileLegacy::operator!=(const TileLegacy &other) {
 	return !(*this == other);
 }
 
-void TileLegacy::walkedOn(Entity* e, Map* map) {
+void TileLegacy::walkedOn(Entity* e, Floor* floor) {
 
 	//Put stuff here when extending this class.
 
@@ -32,9 +32,9 @@ TileTeleportLegacy::TileTeleportLegacy(char c, TCODColor foreground, TCODColor b
 
 }
 
-void TileTeleportLegacy::walkedOn(Entity* e, Map* map) {
+void TileTeleportLegacy::walkedOn(Entity* e, Floor* floor) {
 	//this throws errors as there is no x and y given
-	e->moveForce(x, y, map);
+	e->moveForce(x, y, floor);
 }
 
 /*
@@ -58,6 +58,6 @@ void TileDoorLegacy::closed() {
 	isSolid = closedTile.isSolid;
 }
 
-void TileDoorLegacy::walkedOn(Entity* e, Map* map) {
+void TileDoorLegacy::walkedOn(Entity* e, Floor* floor) {
 	open();
 }

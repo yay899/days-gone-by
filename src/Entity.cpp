@@ -11,7 +11,7 @@ Entity::Entity(int x, int y, char c, TCODColor col) : x(x), y(y), c(c), col(col)
 
 }
 
-void Entity::update(float t, TCOD_key_t key, Map* map) {
+void Entity::update(float t, TCOD_key_t key, Floor* floor) {
 	//Define this when extending.
 }
 
@@ -19,38 +19,38 @@ void Entity::render() {
 	//Define this when extending.
 }
 
-void Entity::attack(unsigned int targetX, unsigned int targetY, Map* map) {
+void Entity::attack(unsigned int targetX, unsigned int targetY, Floor* floor) {
 	//Define this when extending.
 }
 
-void Entity::move(unsigned int targetX, unsigned int targetY, Map* map) {
+void Entity::move(unsigned int targetX, unsigned int targetY, Floor* floor) {
 	//Check to see if target is in bounds.
-	if (targetX >= 0 && targetY >= 0 && targetX < map->getWidth() && targetY < map->getHeight()) {
+	if (targetX >= 0 && targetY >= 0 && targetX < floor->getWidth() && targetY < floor->getHeight()) {
 		//Check to see if target is solid.
-		if (!map->isSolid(targetX, targetY)) {
+		if (!floor->isSolid(targetX, targetY)) {
 			x = targetX;
 			y = targetY;
 		} else {
-			attack(targetX, targetY, map);
+			attack(targetX, targetY, floor);
 		}
 
 		//this throws errors as it is somehow calling tile teleportLegacy, which does not have initialized x and y coords
 		//look into this
 
-		//map->getTilePointer(targetX, targetY)->walkedOn(this, map);
+		//floor->getTilePointer(targetX, targetY)->walkedOn(this, floor);
 
 	}
 }
 
-void Entity::moveForce(unsigned int targetX, unsigned int targetY, Map* map) {
+void Entity::moveForce(unsigned int targetX, unsigned int targetY, Floor* floor) {
 	//Check to see if target is in bounds.
-	if (targetX >= 0 && targetY >= 0 && targetX < map->getWidth() && targetY < map->getHeight()) {
+	if (targetX >= 0 && targetY >= 0 && targetX < floor->getWidth() && targetY < floor->getHeight()) {
 		x = targetX;
 		y = targetY;
 
 		//this throws errors as it is somehow calling tile teleportLegacy, which does not have initialized x and y coords
 		//look into this
-		map->getTile(targetX, targetY).walkedOn(*this);
+		floor->getTile(targetX, targetY).walkedOn(*this);
 	}
 }
 
@@ -84,7 +84,7 @@ EntityPlayer::EntityPlayer(int x, int y, char c, TCODColor col) : Entity(x, y, c
 
 }
 
-void EntityPlayer::update(float t, TCOD_key_t key, Map* map) {
+void EntityPlayer::update(float t, TCOD_key_t key, Floor* floor) {
 
 	switch (key.vk) {
 	//Characters.
@@ -98,54 +98,54 @@ void EntityPlayer::update(float t, TCOD_key_t key, Map* map) {
 		break;
 	//Special keys.
 	case TCODK_UP:
-		move(x, y - 1, map);
+		move(x, y - 1, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_DOWN:
-		move(x, y + 1, map);
+		move(x, y + 1, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_LEFT:
-		move(x - 1, y, map);
+		move(x - 1, y, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_RIGHT:
-		move(x + 1, y, map);
+		move(x + 1, y, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP1:
-		move(x - 1, y + 1, map);
+		move(x - 1, y + 1, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP2:
-		move(x, y + 1, map);
+		move(x, y + 1, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP3:
-		move(x + 1, y + 1, map);
+		move(x + 1, y + 1, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP4:
-		move(x - 1, y, map);
+		move(x - 1, y, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP5:
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP6:
-		move(x + 1, y, map);
+		move(x + 1, y, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP7:
-		move(x - 1, y - 1, map);
+		move(x - 1, y - 1, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP8:
-		move(x, y - 1, map);
+		move(x, y - 1, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	case TCODK_KP9:
-		move(x + 1, y - 1, map);
+		move(x + 1, y - 1, floor);
 		_eng.gameState = STATE_AI_TURN;
 		break;
 	default:
@@ -158,8 +158,8 @@ void EntityPlayer::render() {
 	TCODConsole::root->setChar(x, y, c);
 }
 
-void EntityPlayer::attack(unsigned int x, unsigned int y, Map* map) {
-	Entity* target = map->getEntity(x, y);
+void EntityPlayer::attack(unsigned int x, unsigned int y, Floor* floor) {
+	Entity* target = floor->getEntity(x, y);
 	if (target != nullptr) target->hurt(4);
 }
 
@@ -171,27 +171,27 @@ EntityTestEnemy::EntityTestEnemy(int x, int y, char c, TCODColor col) : Entity(x
 
 }
 
-void EntityTestEnemy::update(float t, TCOD_key_t key, Map* map) {
+void EntityTestEnemy::update(float t, TCOD_key_t key, Floor* floor) {
 	int targetX(x), targetY(y);
 
 	//Target one tile in the direction of the player.
-	if (map->teamPlayer.at(0)->x > x) {
+	if (floor->teamPlayer.at(0)->x > x) {
 		targetX++;
 	}
-	else if (map->teamPlayer.at(0)->x < x) {
+	else if (floor->teamPlayer.at(0)->x < x) {
 		targetX--;
 	}
 
-	if (map->teamPlayer.at(0)->y > y) {
+	if (floor->teamPlayer.at(0)->y > y) {
 		targetY++;
 	}
-	else if (map->teamPlayer.at(0)->y < y) {
+	else if (floor->teamPlayer.at(0)->y < y) {
 		targetY--;
 	}
 
 	//Move if the target is actually somewhere other than current position.
 	if (targetX != x || targetY != y) {
-		move(targetX, targetY, map);
+		move(targetX, targetY, floor);
 	}
 }
 
@@ -200,7 +200,7 @@ void EntityTestEnemy::render() {
 	TCODConsole::root->setChar(x, y, c);
 }
 
-void EntityTestEnemy::attack(unsigned int x, unsigned int y, Map* map) {
-	Entity* target = map->getEntity(x, y);
+void EntityTestEnemy::attack(unsigned int x, unsigned int y, Floor* floor) {
+	Entity* target = floor->getEntity(x, y);
 	if (target != nullptr) target->hurt(1);
 }

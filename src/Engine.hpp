@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "Map.hpp"
+#include "Floor.hpp"
 #include "Menu.hpp"
 #include "Hud.hpp"
 #include "Dungeon.hpp"
@@ -42,41 +42,41 @@ public:
 	void render();
 
 	/*
-		Adds map to maps.
+		Adds floor to maps.
 
-		@param map to be added
+		@param floor to be added
 		@returns index
 	*/
 	unsigned int addDungeon(Dungeon* dungeon);
 
 	/*
-		Adds a map and sets it to the current map.
+		Adds a floor and sets it to the current floor.
 
-		@param map to be added
+		@param floor to be added
 		@returns index
 	*/
 	unsigned int addCurrentDungeon(Dungeon* dungeon);
 
 	/*
-		Gets map at index.
+		Gets floor at index.
 
-		@param index of map
-		@returns pointer to map
+		@param index of floor
+		@returns pointer to floor
 	*/
-	Map* getDungeon(unsigned int i);
+	Floor* getDungeon(unsigned int i);
 
 	/*
-		Gives index of map pointer. (-1 is failure to find.)
+		Gives index of floor pointer. (-1 is failure to find.)
 
-		@param pointer of map
+		@param pointer of floor
 		@returns index
 	*/
 	int findDungeon(Dungeon* dungeon);
 
 	/*
-		Removes map at index.
+		Removes floor at index.
 
-		@param index of map.
+		@param index of floor.
 	*/
 	void removeDungeon(unsigned int i);
 
