@@ -4,17 +4,17 @@
 
 #include "libtcod.hpp"
 #include "Entity.hpp"
-#include "Map.hpp"
+#include "Floor.hpp"
 
 //Need to declare this here due to cyclical #includes.
 class Entity;
-class Map;
+class Floor;
 
-//Basic tile for use in Map.
+//Basic tile for use in Floor.
 class TileLegacy {
 public:
 
-	char c; //The character this tile on the map renders as.
+	char c; //The character this tile on the floor renders as.
 	TCODColor foreground; //The color of the character.
 	TCODColor background; //The color of the tile.
 	bool isSolid; //Whether or not the tile is solid.
@@ -31,9 +31,9 @@ public:
 		Called when tile is walked on, to enable complex tile functionality
 
 		@param entity that entered tile
-		@param map tile is on
+		@param floor tile is on
 	*/
-	virtual void walkedOn(Entity* e, Map* map); //TODO Make this take an entity as an argument when those are implimented.
+	virtual void walkedOn(Entity* e, Floor* floor); //TODO Make this take an entity as an argument when those are implimented.
 };
 
 //Tile that teleports anything that walks on it.
@@ -48,9 +48,9 @@ public:
 		Teleports entity that enters tile to target.
 
 		@param entity that entered tile
-		@param map tile is on
+		@param floor tile is on
 	*/
-	void walkedOn(Entity* e, Map* map);
+	void walkedOn(Entity* e, Floor* floor);
 };
 
 class TileDoorLegacy : public TileLegacy {
@@ -74,9 +74,9 @@ public:
 		Opens door when entity attempts to enter it.
 
 		@param entity that entered tile
-		@param map tile is on
+		@param floor tile is on
 	*/
-	void walkedOn(Entity* e, Map* map);
+	void walkedOn(Entity* e, Floor* floor);
 };
 
 /*

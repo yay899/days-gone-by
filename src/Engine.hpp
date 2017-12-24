@@ -4,9 +4,10 @@
 
 #include <vector>
 
-#include "Map.hpp"
+#include "Floor.hpp"
 #include "Menu.hpp"
 #include "Hud.hpp"
+#include "Dungeon.hpp"
 
 enum State {
 	STATE_PLAYER_TURN,
@@ -17,13 +18,14 @@ enum State {
 class Engine {
 private:
 	//These are all vectors of pointers because it's unsafe to store a pointer to a member of a vector.
-	std::vector<Map*> maps; //List of maps.
+	std::vector<Dungeon*> Dungeons; //List of maps.
 	std::vector<Menu*> menus; //List of menus.
+
 
 public:
 	Hud gameHud;
 	State gameState;
-	Map* currentMap; //Current map.
+	Dungeon* currentDungeon; //Current Dungeon
 	std::vector<Menu*> openMenus; //List of menues that are open, with index zero being the top-most menu.
 
 	Engine();
@@ -40,43 +42,43 @@ public:
 	void render();
 
 	/*
-		Adds map to maps.
+		Adds floor to maps.
 
-		@param map to be added
+		@param floor to be added
 		@returns index
 	*/
-	unsigned int addMap(Map* map);
+	unsigned int addDungeon(Dungeon* dungeon);
 
 	/*
-		Adds a map and sets it to the current map.
+		Adds a floor and sets it to the current floor.
 
-		@param map to be added
+		@param floor to be added
 		@returns index
 	*/
-	unsigned int addCurrentMap(Map* map);
+	unsigned int addCurrentDungeon(Dungeon* dungeon);
 
 	/*
-		Gets map at index.
+		Gets floor at index.
 
-		@param index of map
-		@returns pointer to map
+		@param index of floor
+		@returns pointer to floor
 	*/
-	Map* getMap(unsigned int i);
+	Dungeon* getDungeon(unsigned int i);
 
 	/*
-		Gives index of map pointer. (-1 is failure to find.)
+		Gives index of floor pointer. (-1 is failure to find.)
 
-		@param pointer of map
+		@param pointer of floor
 		@returns index
 	*/
-	int findMap(Map* map);
+	int findDungeon(Dungeon* dungeon);
 
 	/*
-		Removes map at index.
+		Removes floor at index.
 
-		@param index of map.
+		@param index of floor.
 	*/
-	void removeMap(unsigned int i);
+	void removeDungeon(unsigned int i);
 
 	/*
 		Adds menu.

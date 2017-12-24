@@ -1,5 +1,5 @@
 #include "libtcod.hpp"
-#include "Map.hpp"
+#include "Floor.hpp"
 #include "Menu.hpp"
 #include "Engine.hpp"
 #include <iostream>
@@ -18,19 +18,20 @@ int main(int argc, char *argv[]) {
 
 	//Move these eventually.
 	{
-		Map *temp = new Map(80, 50);
-		temp->generateFill(new TileLegacy(' '));
-		temp->setRectangle(30,30,10,10,new TileLegacy(' ', TCOD_black, TCOD_black, true), new TileLegacy('.', TCOD_black, TCOD_black, false));
-		_eng.addCurrentMap(temp);
+		Floor *temp = new Floor(80, 50);
+        Dungeon *tempDun = new Dungeon();
+        tempDun->addCurrentFloor(temp);		temp->generateFill(TileNormal(' ', TCOD_white, TCOD_black, true, false, true));
+		temp->setRectangle(30, 30, 10, 10, TileNormal(' ', TCOD_white, TCOD_black, true, false, true), TileNormal('#', TCOD_white, TCOD_black, true, false, false));
+		_eng.addCurrentDungeon(tempDun);
 	}
 
 
 	{
 		Menu temp = Menu("ESC");
-		temp.options.push_back(std::tuple < std::string, void(*)(Map * ) > ("Create player", &Menu::debugAddPlayer));
-		temp.options.push_back(std::tuple < std::string, void(*)(Map * ) >
+		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) > ("Create player", &Menu::debugAddPlayer));
+		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) >
 		("Create test enemy", &Menu::debugAddTestEnemy));
-		temp.options.push_back(std::tuple < std::string, void(*)(Map * ) >
+		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) >
 		("Highlight solid tiles", &Menu::debugHighlightSolid));
 
 		_eng.addMenu(temp);

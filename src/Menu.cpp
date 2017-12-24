@@ -3,7 +3,7 @@
 #include "Engine.hpp" //Got to put this here or else cyclical includes blows everything up.
 extern Engine _eng;
 
-Menu::Menu(std::string name) : options(std::vector<std::tuple<std::string, void (*)(Map*)>>()), index(0), name(name) {
+Menu::Menu(std::string name) : options(std::vector<std::tuple<std::string, void (*)(Floor*)>>()), index(0), name(name) {
 
 }
 
@@ -11,7 +11,7 @@ void Menu::render(int x, int y) {
 	//Calculate size box needs to be.
 	unsigned int height = (unsigned int)options.size();
 	unsigned int width = 0;
-	for (std::vector<std::tuple<std::string, void(*)(Map*)>>::iterator i = options.begin(); i < options.end(); i++) {
+	for (std::vector<std::tuple<std::string, void(*)(Floor*)>>::iterator i = options.begin(); i < options.end(); i++) {
 		if (std::get<0>(*i).length() > width) width = (unsigned int)std::get<0>(*i).length();
 	}
 
@@ -72,12 +72,12 @@ void Menu::render(int x, int y) {
 	TCODConsole::root->setAlignment(oldAlignment);
 }
 
-void Menu::execute(Map* map) {
-	std::get<1>(options.at(index))(map);
+void Menu::execute(Floor* floor) {
+	std::get<1>(options.at(index))(floor);
 }
 
-void Menu::execute(unsigned int i, Map* map) {
-	if (i <= options.size()) std::get<1>(options.at(i))(map);
+void Menu::execute(unsigned int i, Floor* floor) {
+	if (i <= options.size()) std::get<1>(options.at(i))(floor);
 }
 
 void Menu::selectUp() {
@@ -96,32 +96,25 @@ void Menu::select(unsigned int i) {
 					EFFECTS
 	--------------------------------------------------*/
 
-void Menu::debugAddPlayer(Map* map) {
-	EntityPlayer* temp = new EntityPlayer(0, 0, '@');
-	temp->maxHp = DEFAULT_PLAYER_MAXHP;
-	temp->hp = DEFAULT_PLAYER_MAXHP;
-	temp->maxWatts = DEFAULT_PLAYER_MAXWATTS;
-	temp->watts = DEFAULT_PLAYER_MAXWATTS;
+void Menu::debugAddPlayer(Floor* floor) {
+	Entity* temp = new Entity(0, 0, '@', true);
 
-	map->addTeamPlayer(temp);
+	floor->addTeamPlayer(temp);
 	_eng.gameHud.addElement(new HudElementHp(temp));
 	_eng.gameHud.addElement(new HudElementWatts(temp));
 }
 
-void Menu::debugAddTestEnemy(Map* map) {
-	EntityTestEnemy temp = EntityTestEnemy(map->getWidth() - 1, map->getHeight() - 1, 'e');
-	temp.maxHp = DEFAULT_TESTENEMY_MAXHP;
-	temp.hp = DEFAULT_TESTENEMY_MAXHP;
-	temp.maxWatts = DEFAULT_TESTENEMY_MAXWATTS;
-	temp.watts = DEFAULT_TESTENEMY_MAXWATTS;
+void Menu::debugAddTestEnemy(Floor* floor) {
+	Entity* temp = new Entity(floor->getWidth() - 1, floor->getHeight() - 1, 'e', false);
 
-	map->addTeamAI(new EntityTestEnemy(temp));
+	floor->addTeamAI((temp));
 }
 
-void Menu::debugHighlightSolid(Map* map) {
-	for (unsigned int x = 0; x < map->getWidth(); x++) {
-		for (unsigned int y = 0; y < map->getHeight(); y++) {
-			if (map->isSolid(x, y)) map->getTilePointer(x, y)->background = TCOD_pink;
+void Menu::debugHighlightSolid(Floor* floor) {
+	/*
+	for (unsigned int x = 0; x < floor->getWidth(); x++) {
+		for (unsigned int y = 0; y < floor->getHeight(); y++) {
+			if (floor->isSolid(x, y)) floor->getTilePointer(x, y)->background = TCOD_pink;
 		}
-	}
+	}*/
 }

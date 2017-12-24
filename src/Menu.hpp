@@ -6,11 +6,11 @@
 #include<string>
 #include<tuple>
 
-#include "Map.hpp"
+#include "Floor.hpp"
 
 class Menu {
-public: //                                    v Totally super clear exactly what this means. /s (It's a pointer to a void function that takes a pointer to a Map as an argument.)
-	std::vector<std::tuple<std::string, void (*)(Map*)>> options; //Duple contains text of option, and what function it calls.
+public: //                                    v Totally super clear exactly what this means. /s (It's a pointer to a void function that takes a pointer to a Floor as an argument.)
+	std::vector<std::tuple<std::string, void (*)(Floor*)>> options; //Duple contains text of option, and what function it calls.
 	unsigned int index; //Contains which menu option is currently selected.
 	std::string name;
 
@@ -27,14 +27,14 @@ public: //                                    v Totally super clear exactly what
 	/*
 		Executes effect of current selection.
 	*/
-	void execute(Map* map);
+	void execute(Floor* floor);
 
 	/*
 		Executes effect of target option.
 
 		@param index of target
 	*/
-	void execute(unsigned int i, Map* map);
+	void execute(unsigned int i, Floor* floor);
 
 	/*
 		Moves selection up.
@@ -60,23 +60,23 @@ public: //                                    v Totally super clear exactly what
 	/*
 		For testing purposes; spawns a player entity at (0,0)
 
-		@param current map
+		@param current floor
 	*/
-	static void debugAddPlayer(Map* map);
+	static void debugAddPlayer(Floor* floor);
 
 	/*
-		For testing purposes; spawns a test enemy entitiy at the lower right corner of the map.
+		For testing purposes; spawns a test enemy entitiy at the lower right corner of the floor.
 
-		@param current map
+		@param current floor
 	*/
-	static void debugAddTestEnemy(Map* map);
+	static void debugAddTestEnemy(Floor* floor);
 
 	/*
 		For testing purposes; highlights all solid tiles.
 
-		@param current map
+		@param current floor
 	*/
-	static void debugHighlightSolid(Map* map);
+	static void debugHighlightSolid(Floor* floor);
 };
 
 //Constants
