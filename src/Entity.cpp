@@ -44,7 +44,7 @@ void Entity::attack(unsigned int targetX, unsigned int targetY, Floor* floor) {
 
 void Entity::move(unsigned int targetX, unsigned int targetY, Floor* floor) {
 	//Check to see if target is in bounds.
-	if (targetX >= 0 && targetY >= 0 && targetX < floor->getWidth() && targetY < floor->getHeight()) {
+	if (targetX < floor->getWidth() && targetY < floor->getHeight()) {
 		//Check to see if target is solid.
 		if (!floor->isSolid(targetY,targetX)) {
 			x = targetX;
@@ -63,7 +63,7 @@ void Entity::move(unsigned int targetX, unsigned int targetY, Floor* floor) {
 
 void Entity::moveForce(unsigned int targetX, unsigned int targetY, Floor* floor) {
 	//Check to see if target is in bounds.
-	if (targetX >= 0 && targetY >= 0 && targetX < floor->getWidth() && targetY < floor->getHeight()) {
+	if (targetX < floor->getWidth() && targetY < floor->getHeight()) {
 		x = targetX;
 		y = targetY;
 
