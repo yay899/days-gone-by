@@ -30,7 +30,7 @@ Dungeon* Engine::getDungeon(unsigned int i) {
 	return Dungeons.at(i);
 }
 
-int Engine::findDungeon(Dungeon* dungeon) {
+unsigned int Engine::findDungeon(Dungeon* dungeon) {
 	for (unsigned int i = 0; i < Dungeons.size() - 1; i++) {
 		if (Dungeons.at(i) == dungeon) return i;
 	}

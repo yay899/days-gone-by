@@ -72,6 +72,7 @@ public:
 		@returns index
 	*/
 	int findDungeon(Dungeon* dungeon);
+	unsigned int findDungeon(Dungeon*);
 
 	/*
 		Removes floor at index.
