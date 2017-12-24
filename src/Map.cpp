@@ -71,7 +71,7 @@ void Map::addTeamAI(Entity* e) {
 }
 
 template <class TileType>
-void Map::generateFill(TileType& t) {
+void Map::generateFill(TileType t) {
 	for (unsigned int  r = 0; r < h; r++) {
 		for (unsigned int c = 0; c < w; c++) {
 			delete tileMap[r][c];
@@ -85,13 +85,13 @@ Tile& Map::getTile(unsigned int r, unsigned int c) {
 }
 
 template <class TileType>
-void Map::setTile(unsigned int x, unsigned int y, TileType& t) {
+void Map::setTile(unsigned int x, unsigned int y, TileType t) {
 	delete tileMap[y][x];
 	tileMap[y][x] = new TileType(t);
 }
 
 template <class TileType>
-void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline) {
+void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType outline) {
 
 	//Draw horizontal portion of outline.
 	for (unsigned int i = 0; i < width; i++) {
@@ -107,7 +107,7 @@ void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsig
 }
 
 template <class TileType>
-void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType& outline, TileType& fill) {
+void Map::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType outline, TileType fill) {
 	//Set outline.
 	setRectangle(r, c, width, height, outline);
 
@@ -138,14 +138,14 @@ unsigned int Map::getWidth() { return w; }
 unsigned int Map::getHeight() { return h; }
 
 //Explicit instantiations
-template void Map::generateFill(TileNormal&);
-template void Map::generateFill(TileDoor&);
+template void Map::generateFill<TileNormal>(TileNormal);
+template void Map::generateFill<TileDoor>(TileDoor);
 
-template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&, TileNormal&);
-template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&, TileDoor&);
+template void Map::setRectangle<TileNormal>(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal, TileNormal);
+template void Map::setRectangle<TileDoor>(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor, TileDoor);
 
-template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal&);
-template void Map::setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor&);
+template void Map::setRectangle<TileNormal>(unsigned int, unsigned int, unsigned int, unsigned int, TileNormal);
+template void Map::setRectangle<TileDoor>(unsigned int, unsigned int, unsigned int, unsigned int, TileDoor);
 
-template void Map::setTile(unsigned int, unsigned int, TileNormal&);
-template void Map::setTile(unsigned int, unsigned int, TileDoor&);
+template void Map::setTile<TileNormal>(unsigned int, unsigned int, TileNormal);
+template void Map::setTile<TileDoor>(unsigned int, unsigned int, TileDoor);

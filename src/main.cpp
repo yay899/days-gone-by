@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 	{
 		Map *temp = new Map(80, 50);
 		temp->generateFill(TileNormal(' ', TCOD_white, TCOD_black, true, false, true));
-		temp->setRectangle(30, 30, 10, 10, TileNormal(' ', TCOD_white, TCOD_black, true, false, true), TileNormal('#', TCOD_white, TCOD_black, true, false, false));
+		temp->setRectangle(30, 30, 10, 10,TileNormal(' ', TCOD_white, TCOD_black, true, false, true), TileNormal('#', TCOD_white, TCOD_black, true, false, false));
 		_eng.addCurrentMap(temp);
 	}
 

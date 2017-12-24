@@ -66,7 +66,7 @@ public:
 		@param desired tile
 	*/
 	template <class TileType>
-	void generateFill(TileType&);
+	void generateFill(TileType);
 
 	//TODO write more generators.
 
@@ -88,7 +88,7 @@ public:
 		@param pointer to new tile
 	*/
 	template <class TileType>
-	void setTile(unsigned int, unsigned int, TileType&);
+	void setTile(unsigned int, unsigned int, TileType);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile.
@@ -101,7 +101,7 @@ public:
 		@param outline tile
 	*/
 	template <class TileType>
-	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType&);
+	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType);
 
 	/*
 		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
@@ -114,7 +114,7 @@ public:
 		@param fill tile
 	*/
 	template <class TileType>
-	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType&, TileType&);
+	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType, TileType);
 
 	/*
 		Helper function; checks if tile on map is solid.
