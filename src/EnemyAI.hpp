@@ -1,5 +1,5 @@
 #ifndef ENEMYAI
-#define EMENYAI
+#define ENEMYAI
 
 #include "Entity.hpp"
 #include "Floor.hpp"
