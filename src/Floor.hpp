@@ -19,6 +19,14 @@ protected:
 	
 	unsigned int w, h;
 	Tile*** tileMap; //Floor of tiles.
+    /**
+     * @param slope of the line
+     * @param initX initial x for calculating line
+     * @param initY  initial y for calculating a line
+     * @param currX the value to find the corr y val
+     * @return the y value of a line
+     */
+    double line(double slope, unsigned int initX, unsigned int initY, unsigned int currX);
 
 public:
 	std::vector<Entity*> entities; //All entities in floor.
@@ -114,6 +122,22 @@ public:
 	template <class TileType>
 	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType, TileType);
 
+    /**
+		Helper function; draws a line between two points
+
+		@template tile type
+		@param r1
+		@param c1
+		@param r2
+		@param c2
+		@param outline tile
+		@param fill tile
+	*/
+    template <class TileType>
+    void setLine(unsigned int, unsigned int, unsigned int, unsigned int, TileType, TileType);
+
+
+
 	/**
 		Helper function; checks if tile on floor is solid.
 
@@ -121,6 +145,8 @@ public:
 		@param c
 		@return solidity of tile at (r,c)
 	*/
+
+
 	bool isSolid(unsigned int, unsigned int);
 
 	/**
