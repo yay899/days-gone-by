@@ -27,7 +27,7 @@ void Entity::move(unsigned int targetX, unsigned int targetY, Floor* floor) {
 	//Check to see if target is in bounds.
 	if (targetX >= 0 && targetY >= 0 && targetX < floor->getWidth() && targetY < floor->getHeight()) {
 		//Check to see if target is solid.
-		if (!floor->isSolid(targetX, targetY)) {
+		if (!floor->isSolid(targetY,targetX)) {
 			x = targetX;
 			y = targetY;
 		} else {
