@@ -83,6 +83,11 @@ public: //                                    v Totally super clear exactly what
 		@param current floor
 	*/
 	static void debugHighlightSolid(Floor*);
+
+	/**
+	Exits the game semi-gracefully
+	*/
+	static void exitGame(Floor*);
 };
 
 //Constants

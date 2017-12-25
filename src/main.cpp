@@ -29,10 +29,12 @@ int main(int argc, char *argv[]) {
 	{
 		Menu temp = Menu("ESC");
 		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) > ("Create player", &Menu::debugAddPlayer));
-		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) >
-		("Create test enemy", &Menu::debugAddTestEnemy));
-		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) >
-		("Highlight solid tiles", &Menu::debugHighlightSolid));
+
+		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) > ("Create test enemy", &Menu::debugAddTestEnemy));
+
+		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) > ("Highlight solid tiles", &Menu::debugHighlightSolid));
+
+		temp.options.push_back(std::tuple < std::string, void(*)(Floor * ) > ("Exit game", &Menu::exitGame));
 
 		_eng.addMenu(temp);
 	}

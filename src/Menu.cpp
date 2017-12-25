@@ -55,12 +55,12 @@ void Menu::render(int x, int y) {
 		s += (char)(i + 97); //97 is important. It offsets it to the beginning of letters.
 		s += '-';
 		s += std::get<0>(options.at(i));
-		
+
 		if (index == i) TCODConsole::root->setDefaultForeground(MENU_SELECT_FOREGROUND); //Highlight selection.
 		TCODConsole::root->print(x + 2, y + 2 + i, s.c_str());
 		if (index == i) TCODConsole::root->setDefaultForeground(MENU_FOREGROUND);
 	}
-	
+
 	//Highlight selection.
 	TCODConsole::root->setDefaultBackground(MENU_SELECT_BACKGROUND);
 	TCODConsole::root->rect(x + 1, y + index + 2, width - 2, 1, false);
@@ -117,4 +117,8 @@ void Menu::debugHighlightSolid(Floor* floor) {
 			if (floor->isSolid(x, y)) floor->getTilePointer(x, y)->background = TCOD_pink;
 		}
 	}*/
+}
+
+void Menu::exitGame(Floor* floor){
+	exit(0);
 }
