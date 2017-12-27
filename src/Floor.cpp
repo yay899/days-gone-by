@@ -1,9 +1,17 @@
 #include "Floor.hpp"
 
 #include "Engine.hpp"
+#include "BspListener.hpp"
 #include <iostream>
 
 extern Engine _eng;
+
+void Floor::generateMap(){
+	TCODBsp bsp(0,0,w,h);
+	bsp.splitRecursive(NULL,8,20,15,1.5f,1.5f);
+	BspListener* listener = new BspListener(this);
+	bsp.traverseInvertedLevelOrder(&(*listener),NULL);
+};
 
 Floor::Floor(unsigned int w, unsigned int h) : w(w), h(h) {
 	tileMap = new Tile**[h];
@@ -52,7 +60,7 @@ void Floor::update() {
 
 void Floor::render() {
 	for (unsigned int r = 0; r < h; r++) {
-		for (unsigned int c = 0; c < h; c++) {
+		for (unsigned int c = 0; c < w; c++) {
 			getTile(r, c).render(r, c);
 		}
 	}
@@ -111,12 +119,12 @@ void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, uns
 template <class TileType>
 void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType outline, TileType fill) {
 	//Set outline.
-	setRectangle(r, c, width, height, outline);
+	setRectangle(c, r, height, width, outline);
 
 	//Set inside.
-	for (unsigned int i = 1; i < width - 1; i++) {
-		for (unsigned int k = 1; k < height - 1; k++) {
-			setTile(r + k, c + i, TileType(fill));
+	for (unsigned int i = 1; i < height - 1; i++) {
+		for (unsigned int k = 1; k < width - 1; k++) {
+			setTile(c + k, r + i, TileType(fill));
 		}
 	}
 }
