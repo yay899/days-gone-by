@@ -89,6 +89,11 @@ public:
 		Destroys the entity. When inventory is implimented, drops items, etc.
 	*/
 	void kill();
+
+	/**
+		Asks the AI control module whether the player is controlling this entity
+	*/
+	bool isPlayer();
 };
 
 /*

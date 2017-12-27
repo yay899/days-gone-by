@@ -23,30 +23,31 @@ Floor::~Floor() {
 	for (unsigned int  i= 0; i < h; i++) {
 		delete[] tileMap[i];
 	}
-	
+
 	delete[] tileMap;
 }
 
 void Floor::update() {
-	switch (_eng.gameState) {
-		case STATE_PLAYER_TURN:
-			//Iterate over every player entity in floor, calling updater.
-			for (std::vector<Entity*>::iterator i = teamPlayer.begin(); i < teamPlayer.end(); i++) {
-				(*i)->update(this);
-			}
-			_eng.gameState = STATE_AI_TURN;
-			break;
-		case STATE_AI_TURN:
-			//Iterate over every AI entity in floor, calling updater.
-			for (std::vector<Entity*>::iterator i = teamAI.begin(); i < teamAI.end(); i++) {
-				(*i)->update(this);
-			}
-			_eng.gameState = STATE_PLAYER_TURN;
-			break;
-		default:
-			break;
+
+	//if there are no entities on this floor then we will simply return
+	if(entities.size()==0){
+		return;
 	}
-	
+
+	//first we attempt to run a creature's turn. On a successful turn, we will
+	//push it to the back of the queue and update the game state to reflect that
+	if(entities[0]->update(this)){
+		entities.push_back(entities[0]);//move next to back of stack
+		entities.erase(entities.begin());
+		//check if player is the next turn
+		if(entities[0]->isPlayer()){
+			_eng.gameState = STATE_PLAYER_TURN;
+		}
+		else{
+			_eng.gameState = STATE_AI_TURN;
+		}
+	}
+
 }
 
 void Floor::render() {

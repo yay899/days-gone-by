@@ -95,3 +95,7 @@ bool Entity::drain(int x) {
 void Entity::kill() {
 	col = TCOD_red; //Test code. Just makes the entity red.
 }
+
+bool Entity::isPlayer(){
+	return ai->isPlayer();
+}
