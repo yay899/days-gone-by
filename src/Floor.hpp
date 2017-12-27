@@ -134,7 +134,14 @@ public:
 	*/
 	Entity* getEntity(unsigned int, unsigned int);
 
-	/**
+  /**
+    Returns a reference to the player controlled unit which will take a turn next
+
+    @return a referece to a player controlled entity. nullptr if none.
+  */
+  Entity* getPlayer();
+
+  /**
 		@return width of floor
 	*/
 	unsigned int getWidth();

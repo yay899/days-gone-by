@@ -11,6 +11,9 @@ public:
   bool isPlayer();
   bool takeTurn(Floor* floor);
 
+private:
+  Entity* target;
+
 };
 
 #endif
