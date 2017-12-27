@@ -16,11 +16,13 @@ class Entity;
 
 class Floor {
 protected:
-	
+    friend class BspListener;
 	unsigned int w, h;
 	Tile*** tileMap; //Floor of tiles.
 
+
 public:
+	void generateMap();
 	std::vector<Entity*> entities; //All entities in floor.
 	std::vector<Entity*> teamPlayer; //ONLY player entities.
 	std::vector<Entity*> teamAI; //Everything else.
