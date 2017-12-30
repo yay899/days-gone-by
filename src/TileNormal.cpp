@@ -10,11 +10,12 @@ TileNormal::TileNormal(char ch, TCODColor fo, TCODColor ba, bool cl, bool oc, bo
 
 void TileNormal::bumped(Entity& e) {
 	/*
-	
+
 	*/
 }
 
 void TileNormal::interact(Entity& e) {
+	backgroundColor = TCOD_red;
 	/*
 		Can you hear it?
 	*/
