@@ -1,15 +1,18 @@
 #include "Floor.hpp"
 
 #include "Engine.hpp"
-#include "BspListener.hpp"
+#include "FloorGenListener.hpp"
 #include <iostream>
 
 extern Engine _eng;
 
-void Floor::generateMap(){
+template <class TileType>
+void Floor::generateMap(TileType outline, TileType fill){
 	TCODBsp bsp(0,0,w,h);
 	bsp.splitRecursive(NULL,8,20,15,1.5f,1.5f);
-	BspListener* listener = new BspListener(this);
+	FloorGenListener* listener = new FloorGenListener(this);
+
+	//, border1, inside1);
 	bsp.traverseInvertedLevelOrder(&(*listener),NULL);
 };
 
@@ -148,6 +151,9 @@ unsigned int Floor::getWidth() { return w; }
 unsigned int Floor::getHeight() { return h; }
 
 //Explicit instantiations
+template void Floor::generateMap<TileNormal>(TileNormal, TileNormal);
+template void Floor::generateMap<TileDoor>(TileDoor, TileDoor);
+
 template void Floor::generateFill<TileNormal>(TileNormal);
 template void Floor::generateFill<TileDoor>(TileDoor);
 
