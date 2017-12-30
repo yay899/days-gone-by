@@ -126,6 +126,7 @@ void Engine::update() {
 				break;
 
 			case STATE_PLAYER_TURN:
+			case STATE_CHOOSING_DIRECTION:
 			case STATE_AI_TURN:
 				//HERE
 				KBBuffer::getInstance()->addKey(key);
@@ -146,6 +147,7 @@ void Engine::update() {
 	switch (gameState) {
 		default:
 		case STATE_PLAYER_TURN:
+		case STATE_CHOOSING_DIRECTION:
 		case STATE_AI_TURN:
 			//Only pass keycode if it's when the key is pressed, to prevent it from passing key up events.
 			//HERE-> //nope this is going to be alright for now

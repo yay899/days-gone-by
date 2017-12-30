@@ -94,6 +94,15 @@ public:
 		Asks the AI control module whether the player is controlling this entity
 	*/
 	bool isPlayer();
+
+	/**
+		Calls the interact function on a tile
+
+		@param the x coordinate of the tile in question
+		@param the y coordinate of the tile in question
+		@param floor pointer to the current floor
+	*/
+	void interact(int,int, Floor*);
 };
 
 /*

@@ -99,3 +99,7 @@ void Entity::kill() {
 bool Entity::isPlayer(){
 	return ai->isPlayer();
 }
+
+void Entity::interact(int tileX, int tileY, Floor* floor){
+	floor->getTile(tileX,tileY).interact(*this);
+}
