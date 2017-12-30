@@ -133,7 +133,10 @@ void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, uns
 }
 
 bool Floor::isSolid(unsigned int r, unsigned int c) {
-	return !getTile(r, c).isWalkable();
+	if(!getTile(r, c).isWalkable()){
+		return true;
+	}
+	return getEntity(c,r)!=nullptr;	//switched because rc to xy
 }
 
 Entity* Floor::getEntity(unsigned int x, unsigned int y) {
