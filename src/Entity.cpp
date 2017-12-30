@@ -101,5 +101,5 @@ bool Entity::isPlayer(){
 }
 
 void Entity::interact(int tileX, int tileY, Floor* floor){
-	floor->getTile(tileX,tileY).interact(*this);
+	floor->getTile(tileY,tileX).interact(*this);	//Switched X and Y because row/column
 }
