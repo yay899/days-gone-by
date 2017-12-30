@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
         tempDun->addCurrentFloor(temp);		temp->generateFill(TileNormal(' ', TCOD_white, TCOD_black, true, false, true));
 		//temp->setRectangle(10, 10, 7, 7, TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
 		//temp->setRectangle(15, 15, 10, 10, TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
-		temp->generateMap();
+		temp->generateMap(TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
 		_eng.addCurrentDungeon(tempDun);
 	}
 

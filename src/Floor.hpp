@@ -16,13 +16,13 @@ class Entity;
 
 class Floor {
 protected:
-    friend class BspListener;
+    friend class FloorGenListener;
 	unsigned int w, h;
 	Tile*** tileMap; //Floor of tiles.
 
 
 public:
-	void generateMap();
+
 	std::vector<Entity*> entities; //All entities in floor.
 	std::vector<Entity*> teamPlayer; //ONLY player entities.
 	std::vector<Entity*> teamAI; //Everything else.
@@ -101,6 +101,11 @@ public:
 	*/
 	template <class TileType>
 	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType);
+
+
+	template <class TileType>
+	void generateMap(TileType, TileType);
+
 
 	/**
 		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
