@@ -143,6 +143,17 @@ Entity* Floor::getEntity(unsigned int x, unsigned int y) {
 	return nullptr;
 }
 
+Entity* Floor::getPlayer(){
+	for(int i = 0; i < entities.size(); i++){  //we could use teamPlayer instead
+		if(entities[i]->isPlayer()){
+			return entities[i];
+		}
+	}
+
+	//failure state if no player
+	return nullptr;
+}
+
 unsigned int Floor::getWidth() { return w; }
 
 unsigned int Floor::getHeight() { return h; }
