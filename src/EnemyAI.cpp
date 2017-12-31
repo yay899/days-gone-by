@@ -1,6 +1,5 @@
 #include "EnemyAI.hpp"
 #include <stddef.h>
-#include <iostream>
 
 EnemyAI::EnemyAI(Entity* ent){
   entity = ent;
