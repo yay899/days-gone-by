@@ -1,5 +1,6 @@
 #include "EnemyAI.hpp"
 #include <stddef.h>
+#include <iostream>
 
 EnemyAI::EnemyAI(Entity* ent){
   entity = ent;
@@ -12,21 +13,11 @@ bool EnemyAI::takeTurn(Floor* floor){
   //check for a target
   if(target!=nullptr){
     //calcuate vector to target
-    int diffx = target->x - entity->x;
-    int diffy = target->y - entity->y;
+    int destX = target->x;
+    int destY = target->y;
+		pathMove(destX,destY,floor);
 
-    //find best greedy direction to get to target
-    if(diffx!=0){
-      diffx = diffx / abs(diffx);
-    }
-    if(diffy!=0){
-      diffy = diffy / abs(diffy);
-    }
-
-    //move to space
-    entity->move(entity->x+diffx,entity->y+diffy,floor);
-
-    return true;
+		return true;
   }
   else{
     //find a target
@@ -46,13 +37,16 @@ bool EnemyAI::takeTurn(Floor* floor){
   return true;
 }
 
-void EnemyAI::pathMove(Floor* floor, int destX, int destY){
+bool EnemyAI::pathMove(int destX, int destY, Floor* floor){
 	TCOD_map_t map;
-	map = TCOD_map_new(floor->getWidth(),floor->getHeight());
-	for(int i=0; i<floor->getWidth(); i++){
-		for (int p=0; p<floor->getHeight(); p++){
+	int H = floor->getHeight();
+	int W = floor->getWidth();
+	map = TCOD_map_new(W,H);
+
+	for(int i=0; i<H; i++){
+		for (int p=0; p<W; p++){
 			Tile& tile = floor->getTile(i,p);
-			TCOD_map_set_properties(map,i,p,true,floor->getTile(i,p).isWalkable());
+			TCOD_map_set_properties(map,p,i,true,floor->getTile(i,p).isWalkable());
 		}
 	}
 
@@ -61,10 +55,12 @@ void EnemyAI::pathMove(Floor* floor, int destX, int destY){
 
 	int nextX;
 	int nextY;
+	if(TCOD_path_size(path)==0){	//check validity
+		return false;
+	}
 	TCOD_path_get(path,0,&nextX,&nextY);
-
 	TCOD_path_delete(path);
 
 	entity->move(nextX,nextY,floor);
-
+	return true;
 }

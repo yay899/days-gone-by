@@ -13,7 +13,7 @@ public:
 
 private:
   Entity* target;
-	void pathMove(Floor*,int,int);
+	bool pathMove(int,int,Floor*);
 
 };
 
