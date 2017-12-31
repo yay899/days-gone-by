@@ -38,10 +38,33 @@ bool EnemyAI::takeTurn(Floor* floor){
     }
     else{
       //if still no target, don't freeze the game thinking forever.
-      return false;
+      return true;
     }
 
   }
 
   return true;
+}
+
+void EnemyAI::pathMove(Floor* floor, int destX, int destY){
+	TCOD_map_t map;
+	map = TCOD_map_new(floor->getWidth(),floor->getHeight());
+	for(int i=0; i<floor->getWidth(); i++){
+		for (int p=0; p<floor->getHeight(); p++){
+			Tile& tile = floor->getTile(i,p);
+			TCOD_map_set_properties(map,i,p,true,floor->getTile(i,p).isWalkable());
+		}
+	}
+
+	TCOD_path_t path = TCOD_path_new_using_map(map,1.41f);
+	TCOD_path_compute(path,entity->x,entity->y,destX,destY);
+
+	int nextX;
+	int nextY;
+	TCOD_path_get(path,0,&nextX,&nextY);
+
+	TCOD_path_delete(path);
+
+	entity->move(nextX,nextY,floor);
+
 }
