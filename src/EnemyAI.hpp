@@ -13,6 +13,7 @@ public:
 
 private:
   Entity* target;
+	bool pathMove(int,int,Floor*);
 
 };
 
