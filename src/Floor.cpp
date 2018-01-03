@@ -4,15 +4,19 @@
 #include "FloorGenListener.hpp"
 #include <iostream>
 
-template <class TileType>
-void Floor::generateMap(TileType outline, TileType fill){
+
+int* Floor::generateMap(){
 	TCODBsp bsp(0,0,w,h);
 	bsp.splitRecursive(NULL,8,20,15,1.5f,1.5f);
 	FloorGenListener* listener = new FloorGenListener(this);
 
 	//, border1, inside1);
 	bsp.traverseInvertedLevelOrder(&(*listener),NULL);
-};
+	int * coords = new int[2];
+	coords[0] = listener->lastRoomX;
+	coords[1] = listener->lastRoomY;
+	return coords;
+}
 
 Floor::Floor(unsigned int w, unsigned int h) : w(w), h(h) {
 	tileMap = new Tile**[w];
@@ -157,8 +161,6 @@ unsigned int Floor::getWidth() { return w; }
 unsigned int Floor::getHeight() { return h; }
 
 //Explicit instantiations
-template void Floor::generateMap<TileNormal>(TileNormal, TileNormal);
-template void Floor::generateMap<TileDoor>(TileDoor, TileDoor);
 
 template void Floor::generateFill<TileNormal>(TileNormal);
 template void Floor::generateFill<TileDoor>(TileDoor);

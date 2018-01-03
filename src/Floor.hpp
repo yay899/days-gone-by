@@ -96,8 +96,7 @@ public:
 	void setRectangle(unsigned int, unsigned int, unsigned int, unsigned int, TileType);
 
 
-	template <class TileType>
-	void generateMap(TileType, TileType);
+	int* generateMap();
 
 
 	/**

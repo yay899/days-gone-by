@@ -15,11 +15,12 @@ class FloorGenListener: public ITCODBspCallback, public TCODLineListener{
 private :
     Floor *floor; // a map to dig
     int roomNum; // room number
-    int lastRoomX,lastRoomY, lastPointX, lastPointY; // center of the last room
+    int lastPointX, lastPointY; // center of the last room
 	bool edgeOfRoom;
 
 
 public :
+	int lastRoomX,lastRoomY;
 	FloorGenListener(Floor* floor1);
 
 	/*template <class TileType>

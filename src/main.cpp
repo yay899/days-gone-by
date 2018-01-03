@@ -13,6 +13,8 @@ Engine _eng = Engine();
 const unsigned int SCREEN_WIDTH = 88;
 const unsigned int SCREEN_HEIGHT = 50;
 
+void createPlayer(int x,int y,Floor* floor);
+
 int main(int argc, char *argv[]) {
 	//Initialization
 	TCODConsole::initRoot(SCREEN_WIDTH, SCREEN_HEIGHT, "Days Gone By");
@@ -22,11 +24,13 @@ int main(int argc, char *argv[]) {
 		Floor *temp = new Floor(80, 50);
     Dungeon *tempDun = new Dungeon();
     tempDun->addCurrentFloor(temp);
-		temp->generateFill(TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, true));
+		temp->generateFill(TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, false));
 		//temp->setRectangle(10, 10, 7, 7, TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
 		//temp->setRectangle(15, 15, 10, 10, TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
-		temp->generateMap(TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
+		int *p = temp->generateMap();
+		createPlayer(p[0],p[1],temp);
 		_eng.addCurrentDungeon(tempDun);
+
 	}
 
 
@@ -66,7 +70,7 @@ int main(int argc, char *argv[]) {
 
 void createPlayer(int x,int y,Floor* floor){
 	Entity* temp = new Entity(x,y,'@',true);
-	floor->addTeamPlayer(temp);
+	floor->addEntity(temp);
 	_eng.gameHud.addElement(new HudElementHp(temp));
 	_eng.gameHud.addElement(new HudElementWatts(temp));
 }
