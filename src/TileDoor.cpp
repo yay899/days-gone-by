@@ -25,9 +25,22 @@ bool TileDoor::isWalkable() {
 }
 
 void TileDoor::render(int x, int y) {
-	TCODConsole::root->setChar(x, y, open ? openCharacter : closedCharacter);
-	TCODConsole::root->setCharForeground(x, y, open ? openForegroundColor : closedForegroundColor);
-	TCODConsole::root->setCharBackground(x, y, open ? openBackgroundColor : closedBackgroundColor);
+	if (seen != UNSEEN) {
+		TCODConsole::root->setChar(x, y, open ? openCharacter : closedCharacter);
+		TCODConsole::root->setCharForeground(x, y, open ? openForegroundColor : closedForegroundColor);
+		TCODConsole::root->setCharBackground(x, y, open ? openBackgroundColor : closedBackgroundColor);
+		
+		switch (seen) {
+		case SEEING:
+			TCODConsole::root->setCharBackground(x, y, TCOD_grey, TCOD_BKGND_ADD);
+			break;
+		case SEEN:
+			TCODConsole::root->setCharBackground(x, y, TCOD_dark_grey, TCOD_BKGND_ADD);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void TileDoor::setSeen(Seen s) {

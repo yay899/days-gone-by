@@ -34,9 +34,22 @@ bool TileNormal::isWalkable() {
 }
 
 void TileNormal::render(int x, int y) {
-	TCODConsole::root->setChar(x, y, character);
-	TCODConsole::root->setCharForeground(x, y, foregroundColor);
-	TCODConsole::root->setCharBackground(x, y, backgroundColor);
+	if (seen != UNSEEN) {
+		TCODConsole::root->setChar(x, y, character);
+		TCODConsole::root->setCharForeground(x, y, foregroundColor);
+		TCODConsole::root->setCharBackground(x, y, backgroundColor);
+		
+		switch (seen) {
+			case SEEING:
+				TCODConsole::root->setCharBackground(x, y, TCOD_grey, TCOD_BKGND_ADD);
+				break;
+			case SEEN:
+				TCODConsole::root->setCharBackground(x, y, TCOD_dark_grey, TCOD_BKGND_ADD);
+				break;
+			default:
+				break;
+		}
+	}
 }
 
 void TileNormal::setSeen(Seen s) {
