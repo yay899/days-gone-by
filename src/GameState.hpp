@@ -14,8 +14,8 @@ enum State {
 class GameState{
 public:
   static GameState* getInstance();
-  State getState();
-  void setState(State);
+  static State getState();
+  static void setState(State);
 private:
   static State gameState;
 

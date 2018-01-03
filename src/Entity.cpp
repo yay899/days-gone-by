@@ -5,8 +5,6 @@
 #include "PlayerAI.hpp"
 #include <iostream>
 
-extern Engine _eng;
-
 /*
 	Class Entity.
 */

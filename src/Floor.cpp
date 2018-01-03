@@ -4,8 +4,6 @@
 #include "FloorGenListener.hpp"
 #include <iostream>
 
-extern Engine _eng;
-
 template <class TileType>
 void Floor::generateMap(TileType outline, TileType fill){
 	TCODBsp bsp(0,0,w,h);
@@ -52,10 +50,10 @@ void Floor::update() {
 		entities.erase(entities.begin());
 		//check if player is the next turn
 		if(entities[0]->isPlayer()){
-			_eng.gameState = STATE_PLAYER_TURN;
+			GameState::setState(STATE_PLAYER_TURN);
 		}
 		else{
-			_eng.gameState = STATE_AI_TURN;
+			GameState::setState(STATE_AI_TURN);
 		}
 	}
 
