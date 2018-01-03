@@ -45,18 +45,11 @@ public:
 	void render();
 
 	/**
-		Helper function; add entity to teamPlayer and entities.
+		Adds an entity to the Floor
 
 		@param pointer to new entity
 	*/
-	void addTeamPlayer(Entity*);
-
-	/**
-		Helper function; add entity to teamAI and entities.
-
-		@param pointer to new entity
-	*/
-	void addTeamAI(Entity*);
+	void addEntity(Entity*);
 
 	/**
 		Fills floor with a single tile.
