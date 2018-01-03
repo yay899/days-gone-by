@@ -15,21 +15,21 @@ void Floor::generateMap(TileType outline, TileType fill){
 };
 
 Floor::Floor(unsigned int w, unsigned int h) : w(w), h(h) {
-	tileMap = new Tile**[h];
-    for(unsigned int i = 0; i < h; ++i) {
-		tileMap[i] = new Tile*[w];
+	tileMap = new Tile**[w];
+    for(unsigned int i = 0; i < w; i++) {
+		tileMap[i] = new Tile*[h];
 	}
 
 
-	for (unsigned int  r = 0; r < h; r++) {
-		for (unsigned int c = 0; c < w; c++) {
-			tileMap[r][c] = new TileNormal();
+	for (unsigned int  y = 0; y < h; y++) {
+		for (unsigned int x = 0; x < w; x++) {
+			tileMap[x][y] = new TileNormal();
 		}
 	}
 }
 
 Floor::~Floor() {
-	for (unsigned int  i= 0; i < h; i++) {
+	for (unsigned int  i= 0; i < w; i++) {
 		delete[] tileMap[i];
 	}
 
@@ -60,9 +60,9 @@ void Floor::update() {
 }
 
 void Floor::render() {
-	for (unsigned int r = 0; r < h; r++) {
-		for (unsigned int c = 0; c < w; c++) {
-			getTile(r, c).render(r, c);
+	for (unsigned int y = 0; y < h; y++) {
+		for (unsigned int x = 0; x < w; x++) {
+			getTile(x, y).render(x, y);
 		}
 	}
 
@@ -83,58 +83,58 @@ void Floor::addTeamAI(Entity* e) {
 
 template <class TileType>
 void Floor::generateFill(TileType t) {
-	for (unsigned int  r = 0; r < h; r++) {
-		for (unsigned int c = 0; c < w; c++) {
-			delete tileMap[r][c];
-			tileMap[r][c] = new TileType(t);
+	for (unsigned int  y = 0; y < h; y++) {
+		for (unsigned int x = 0; x < w; x++) {
+			delete tileMap[x][y];
+			tileMap[x][y] = new TileType(t);
 		}
 	}
 }
 
-Tile& Floor::getTile(unsigned int r, unsigned int c) {
-	return *tileMap[r][c];
+Tile& Floor::getTile(unsigned int x, unsigned int y) {//here DONE
+	return *tileMap[x][y];
 }
 
 template <class TileType>
 void Floor::setTile(unsigned int x, unsigned int y, TileType t) {
-	delete tileMap[y][x];
-	tileMap[y][x] = new TileType(t);
+	delete tileMap[x][y];
+	tileMap[x][y] = new TileType(t);
 }
 
 template <class TileType>
-void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType outline) {
+void Floor::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileType outline) {//here DONE
 
 	//Draw horizontal portion of outline.
 	for (unsigned int i = 0; i < width; i++) {
-		setTile(r, c + i, TileType(outline));
-		setTile(r + height - 1, c +i, TileType(outline));
+		setTile(x + i, y, TileType(outline));
+		setTile( x + i, y + height - 1, TileType(outline));
 	}
 
 	//Draw vertical portion of outline.
 	for (unsigned int i = 1; i < height - 1; i++) { //Start and end one early because the horizontal already covered the corners.
-		setTile(r + i, c, TileType(outline));
-		setTile(r + i, c + width - 1, TileType(outline));
+		setTile(x, y + i, TileType(outline));
+		setTile(x + width - 1, y + i, TileType(outline));
 	}
 }
 
 template <class TileType>
-void Floor::setRectangle(unsigned int r, unsigned int c, unsigned int width, unsigned int height, TileType outline, TileType fill) {
+void Floor::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileType outline, TileType fill) {//here DONE
 	//Set outline.
-	setRectangle(c, r, height, width, outline);
+	setRectangle(x, y, width, height, outline);
 
 	//Set inside.
 	for (unsigned int i = 1; i < height - 1; i++) {
 		for (unsigned int k = 1; k < width - 1; k++) {
-			setTile(c + k, r + i, TileType(fill));
+			setTile(x + k, y + i, TileType(fill));
 		}
 	}
 }
 
-bool Floor::isSolid(unsigned int r, unsigned int c) {
-	if(!getTile(r, c).isWalkable()){
+bool Floor::isSolid(unsigned int x, unsigned int y) {//here DONE
+	if(!getTile(x, y).isWalkable()){
 		return true;
 	}
-	return getEntity(c,r)!=nullptr;	//switched because rc to xy
+	return getEntity(x,y)!=nullptr;	//switched because rc to xy
 }
 
 Entity* Floor::getEntity(unsigned int x, unsigned int y) {

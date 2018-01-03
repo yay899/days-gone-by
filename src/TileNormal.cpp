@@ -33,10 +33,10 @@ bool TileNormal::isWalkable() {
 	return walkable && !occupied;
 }
 
-void TileNormal::render(int r, int c) {
-	TCODConsole::root->setChar(c, r, character);
-	TCODConsole::root->setCharForeground(c, r, foregroundColor);
-	TCODConsole::root->setCharBackground(c, r, backgroundColor);
+void TileNormal::render(int x, int y) {
+	TCODConsole::root->setChar(x, y, character);
+	TCODConsole::root->setCharForeground(x, y, foregroundColor);
+	TCODConsole::root->setCharBackground(x, y, backgroundColor);
 }
 
 void TileNormal::walkedOn(Entity& e) {

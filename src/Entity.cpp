@@ -44,7 +44,7 @@ void Entity::move(unsigned int targetX, unsigned int targetY, Floor* floor) {
 	//Check to see if target is in bounds.
 	if (targetX < floor->getWidth() && targetY < floor->getHeight()) {
 		//Check to see if target is solid.
-		if (!floor->isSolid(targetY,targetX)) {
+		if (!floor->isSolid(targetX,targetY)) {
 			x = targetX;
 			y = targetY;
 		} else {
@@ -99,5 +99,5 @@ bool Entity::isPlayer(){
 }
 
 void Entity::interact(int tileX, int tileY, Floor* floor){
-	floor->getTile(tileY,tileX).interact(*this);	//Switched X and Y because row/column
+	floor->getTile(tileX,tileY).interact(*this);	//Switched X and Y because row/column
 }
