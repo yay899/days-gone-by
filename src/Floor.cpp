@@ -71,13 +71,7 @@ void Floor::render() {
 	}
 }
 
-void Floor::addTeamPlayer(Entity* e) {
-	teamPlayer.emplace_back(e);
-	entities.emplace_back(e);
-}
-
-void Floor::addTeamAI(Entity* e) {
-	teamAI.emplace_back(e);
+void Floor::addEntity(Entity* e) {
 	entities.emplace_back(e);
 }
 
