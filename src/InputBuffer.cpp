@@ -2,14 +2,15 @@
 #include <vector>
 #include <stddef.h>
 
-KBBuffer* KBBuffer::buff = NULL;
+KBBuffer* KBBuffer::buff = nullptr;
 std::vector<TCOD_key_t> KBBuffer::keys = std::vector<TCOD_key_t>();
 
 
 KBBuffer* KBBuffer::getInstance(){
-  if(!buff)
+  if(buff==nullptr){
     buff = new KBBuffer;
-  return buff;
+  }
+	return buff;
 }
 /*KBBuffer::~KBBuffer(){
   delete keys;
