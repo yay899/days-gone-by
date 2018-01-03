@@ -118,7 +118,7 @@ void Floor::setRectangle(unsigned int x, unsigned int y, unsigned int width, uns
 template <class TileType>
 void Floor::setRectangle(unsigned int x, unsigned int y, unsigned int width, unsigned int height, TileType outline, TileType fill) {//here DONE
 	//Set outline.
-	setRectangle(x, y, width, height, outline);
+	//setRectangle(x, y, width, height, outline);
 
 	//Set inside.
 	for (unsigned int i = 1; i < height - 1; i++) {
