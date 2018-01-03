@@ -14,13 +14,14 @@ const unsigned int SCREEN_HEIGHT = 50;
 
 int main(int argc, char *argv[]) {
 	//Initialization
-	TCODConsole::initRoot(SCREEN_WIDTH, SCREEN_HEIGHT, "days-gone-by");
+	TCODConsole::initRoot(SCREEN_WIDTH, SCREEN_HEIGHT, "Days Gone By");
 
 	//Move these eventually.
 	{
 		Floor *temp = new Floor(80, 50);
-        Dungeon *tempDun = new Dungeon();
-        tempDun->addCurrentFloor(temp);		temp->generateFill(TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, true));
+    Dungeon *tempDun = new Dungeon();
+    tempDun->addCurrentFloor(temp);
+		temp->generateFill(TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, true));
 		//temp->setRectangle(10, 10, 7, 7, TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
 		//temp->setRectangle(15, 15, 10, 10, TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
 		temp->generateMap(TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
