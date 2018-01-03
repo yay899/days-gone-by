@@ -41,15 +41,15 @@ bool FloorGenListener::visitNode(TCODBsp *node, void *userData){
             std::cout << y - (h - 2) / 2 << std::endl;
             std::cout << x - (w - 2) / 2 << std::endl;
 
-            floor->setRectangle(y - h / 2 - 1, x - w / 2 - 1, (w), (h), TileNormal('#', TCOD_light_grey, TCOD_black, true, false, false), TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
+            floor->setRectangle(y - h / 2 - 1, x - w / 2 - 1, (w), (h), TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, false), TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
 
 
             if ( roomNum != 0 ) {
                 // dig a corridor from last room
+
                 lastPointX = -1;
                 lastPointY = -1;
                 TCODLine::line(lastRoomX,lastRoomY,x,y,&(*this));
-
             }
             lastRoomX=x;
             lastRoomY=y;
@@ -60,22 +60,14 @@ bool FloorGenListener::visitNode(TCODBsp *node, void *userData){
 
 	}
 	bool FloorGenListener::putPoint (int x,int y) {
-       /* if(edgeOfRoom == true){
-            floor->setTile(x+1,y, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-            floor->setTile(x-1,y, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-            floor->setTile(x,y+1, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-            floor->setTile(x,y-1, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-            floor->setTile(x,y, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
+        //if(!floor->getTile(y,x).isWalkable()){
 
-        }
-        if(!floor->getTile(y,x).isWalkable()){
-            edgeOfRoom = !edgeOfRoom;*/
-            floor->setTile(x+1,y, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-            floor->setTile(x-1,y, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-            floor->setTile(x,y+1, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-            floor->setTile(x,y-1, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-            floor->setTile(x,y, TileNormal('.', TCOD_light_grey, TCOD_black, true, false, true));
-        //}
+            floor->setTile(x+1,y, TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
+            floor->setTile(x-1,y, TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
+            floor->setTile(x,y+1, TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
+            floor->setTile(x,y-1, TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
+            floor->setTile(x,y, TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
+
        return true;
 	}
 
