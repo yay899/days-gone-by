@@ -1,6 +1,6 @@
 #include "TileNormal.hpp"
 
-TileNormal::TileNormal() : backgroundColor(TCOD_black), character(' '), clear(true), foregroundColor(TCOD_white), occupied(false), walkable(true) {
+TileNormal::TileNormal() : backgroundColor(TCOD_black), character(' '), clear(true), foregroundColor(TCOD_white), occupied(false), seen(UNSEEN), walkable(true) {
 
 }
 
@@ -37,6 +37,10 @@ void TileNormal::render(int x, int y) {
 	TCODConsole::root->setChar(x, y, character);
 	TCODConsole::root->setCharForeground(x, y, foregroundColor);
 	TCODConsole::root->setCharBackground(x, y, backgroundColor);
+}
+
+void TileDoor::setSeen(Seen s) {
+	seen = s;
 }
 
 void TileNormal::walkedOn(Entity& e) {

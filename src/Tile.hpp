@@ -6,6 +6,12 @@
 
 class Entity;
 
+enum Seen {
+	UNSEEN,
+	SEEING,
+	SEEN
+};
+
 class Tile {
 public:
 
@@ -17,6 +23,7 @@ public:
 	virtual bool isOccupied() = 0;
 	virtual bool isWalkable() = 0;
 	virtual void render(int, int) = 0; //Called during render portion of gameplay loop.
+	virtual void setSeen(Seen) = 0; //Change whether or not a tile has been seen.
 	virtual void walkedOn(Entity&) = 0; //Called when an entity walks on the tile.
 
 };

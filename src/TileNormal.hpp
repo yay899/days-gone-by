@@ -15,6 +15,7 @@ protected:
 	bool clear;
 	TCODColor foregroundColor;
 	bool occupied;
+	Seen seen;
 	bool walkable;
 
 public:
@@ -67,7 +68,14 @@ public:
 		@param column
 	*/
 	void render(int, int);
-
+	
+	/**
+		Sets Seen state of tile.
+		
+		@param state
+	*/
+	void setSeen(Seen);
+	
 	/*
 		Does nothing.
 

@@ -19,6 +19,7 @@ protected:
 	bool open;
 	TCODColor openForegroundColor;
 	char openCharacter;
+	Seen seen; //TODO Make door save the last time you saw it.
 	bool walkable;
 
 public:
@@ -73,6 +74,13 @@ public:
 		@param column
 	*/
 	void render(int, int);
+	
+	/**
+		Sets Seen state of tile.
+		
+		@param state
+	*/
+	void setSeen(Seen);
 
 	/**
 		Does nothing.
