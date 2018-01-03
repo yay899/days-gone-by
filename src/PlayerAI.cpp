@@ -4,8 +4,6 @@
 
 #include <iostream>
 
-extern Engine _eng;
-
 PlayerAI::PlayerAI(Entity* ent){
   entity = ent;
 }
@@ -14,7 +12,7 @@ bool PlayerAI::isPlayer(){
 }
 bool PlayerAI::takeTurn(Floor* floor){
 		TCOD_key_t key;
-		switch(_eng.gameState){
+		switch(GameState::getState()){
 		case STATE_PLAYER_TURN:
 
     key = getInput();
@@ -24,7 +22,7 @@ bool PlayerAI::takeTurn(Floor* floor){
 	   case TCODK_CHAR:
 		  switch (key.c) {
 				case 'e':
-					_eng.gameState = STATE_CHOOSING_DIRECTION;
+					GameState::setState(STATE_CHOOSING_DIRECTION);
 					return false;
 		    case '.':
 					return true;

@@ -8,13 +8,7 @@
 #include "Menu.hpp"
 #include "Hud.hpp"
 #include "Dungeon.hpp"
-
-enum State {
-	STATE_PLAYER_TURN,
-	STATE_CHOOSING_DIRECTION,
-	STATE_AI_TURN,
-	STATE_IN_MENU
-};
+#include "GameState.hpp"
 
 class Engine {
 private:
@@ -25,7 +19,6 @@ private:
 
 public:
 	Hud gameHud;
-	State gameState;
 	Dungeon* currentDungeon; //Current Dungeon
 	std::vector<Menu*> openMenus; //List of menues that are open, with index zero being the top-most menu.
 

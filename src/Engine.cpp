@@ -1,7 +1,7 @@
 #include "Engine.hpp"
 #include "InputBuffer.hpp"
 
-Engine::Engine() : Dungeons(std::vector<Dungeon*>()), menus(std::vector<Menu*>()), gameHud(Hud(8)), gameState(STATE_PLAYER_TURN), currentDungeon(nullptr), openMenus(std::vector<Menu*>()) {
+Engine::Engine() : Dungeons(std::vector<Dungeon*>()), menus(std::vector<Menu*>()), gameHud(Hud(8)), currentDungeon(nullptr), openMenus(std::vector<Menu*>()) {
 
 }
 
@@ -80,7 +80,7 @@ void Engine::render() {
 	currentDungeon->currentFloor->render();
 
 	//Render menus so that index 0 is rendered last.
-	if (gameState == STATE_IN_MENU) {
+	if (GameState::getState() == STATE_IN_MENU) {
 		for (std::vector<Menu *>::reverse_iterator i = openMenus.rbegin(); i < openMenus.rend(); i++) {
 			(*i)->render(4, 4);
 		}
@@ -101,13 +101,13 @@ void Engine::update() {
 
 	//Check global keys.
 	if (ev == TCOD_EVENT_KEY_PRESS) {
-		switch (gameState) {
+		switch (GameState::getState()) {
 			case STATE_IN_MENU:
 				switch (key.vk) {
 					case TCODK_ENTER:
 						openMenus.at(0)->execute(currentDungeon->currentFloor);
 						closeMenu();
-						if (openMenus.size() == 0) gameState = STATE_PLAYER_TURN;
+						if (openMenus.size() == 0) GameState::setState(STATE_PLAYER_TURN);
 						break;
 					case TCODK_UP:
 						openMenus.at(0)->selectUp();
@@ -118,7 +118,7 @@ void Engine::update() {
 					case TCODK_CHAR:
 						openMenus.at(0)->execute(key.c - 97, currentDungeon->currentFloor);
 						closeMenu();
-						if (openMenus.size() == 0) gameState = STATE_PLAYER_TURN;
+						if (openMenus.size() == 0) GameState::setState(STATE_PLAYER_TURN);
 						break;
 					default:
 						break;
@@ -135,7 +135,7 @@ void Engine::update() {
 				switch (key.vk) {
 					case TCODK_ESCAPE:
 						openMenu(0);
-						gameState = STATE_IN_MENU;
+						GameState::setState(STATE_IN_MENU);
 						break;
 					default:
 						break;
@@ -144,7 +144,7 @@ void Engine::update() {
 	}
 
 	//Check gameState dependent keys.
-	switch (gameState) {
+	switch (GameState::getState()) {
 		default:
 		case STATE_PLAYER_TURN:
 		case STATE_CHOOSING_DIRECTION:
