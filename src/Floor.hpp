@@ -70,20 +70,20 @@ public:
 	//TODO write more generators.
 
 	/**
-		Helper function; gets tile info at (c,r).
+		Helper function; gets tile info at (x,y).
 
-		@param c
-		@param r
+		@param x
+		@param y
 		@return tile info
 	*/
 	Tile& getTile(unsigned int, unsigned int);
 
 	/**
-		Helper function; sets tile at (r,c) to provided tile.
+		Helper function; sets tile at (y,x) to provided tile.
 
 		@template tile type
-		@param r
-		@param c
+		@param y
+		@param x
 		@param new tile
 	*/
 	template <class TileType>
@@ -93,8 +93,8 @@ public:
 		Helper function; sets tiles on rectangle to provided tile.
 
 		@template tile type
-		@param r
-		@param c
+		@param y
+		@param x
 		@param width
 		@param height
 		@param outline tile
@@ -111,8 +111,8 @@ public:
 		Helper function; sets tiles on rectangle to provided tile, and fill to other provided tile.
 
 		@template tile type
-		@param r
-		@param c
+		@param y
+		@param x
 		@param width
 		@param height
 		@param outline tile
@@ -124,17 +124,17 @@ public:
 	/**
 		Helper function; checks if tile on floor is solid.
 
-		@param r
-		@param c
-		@return solidity of tile at (r,c)
+		@param y
+		@param x
+		@return solidity of tile at (y,x)
 	*/
 	bool isSolid(unsigned int, unsigned int);
 
 	/**
-		Finds entity at (r,c)
+		Finds entity at (y,x)
 
-		@param r
-		@param c
+		@param y
+		@param x
 		@return pointer to entity
 	*/
 	Entity* getEntity(unsigned int, unsigned int);

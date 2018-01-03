@@ -41,7 +41,7 @@ bool FloorGenListener::visitNode(TCODBsp *node, void *userData){
             std::cout << y - (h - 2) / 2 << std::endl;
             std::cout << x - (w - 2) / 2 << std::endl;
 
-            floor->setRectangle(y - h / 2 - 1, x - w / 2 - 1, (w), (h), TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, false), TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
+            floor->setRectangle(x - w / 2 - 1, y - h / 2 - 1, (w), (h), TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, false), TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
 
 
             if ( roomNum != 0 ) {

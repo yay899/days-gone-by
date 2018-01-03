@@ -24,10 +24,10 @@ bool TileDoor::isWalkable() {
 	return walkable && !occupied && open;
 }
 
-void TileDoor::render(int r, int c) {
-	TCODConsole::root->setChar(c, r, open ? openCharacter : closedCharacter);
-	TCODConsole::root->setCharForeground(c, r, open ? openForegroundColor : closedForegroundColor);
-	TCODConsole::root->setCharBackground(c, r, open ? openBackgroundColor : closedBackgroundColor);
+void TileDoor::render(int x, int y) {
+	TCODConsole::root->setChar(x, y, open ? openCharacter : closedCharacter);
+	TCODConsole::root->setCharForeground(x, y, open ? openForegroundColor : closedForegroundColor);
+	TCODConsole::root->setCharBackground(x, y, open ? openBackgroundColor : closedBackgroundColor);
 }
 
 void TileDoor::walkedOn(Entity& e) {

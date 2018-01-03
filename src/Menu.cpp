@@ -30,7 +30,7 @@ void Menu::render(int x, int y) {
 	TCODConsole::root->setBackgroundFlag(TCOD_BKGND_SET);
 	TCODConsole::root->setAlignment(TCOD_LEFT);
 
-	//Wrote this before I found out printFrame was a function. :c
+	//Wrote this before I found out printFrame was a function. :x
 	//This is why you always read *all* of the documentation.
 	/*
 	//Draw box.

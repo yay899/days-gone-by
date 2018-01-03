@@ -42,10 +42,10 @@ bool EnemyAI::pathMove(int destX, int destY, Floor* floor){
 	int W = floor->getWidth();
 	map = TCOD_map_new(W,H);
 
-	for(int i=0; i<H; i++){
-		for (int p=0; p<W; p++){
-			Tile& tile = floor->getTile(i,p);
-			TCOD_map_set_properties(map,p,i,true,floor->getTile(i,p).isWalkable());
+	for(int y=0; y<H; y++){
+		for (int x=0; x<W; x++){
+			Tile& tile = floor->getTile(x,y);
+			TCOD_map_set_properties(map,x,y,true,floor->getTile(x,y).isWalkable());
 		}
 	}
 
