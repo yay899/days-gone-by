@@ -3,6 +3,7 @@
 
 EnemyAI::EnemyAI(Entity* ent){
   entity = ent;
+	target = nullptr;
 }
 bool EnemyAI::isPlayer(){
   return false;
