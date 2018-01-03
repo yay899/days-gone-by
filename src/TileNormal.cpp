@@ -39,7 +39,7 @@ void TileNormal::render(int x, int y) {
 	TCODConsole::root->setCharBackground(x, y, backgroundColor);
 }
 
-void TileDoor::setSeen(Seen s) {
+void TileNormal::setSeen(Seen s) {
 	seen = s;
 }
 
