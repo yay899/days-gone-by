@@ -99,7 +99,7 @@ void Menu::select(unsigned int i) {
 void Menu::debugAddPlayer(Floor* floor) {
 	Entity* temp = new Entity(0, 0, '@', true);
 
-	floor->addTeamPlayer(temp);
+	floor->addEntity(temp);
 	_eng.gameHud.addElement(new HudElementHp(temp));
 	_eng.gameHud.addElement(new HudElementWatts(temp));
 }
@@ -107,7 +107,7 @@ void Menu::debugAddPlayer(Floor* floor) {
 void Menu::debugAddTestEnemy(Floor* floor) {
 	Entity* temp = new Entity(floor->getWidth() - 1, floor->getHeight() - 1, 'e', false);
 
-	floor->addTeamAI((temp));
+	floor->addEntity((temp));
 }
 
 void Menu::debugHighlightSolid(Floor* floor) {
