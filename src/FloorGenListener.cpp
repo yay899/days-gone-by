@@ -25,9 +25,7 @@ bool FloorGenListener::visitNode(TCODBsp *node, void *userData){
         TCODRandom *rng = TCODRandom::getInstance();
 
         if (rng->getInt(0,20)>-1){//if not currently in use
-            std::cout << node->w - 2 << std::endl;
             w = rng->getInt(10, node->w - 2);
-            std::cout << node->h - 2 << std::endl;
             h = rng->getInt(7, node->h - 2);
 
             x = node->x + (node->w) / 2;
@@ -37,9 +35,6 @@ bool FloorGenListener::visitNode(TCODBsp *node, void *userData){
             y = node->y + (node->h) / 2;
             //std::cout<<node->y+1<<std::endl;
             //std::cout<<node->h-h-1<<std::endl;
-
-            std::cout << y - (h - 2) / 2 << std::endl;
-            std::cout << x - (w - 2) / 2 << std::endl;
 
             floor->setRectangle(x - w / 2 - 1, y - h / 2 - 1, (w), (h), TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, false), TileNormal(' ', TCOD_dark_grey, TCOD_black, true, false, true));
 
@@ -76,4 +71,3 @@ template void FloorGenListener::floorSet<TileDoor>(TileDoor, TileDoor);
 
 template void FloorGenListener::outline<TileNormal>;
 template void FloorGenListener::outline<TileDoor>;*/
-
