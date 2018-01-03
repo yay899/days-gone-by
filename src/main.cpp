@@ -2,6 +2,7 @@
 #include "Floor.hpp"
 #include "Menu.hpp"
 #include "Engine.hpp"
+#include "HudElement.hpp"
 #include <iostream>
 
 Engine _eng = Engine();
@@ -53,4 +54,19 @@ int main(int argc, char *argv[]) {
 	}
 
 	return 0;
+}
+
+/**
+	Creates a player at a specific place
+
+	@param X coordinate of new player
+	@param Y coordinate of new player
+	@param Floor to generate player on
+*/
+
+void createPlayer(int x,int y,Floor* floor){
+	Entity* temp = new Entity(x,y,'@',true);
+	floor->addTeamPlayer(temp);
+	_eng.gameHud.addElement(new HudElementHp(temp));
+	_eng.gameHud.addElement(new HudElementWatts(temp));
 }
