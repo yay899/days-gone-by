@@ -16,7 +16,6 @@ int* Floor::generateMap(){
 	coords[0] = listener->lastRoomX;
 	coords[1] = listener->lastRoomY;
 	return coords;
-}
 
 	//Finally, generate the sight map.
 	updateSightMap();
