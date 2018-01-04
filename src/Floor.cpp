@@ -177,8 +177,10 @@ void Floor::updateSight(Entity& e) {
 		for (unsigned int y = 0; y < h; y++) {
 			if (sightMap.isInFov(x, y)) {
 				getTile(x, y).setSeen(SEEING);
+			} else if (getTile(x, y).getSeen() == SEEING || getTile(x, y).getSeen() == SEEN) {
+				getTile(x, y).setSeen(SEEN);
 			} else {
-				getTile(x, y).setSeen(getTile(x, y).getSeen() == SEEING ? SEEN : UNSEEN);
+				getTile(x, y).setSeen(UNSEEN);
 			}
 		}
 	}
