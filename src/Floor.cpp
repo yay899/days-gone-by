@@ -18,7 +18,7 @@ int* Floor::generateMap(){
 	return coords;
 }
 
-Floor::Floor(unsigned int w, unsigned int h) : w(w), h(h) {
+Floor::Floor(unsigned int w, unsigned int h) : w(w), h(h), sightMap(TCODMap(w, h)) {
 	tileMap = new Tile**[w];
     for(unsigned int i = 0; i < w; i++) {
 		tileMap[i] = new Tile*[h];
@@ -159,6 +159,28 @@ Entity* Floor::getPlayer(){
 unsigned int Floor::getWidth() { return w; }
 
 unsigned int Floor::getHeight() { return h; }
+
+void Floor::updateSightMap() {
+	for (unsigned int x = 0; x < w; x++) {
+		for (unsigned int y = 0; y < h; y++) {
+			sightMap.setProperties(x, y, getTile(x, y).isClear(), false);
+		}
+	}
+}
+
+void Floor::updateSight(Entity& e) {
+	sightMap.computeFov(e.x, e.y);
+
+	for (unsigned int x = 0; x < w; x++) {
+		for (unsigned int y = 0; y < h; y++) {
+			if (sightMap.isInFov(x, y)) {
+				getTile(x, y).setSeen(SEEING);
+			} else {
+				getTile(x, y).setSeen(getTile(x, y).getSeen == SEEING ? SEEN : UNSEEN);
+			}
+		}
+	}
+}
 
 //Explicit instantiations
 

@@ -19,7 +19,7 @@ protected:
     friend class FloorGenListener;
 	unsigned int w, h;
 	Tile*** tileMap; //Floor of tiles.
-
+	TCODMap sightMap; //Map for vision.
 
 public:
 
@@ -147,6 +147,18 @@ public:
 		@return height of floor
 	*/
 	unsigned int getHeight();
+
+	/**
+		Updates the sight map.
+	*/
+	void updateSightMap();
+
+	/**
+		Updates tile status using FOV of target Entity.
+
+		@param target Entity
+	*/
+	void updateSight(Entity&);
 };
 
 #endif
