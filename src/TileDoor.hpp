@@ -46,6 +46,11 @@ public:
 	void bumped(Entity&);
 
 	/**
+		@return seen
+	*/
+	Seen getSeen();
+
+	/**
 		Toggles door.
 
 		@param entity that interacted

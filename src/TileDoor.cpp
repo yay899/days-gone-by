@@ -8,6 +8,10 @@ void TileDoor::bumped(Entity& e) {
 	open = true;
 }
 
+Seen TileDoor::getSeen() {
+	return seen;
+}
+
 void TileDoor::interact(Entity& e) {
 	open = !open;
 }

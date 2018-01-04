@@ -39,6 +39,11 @@ public:
 	*/
 	void bumped(Entity&);
 
+	/**
+		@return seen
+	*/
+	Seen getSeen();
+
 	/*
 		Does nothing.
 

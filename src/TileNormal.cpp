@@ -14,6 +14,10 @@ void TileNormal::bumped(Entity& e) {
 	*/
 }
 
+Seen TileNormal::getSeen() {
+	return seen;
+}
+
 void TileNormal::interact(Entity& e) {
 	backgroundColor = TCOD_red;
 	/*
