@@ -18,6 +18,10 @@ int* Floor::generateMap(){
 	return coords;
 }
 
+	//Finally, generate the sight map.
+	updateSightMap();
+}
+
 Floor::Floor(unsigned int w, unsigned int h) : w(w), h(h), sightMap(TCODMap(w, h)) {
 	tileMap = new Tile**[w];
     for(unsigned int i = 0; i < w; i++) {
@@ -55,6 +59,8 @@ void Floor::update() {
 		//check if player is the next turn
 		if(entities[0]->isPlayer()){
 			GameState::setState(STATE_PLAYER_TURN);
+
+			updateSight(*entities[0]); //Additionally, update sight lines.
 		}
 		else{
 			GameState::setState(STATE_AI_TURN);
@@ -176,7 +182,7 @@ void Floor::updateSight(Entity& e) {
 			if (sightMap.isInFov(x, y)) {
 				getTile(x, y).setSeen(SEEING);
 			} else {
-				getTile(x, y).setSeen(getTile(x, y).getSeen == SEEING ? SEEN : UNSEEN);
+				getTile(x, y).setSeen(getTile(x, y).getSeen() == SEEING ? SEEN : UNSEEN);
 			}
 		}
 	}
