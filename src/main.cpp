@@ -31,6 +31,8 @@ int main(int argc, char *argv[]) {
 		createPlayer(p[0],p[1],temp);
 		_eng.addCurrentDungeon(tempDun);
 
+		//Finally, generate the sight map.
+		temp->updateSightMap();
 	}
 
 
