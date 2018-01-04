@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 		Floor *temp = new Floor(80, 50);
     Dungeon *tempDun = new Dungeon();
     tempDun->addCurrentFloor(temp);
-		temp->generateFill(TileNormal('.', TCOD_dark_grey, TCOD_black, true, false, false));
+		temp->generateFill(TileNormal('.', TCOD_purple, TCOD_black, false, false, false));
 		//temp->setRectangle(10, 10, 7, 7, TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
 		//temp->setRectangle(15, 15, 10, 10, TileNormal('#', TCOD_white, TCOD_black, true, false, true), TileNormal('.', TCOD_white, TCOD_black, true, false, false));
 		int *p = temp->generateMap();
